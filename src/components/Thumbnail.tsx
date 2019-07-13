@@ -1,8 +1,11 @@
 import * as React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
+import StyleGuide from "./StyleGuide";
 
 const styles = StyleSheet.create({
   container: {
+    margin: StyleGuide.spacing,
+    marginBottom: 0,
     borderRadius: 8,
     flex: 1,
     height: 150,
@@ -16,7 +19,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: undefined,
     height: undefined,
-    resizeMode: "center"
+    resizeMode: "cover"
+  },
+  content: {
+    ...StyleSheet.absoluteFillObject,
+    padding: StyleGuide.spacing,
+    justifyContent: "flex-end"
+  },
+  title: {
+    ...StyleGuide.typography.title2
   }
 });
 
@@ -28,12 +39,10 @@ interface ThumbnailProps {
 export default ({ title, source }: ThumbnailProps) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={{
-          uri: "https://stubborn.rocks/images/scenes/group-401@2x.png"
-        }}
-        style={styles.image}
-      />
+      <Image style={styles.image} {...{ source }} />
+      <View style={styles.content}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
     </View>
   );
 };

@@ -1,24 +1,32 @@
 import * as React from "react";
-import { View } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
-import { Container, Thumbnail } from "../components";
+import { Thumbnail } from "../components";
 
 export const examples = [
   {
     id: "layouts",
     title: "Layouts",
     source: require("../../assets/examples/layouts.png")
+  },
+  {
+    id: "transitions",
+    title: "Transitions",
+    source: require("../../assets/examples/transitions.png")
   }
 ];
-
-interface ExamplesProps {}
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#e9f1ff"
+  }
+});
 
 export default () => {
   return (
-    <Container title="Examples">
+    <ScrollView style={styles.container}>
       {examples.map(thumbnail => (
-        <Thumbnail key={thumbnail.id} {...{ thumbnail }} />
+        <Thumbnail key={thumbnail.id} {...thumbnail} />
       ))}
-    </Container>
+    </ScrollView>
   );
 };

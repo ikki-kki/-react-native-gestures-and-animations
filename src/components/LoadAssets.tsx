@@ -24,7 +24,7 @@ const useLoadAssets = (assets: number[], fonts: FontSource): boolean => {
 interface LoadAssetsProps {
   fonts?: FontSource;
   assets?: number[];
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 export default ({ assets, fonts, children }: LoadAssetsProps) => {

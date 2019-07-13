@@ -4,14 +4,15 @@ import Constants from "expo-constants";
 import StyleGuide from "./StyleGuide";
 
 export const MIN_HEADER_HEIGHT = 64 + Constants.statusBarHeight;
-export const MAX_HEADER_HEIGHT = MIN_HEADER_HEIGHT * 2;
+export const MAX_HEADER_HEIGHT = 64;
 const styles = StyleSheet.create({
   container: {
-    height: MIN_HEADER_HEIGHT,
-    backgroundColor: StyleGuide.palette.primary
+    height: MAX_HEADER_HEIGHT,
+    backgroundColor: StyleGuide.palette.primary,
+    padding: StyleGuide.spacing
   },
   title: {
-    ...StyleGuide.typography.body,
+    ...StyleGuide.typography.title1,
     color: "white"
   }
 });

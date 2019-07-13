@@ -1,11 +1,14 @@
 import * as React from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
-
-import Header from "./Header";
+import StyleGuide from "./StyleGuide";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#e9f1ff"
+  },
+  scrollView: {
+    padding: StyleGuide.spacing
   }
 });
 
@@ -14,11 +17,10 @@ interface ContainerProps {
   children: React.ReactNode;
 }
 
-export default ({ title, children }: ContainerProps) => {
+export default ({ children }: ContainerProps) => {
   return (
     <View style={styles.container}>
-      <Header {...{ title }} />
-      <ScrollView>{children}</ScrollView>
+      <ScrollView style={styles.scrollView}>{children}</ScrollView>
     </View>
   );
 };

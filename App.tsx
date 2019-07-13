@@ -3,13 +3,14 @@ import { StatusBar } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import { LoadAssets, StyleGuide } from "./src/components";
-import Examples from "./src/examples";
+import Examples, { examples } from "./src/examples";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
   "SFProText-Semibold": require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
   "SFProText-Regular": require("./assets/fonts/SF-Pro-Text-Regular.otf")
 };
+const assets = examples.map(example => example.source);
 const AppNavigator = createAppContainer(
   createStackNavigator(
     {
@@ -33,7 +34,7 @@ const AppNavigator = createAppContainer(
 );
 
 export default () => (
-  <LoadAssets {...{ fonts }}>
+  <LoadAssets {...{ fonts, assets }}>
     <StatusBar barStyle="light-content" />
     <AppNavigator />
   </LoadAssets>

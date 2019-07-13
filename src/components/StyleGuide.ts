@@ -1,5 +1,3 @@
-const darkGray = "#999999";
-
 const StyleGuide = {
   spacing: 8,
   palette: {
@@ -25,7 +23,7 @@ const StyleGuide = {
       fontSize: 13,
       lineHeight: 18,
       fontFamily: "SFProText-Regular",
-      color: darkGray
+      color: "#999999"
     },
     headline: {
       fontSize: 17,

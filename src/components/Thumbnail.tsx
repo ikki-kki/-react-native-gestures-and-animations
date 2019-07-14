@@ -1,25 +1,34 @@
 import * as React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableWithoutFeedback
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import StyleGuide from "./StyleGuide";
 
 const styles = StyleSheet.create({
   container: {
-    margin: StyleGuide.spacing,
+    margin: StyleGuide.spacing * 2,
     marginBottom: 0,
     borderRadius: 8,
     flex: 1,
     height: 150,
-    shadowColor: "black",
+    shadowColor: StyleGuide.palette.primary,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.18,
-    shadowRadius: 2
+    shadowRadius: 2,
+    overflow: "hidden"
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     borderRadius: 8,
     width: undefined,
     height: undefined,
-    resizeMode: "cover"
+    resizeMode: "cover",
+    transform: [{ scale: 1.2 }]
   },
   content: {
     ...StyleSheet.absoluteFillObject,
@@ -34,15 +43,22 @@ const styles = StyleSheet.create({
 interface ThumbnailProps {
   title: string;
   source: number;
+  onPress: () => void;
 }
 
-export default ({ title, source }: ThumbnailProps) => {
+export default ({ title, source, onPress }: ThumbnailProps) => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} {...{ source }} />
-      <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
+    <TouchableWithoutFeedback {...{ onPress }}>
+      <View style={styles.container}>
+        <Image style={styles.image} {...{ source }} />
+        <LinearGradient
+          colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+          style={StyleSheet.absoluteFill}
+        />
+        <View style={styles.content}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };

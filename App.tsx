@@ -4,6 +4,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import { LoadAssets, StyleGuide } from "./src/components";
 import Examples, { examples } from "./src/examples";
+import Layouts from "./src/layouts";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -17,7 +18,7 @@ const AppNavigator = createAppContainer(
       Examples: {
         screen: Examples,
         navigationOptions: () => ({
-          title: "Examples",
+          title: "Declarative Gestures & Animations",
           headerBackTitle: null,
           headerStyle: {
             backgroundColor: StyleGuide.palette.primary,
@@ -27,6 +28,9 @@ const AppNavigator = createAppContainer(
             color: "white"
           }
         })
+      },
+      Layouts: {
+        screen: Layouts
       }
     },
     {}

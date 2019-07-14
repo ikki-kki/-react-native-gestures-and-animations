@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactElement } from "react";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
@@ -24,13 +24,13 @@ const useLoadAssets = (assets: number[], fonts: FontSource): boolean => {
 interface LoadAssetsProps {
   fonts?: FontSource;
   assets?: number[];
-  children: React.ReactNode;
+  children: ReactElement | ReactElement[];
 }
 
-export default ({ assets, fonts, children }: LoadAssetsProps) => {
+export default ({ assets, fonts, children }: LoadAssetsProps): ReactElement => {
   const ready = useLoadAssets(assets || [], fonts || {});
   if (!ready) {
     return <AppLoading />;
   }
-  return children;
+  return <>{children}</>;
 };

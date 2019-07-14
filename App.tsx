@@ -17,29 +17,33 @@ const AppNavigator = createAppContainer(
     {
       Examples: {
         screen: Examples,
-        navigationOptions: () => ({
+        navigationOptions: {
           title: "Declarative Gestures & Animations",
-          headerBackTitle: null,
-          headerStyle: {
-            backgroundColor: StyleGuide.palette.primary,
-            borderBottomWidth: 0
-          },
-          headerTitleStyle: {
-            color: "white"
-          }
-        })
+          headerBackTitle: null
+        }
       },
       Layouts: {
-        screen: Layouts
+        screen: Layouts,
+        navigationOptions: {
+          title: "Layout"
+        }
       }
     },
-    {}
+    {
+      defaultNavigationOptions: {
+        headerStyle: {
+          backgroundColor: StyleGuide.palette.primary,
+          borderBottomWidth: 0
+        },
+        headerTintColor: "white"
+      }
+    }
   )
 );
 
 export default () => (
   <LoadAssets {...{ fonts, assets }}>
-    <StatusBar barStyle="light-content" />
+    <StatusBar barStyle="dark-content" />
     <AppNavigator />
   </LoadAssets>
 );

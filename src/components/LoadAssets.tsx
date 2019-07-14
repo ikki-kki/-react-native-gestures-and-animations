@@ -27,7 +27,7 @@ interface LoadAssetsProps {
   children: ReactElement | ReactElement[];
 }
 
-export default ({ assets, fonts, children }: LoadAssetsProps): ReactElement => {
+export default ({ assets, fonts, children }: LoadAssetsProps) => {
   const ready = useLoadAssets(assets || [], fonts || {});
   if (!ready) {
     return <AppLoading />;

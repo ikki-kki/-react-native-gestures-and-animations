@@ -53,6 +53,7 @@ export default ({ title, source, onPress }: ThumbnailProps) => {
         <Image style={styles.image} {...{ source }} />
         <LinearGradient
           colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+          locations={[0.7, 1]}
           style={StyleSheet.absoluteFill}
         />
         <View style={styles.content}>

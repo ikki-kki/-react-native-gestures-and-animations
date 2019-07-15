@@ -2,8 +2,8 @@ const StyleGuide = {
   spacing: 8,
   palette: {
     primary: "#3884ff",
-    backgroundPrimary: "#d5e5ff", // "#dae2f0"
-    background: "#f2f1f1"
+    backgroundPrimary: "#d5e5ff", // === rgba(primary, 0.1)
+    background: "#f2f2f2"
   },
   typography: {
     body: {

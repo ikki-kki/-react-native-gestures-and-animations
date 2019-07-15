@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
 export default () => {
   return (
     <View style={styles.container}>
-      <Card />
+      <Card id="1" />
+      <Card id="2" />
+      <Card id="3" />
     </View>
   );
 };

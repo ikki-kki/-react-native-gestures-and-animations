@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...StyleGuide.typography.title2,
-    color: "black"
+    color: "#2F2E41"
   }
 });
 

@@ -17,13 +17,14 @@ export const examples = [
   },
   {
     screen: "UseTransition",
-    title: "useTransition()",
+    title: "Trigonometry",
     source: require("../../assets/examples/advanced-transitions.png")
   }
 ];
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#d5e5ff"
+    backgroundColor: "#f2f1f1"
   }
 });
 

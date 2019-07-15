@@ -16,12 +16,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flex: 1,
     height: 150,
-    shadowColor: StyleGuide.palette.primary,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.18,
-    shadowRadius: 2,
+    elevation: 5,
     overflow: "hidden",
-    backgroundColor: "white"
+    backgroundColor: "#dae2f0"
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -37,7 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   title: {
-    ...StyleGuide.typography.title2
+    ...StyleGuide.typography.title2,
+    color: "black"
   }
 });
 
@@ -53,9 +51,13 @@ export default ({ title, source, onPress }: ThumbnailProps) => {
       <View style={styles.container}>
         <Image style={styles.image} {...{ source }} />
         <LinearGradient
-          colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
-          locations={[0.7, 1]}
           style={StyleSheet.absoluteFill}
+          colors={[
+            "rgba(218, 226, 240, 0)",
+            "rgba(218, 226, 240, 0.9)",
+            "rgba(218, 226, 240, 1)"
+          ]}
+          locations={[0.7, 0.8, 1]}
         />
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>

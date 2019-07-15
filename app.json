@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app.start-react-native.dev",
-    "slug": "app.start-react-native.dev",
+    "name": "start-react-native",
+    "slug": "start-react-native",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [

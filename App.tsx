@@ -18,7 +18,7 @@ const AppNavigator = createAppContainer(
       Examples: {
         screen: Examples,
         navigationOptions: {
-          title: "Declarative Gestures & Animations",
+          title: "Gestures & Animations",
           headerBackTitle: null
         }
       },

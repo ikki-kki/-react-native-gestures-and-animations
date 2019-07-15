@@ -6,7 +6,7 @@ import { Card, StyleGuide } from "../components";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: "center",
+    alignItems: "center",
     justifyContent: "center",
     backgroundColor: StyleGuide.palette.background
   }

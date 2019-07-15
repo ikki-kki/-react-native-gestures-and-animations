@@ -25,7 +25,7 @@ const AppNavigator = createAppContainer(
       Layouts: {
         screen: Layouts,
         navigationOptions: {
-          title: "Layout"
+          title: "Layouts"
         }
       }
     },

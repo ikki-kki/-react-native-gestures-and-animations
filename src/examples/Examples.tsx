@@ -2,7 +2,7 @@ import * as React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
 import { NavigationScreenConfigProps } from "react-navigation";
-import { Thumbnail } from "../components";
+import { Thumbnail, StyleGuide } from "../components";
 
 export const examples = [
   {
@@ -24,7 +24,7 @@ export const examples = [
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f2f1f1"
+    backgroundColor: StyleGuide.palette.background
   }
 });
 

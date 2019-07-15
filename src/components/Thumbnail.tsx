@@ -1,3 +1,4 @@
+import Color from "color";
 import * as React from "react";
 import {
   View,
@@ -9,6 +10,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import StyleGuide from "./StyleGuide";
 
+const background = new Color(StyleGuide.palette.backgroundPrimary);
 const styles = StyleSheet.create({
   container: {
     margin: StyleGuide.spacing * 2,
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
     height: 150,
     elevation: 5,
     overflow: "hidden",
-    backgroundColor: "#dae2f0"
+    backgroundColor: StyleGuide.palette.backgroundPrimary
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -53,9 +55,9 @@ export default ({ title, source, onPress }: ThumbnailProps) => {
         <LinearGradient
           style={StyleSheet.absoluteFill}
           colors={[
-            "rgba(218, 226, 240, 0)",
-            "rgba(218, 226, 240, 0.9)",
-            "rgba(218, 226, 240, 1)"
+            `rgba(${background.array().join(", ")}, 0)`,
+            `rgba(${background.array().join(", ")}, 0.9)`,
+            `rgba(${background.array().join(", ")}, 1)`
           ]}
           locations={[0.7, 0.8, 1]}
         />

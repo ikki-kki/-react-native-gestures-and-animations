@@ -20,15 +20,16 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.18,
     shadowRadius: 2,
-    overflow: "hidden"
+    overflow: "hidden",
+    backgroundColor: "white"
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     borderRadius: 8,
     width: undefined,
     height: undefined,
-    resizeMode: "cover",
-    transform: [{ scale: 1.2 }]
+    resizeMode: "contain",
+    transform: [{ scale: 1 }]
   },
   content: {
     ...StyleSheet.absoluteFillObject,
@@ -53,6 +54,7 @@ export default ({ title, source, onPress }: ThumbnailProps) => {
         <Image style={styles.image} {...{ source }} />
         <LinearGradient
           colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+          locations={[0.7, 1]}
           style={StyleSheet.absoluteFill}
         />
         <View style={styles.content}>

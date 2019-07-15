@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, Dimensions, Image } from "react-native";
+import { View, StyleSheet, Image, ViewStyle } from "react-native";
 import StyleGuide from "./StyleGuide";
 
 type CardId = "1" | "2" | "3";
@@ -23,16 +23,12 @@ export const cards: Card[] = [
   }
 ];
 
-const { width } = Dimensions.get("window");
 const CARD_ASPECT_RATIO = 1324 / 863;
-const CARD_WIDTH = width - StyleGuide.spacing * 2;
-const CARD_HEIGHT = CARD_WIDTH / CARD_ASPECT_RATIO;
 const styles = StyleSheet.create({
   container: {
-    width: CARD_WIDTH,
-    height: CARD_HEIGHT,
-    backgroundColor: StyleGuide.palette.primary,
-    borderRadius: StyleGuide.spacing * 2
+    flex: 1,
+    aspectRatio: CARD_ASPECT_RATIO,
+    margin: StyleGuide.spacing
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -42,13 +38,13 @@ const styles = StyleSheet.create({
 });
 
 interface CardProps {
-  id: CardId;
+  card: Card;
+  style?: ViewStyle;
 }
 
-export default ({ id }: CardProps) => {
-  const card = cards.find(c => c.id === id) as Card;
+export default ({ card, style }: CardProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Image style={styles.image} source={card.source} />
     </View>
   );

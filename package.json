@@ -33,7 +33,7 @@
     "@types/react-native": "^0.57.60",
     "babel-preset-expo": "^5.1.1",
     "eslint": "^6.0.1",
-    "eslint-config-react-native-wcandillon": "^2.0.3",
+    "eslint-config-react-native-wcandillon": "2.0.4",
     "typescript": "^3.4.5"
   },
   "private": true

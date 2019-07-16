@@ -4,6 +4,8 @@ import { RectButton } from "react-native-gesture-handler";
 
 import { Card, StyleGuide, cards } from "../components";
 
+import CheckIcon from "./CheckIcon";
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -62,22 +64,26 @@ const layouts = [
   {
     id: "column",
     name: "Column",
-    layout: column
+    layout: column,
+    color: "blue"
   },
   {
     id: "row",
     name: "Row",
-    layout: row
+    layout: row,
+    color: "blue"
   },
   {
     id: "wrap",
     name: "Wrap",
-    layout: wrap
+    layout: wrap,
+    color: "blue"
   },
   {
     id: "stacked",
     name: "stacked",
-    layout: stacked
+    layout: stacked,
+    color: "blue"
   }
 ];
 
@@ -98,12 +104,13 @@ export default () => {
         ))}
       </View>
       <SafeAreaView>
-        {layouts.map(({ id, name, layout }, index) => (
+        {layouts.map(({ id, name, layout, color }, index) => (
           <RectButton key={id} onPress={() => setLayout(layout)}>
             <View style={styles.button} accessible>
               <View style={styles.name}>
                 <Text>{name}</Text>
               </View>
+              {selectedLayout === layout && <CheckIcon {...{ color }} />}
             </View>
           </RectButton>
         ))}
@@ -111,5 +118,3 @@ export default () => {
     </>
   );
 };
-//               <Thumbnail {...{ thumbnail }} />
-//               {layout === selectedLayout && <CheckIcon {...{ color }} />}

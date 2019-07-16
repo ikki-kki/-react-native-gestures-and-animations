@@ -10,6 +10,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.3",
     "add": "^2.0.6",
     "color": "^3.1.2",
     "expo": "^33.0.0",

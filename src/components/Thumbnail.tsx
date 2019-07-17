@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1 }]
   },
   content: {
-    ...StyleSheet.absoluteFillObject,
     padding: StyleGuide.spacing,
     justifyContent: "flex-end"
   },

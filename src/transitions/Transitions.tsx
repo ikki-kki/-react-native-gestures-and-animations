@@ -1,14 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  SafeAreaView,
-  Text,
-  Dimensions,
-  ImageStyle
-} from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { StyleSheet, ViewStyle, Dimensions, ImageStyle } from "react-native";
 import {
   Transitioning,
   Transition,
@@ -16,8 +7,6 @@ import {
 } from "react-native-reanimated";
 
 import { Card, StyleGuide, Selection, cards } from "../components";
-
-import CheckIcon, { CHECK_ICON_SIZE } from "./CheckIcon";
 
 const { width } = Dimensions.get("window");
 const transition = (

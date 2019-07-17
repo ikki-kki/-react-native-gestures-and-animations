@@ -5,7 +5,8 @@ import {
   ViewStyle,
   SafeAreaView,
   Text,
-  Dimensions
+  Dimensions,
+  ImageStyle
 } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
 
 interface Layout {
   container: ViewStyle;
-  child?: ViewStyle;
+  child?: ImageStyle;
 }
 
 const column: Layout = {
@@ -67,7 +68,7 @@ const wrap: Layout = {
   },
   child: {
     flex: 0,
-    width: width / 2
+    width: width / 2 - StyleGuide.spacing * 2
   }
 };
 
@@ -107,7 +108,7 @@ export default () => {
           <RectButton
             onPress={() => {
               if (ref.current) {
-                // ref.current.animateNextTransition();
+                ref.current.animateNextTransition();
               }
               setLayout(layout);
             }}

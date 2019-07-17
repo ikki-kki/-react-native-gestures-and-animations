@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -8,12 +8,21 @@ import {
   Dimensions
 } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
+import Animated, {
+  Transitioning,
+  Transition,
+  TransitioningView,
+  Easing
+} from "react-native-reanimated";
 
 import { Card, StyleGuide, cards } from "../components";
 
 import CheckIcon, { CHECK_ICON_SIZE } from "./CheckIcon";
 
 const { width } = Dimensions.get("window");
+const transition = (
+  <Transition.Change interpolation="easeInOut" durationMs={400} />
+);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -82,17 +91,28 @@ const layouts = [
 ];
 
 export default () => {
+  const ref = useRef<TransitioningView>(null);
   const [selectedLayout, setLayout] = useState(column);
   return (
     <>
-      <View style={[styles.container, selectedLayout.container]}>
+      <Transitioning.View
+        style={[styles.container, selectedLayout.container]}
+        {...{ transition, ref }}
+      >
         {cards.map(card => (
           <Card key={card.id} style={selectedLayout.child} {...{ card }} />
         ))}
-      </View>
+      </Transitioning.View>
       {layouts.map(({ id, name, layout }) => (
         <SafeAreaView key={id} style={styles.buttonContainer}>
-          <RectButton onPress={() => setLayout(layout)}>
+          <RectButton
+            onPress={() => {
+              if (ref.current) {
+                ref.current.animateNextTransition();
+              }
+              setLayout(layout);
+            }}
+          >
             <View style={styles.button} accessible>
               <Text>{name}</Text>
               {selectedLayout === layout && <CheckIcon />}

@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
 
 interface Layout {
   container: ViewStyle;
-  child?: ViewStyle | ((index: number) => ViewStyle);
-  absolute?: boolean;
+  child?: ViewStyle;
 }
 
 const column: Layout = {
@@ -64,16 +63,6 @@ const wrap: Layout = {
   }
 };
 
-const stacked: Layout = {
-  container: {},
-  child: index => ({
-    ...StyleSheet.absoluteFillObject,
-    top: index * 2 * StyleGuide.spacing,
-    justifyContent: "center"
-  }),
-  absolute: true
-};
-
 const layouts = [
   {
     id: "column",
@@ -89,11 +78,6 @@ const layouts = [
     id: "wrap",
     name: "Wrap",
     layout: wrap
-  },
-  {
-    id: "stacked",
-    name: "Stacked",
-    layout: stacked
   }
 ];
 
@@ -102,23 +86,9 @@ export default () => {
   return (
     <>
       <View style={[styles.container, selectedLayout.container]}>
-        {cards.map((card, index) =>
-          selectedLayout.absolute ? (
-            <View key={card.id} style={selectedLayout.child(index)}>
-              <Card style={{ flex: 0, width: "100%" }} {...{ card }} />
-            </View>
-          ) : (
-            <Card
-              key={card.id}
-              style={
-                typeof selectedLayout.child === "function"
-                  ? selectedLayout.child(index)
-                  : selectedLayout.child
-              }
-              {...{ card }}
-            />
-          )
-        )}
+        {cards.map(card => (
+          <Card key={card.id} style={selectedLayout.child} {...{ card }} />
+        ))}
       </View>
       {layouts.map(({ id, name, layout }) => (
         <SafeAreaView key={id} style={styles.buttonContainer}>

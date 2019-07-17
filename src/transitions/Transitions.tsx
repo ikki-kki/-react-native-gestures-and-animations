@@ -15,7 +15,7 @@ import {
   TransitioningView
 } from "react-native-reanimated";
 
-import { Card, StyleGuide, cards } from "../components";
+import { Card, StyleGuide, Selection, cards } from "../components";
 
 import CheckIcon, { CHECK_ICON_SIZE } from "./CheckIcon";
 
@@ -27,17 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: StyleGuide.palette.background
-  },
-  buttonContainer: {
-    borderBottomWidth: 1,
-    borderColor: "#f4f6f3"
-  },
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: StyleGuide.spacing * 2 + CHECK_ICON_SIZE,
-    padding: StyleGuide.spacing
   }
 });
 
@@ -104,21 +93,17 @@ export default () => {
         ))}
       </Transitioning.View>
       {layouts.map(({ id, name, layout }) => (
-        <SafeAreaView key={id} style={styles.buttonContainer}>
-          <RectButton
-            onPress={() => {
-              if (ref.current) {
-                ref.current.animateNextTransition();
-              }
-              setLayout(layout);
-            }}
-          >
-            <View style={styles.button} accessible>
-              <Text>{name}</Text>
-              {selectedLayout === layout && <CheckIcon />}
-            </View>
-          </RectButton>
-        </SafeAreaView>
+        <Selection
+          key={id}
+          onPress={() => {
+            if (ref.current) {
+              ref.current.animateNextTransition();
+            }
+            setLayout(layout);
+          }}
+          isSelected={selectedLayout === layout}
+          {...{ name }}
+        />
       ))}
     </>
   );

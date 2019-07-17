@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
-import { StyleGuide } from "../components";
+import StyleGuide from "./StyleGuide";
 
 export const CHECK_ICON_SIZE = 35;
 const styles = StyleSheet.create({

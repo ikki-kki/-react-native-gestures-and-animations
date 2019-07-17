@@ -8,11 +8,10 @@ import {
   Dimensions
 } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
-import Animated, {
+import {
   Transitioning,
   Transition,
-  TransitioningView,
-  Easing
+  TransitioningView
 } from "react-native-reanimated";
 
 import { Card, StyleGuide, cards } from "../components";
@@ -108,7 +107,7 @@ export default () => {
           <RectButton
             onPress={() => {
               if (ref.current) {
-                ref.current.animateNextTransition();
+                // ref.current.animateNextTransition();
               }
               setLayout(layout);
             }}

@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flex: 1,
     height: 150,
-    elevation: 5,
     overflow: "hidden",
     backgroundColor: StyleGuide.palette.backgroundPrimary
   },

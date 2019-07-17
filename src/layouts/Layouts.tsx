@@ -4,21 +4,23 @@ import { RectButton } from "react-native-gesture-handler";
 
 import { Card, StyleGuide, cards } from "../components";
 
-import CheckIcon from "./CheckIcon";
+import CheckIcon, { CHECK_ICON_SIZE } from "./CheckIcon";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: StyleGuide.palette.background
   },
-  button: {
-    flexDirection: "row"
-  },
-  name: {
-    flex: 1,
+  buttonContainer: {
     borderBottomWidth: 1,
-    borderColor: "#f4f6f3",
-    justifyContent: "center"
+    borderColor: "#f4f6f3"
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: StyleGuide.spacing * 2 + CHECK_ICON_SIZE,
+    padding: StyleGuide.spacing
   }
 });
 
@@ -57,45 +59,36 @@ const wrap: Layout = {
 
 const stacked: Layout = {
   container: {},
-  child: {}
+  child: {
+    ...StyleSheet.absoluteFillObject
+  }
 };
 
 const layouts = [
   {
     id: "column",
     name: "Column",
-    layout: column,
-    color: "blue"
+    layout: column
   },
   {
     id: "row",
     name: "Row",
-    layout: row,
-    color: "blue"
+    layout: row
   },
   {
     id: "wrap",
     name: "Wrap",
-    layout: wrap,
-    color: "blue"
+    layout: wrap
   },
   {
     id: "stacked",
     name: "stacked",
-    layout: stacked,
-    color: "blue"
+    layout: stacked
   }
 ];
 
-const stack: Layout = {
-  container: {},
-  child: {
-    ...StyleSheet.absoluteFillObject
-  }
-};
-
 export default () => {
-  const [selectedLayout, setLayout] = useState(stack);
+  const [selectedLayout, setLayout] = useState(column);
   return (
     <>
       <View style={[styles.container, selectedLayout.container]}>
@@ -103,18 +96,16 @@ export default () => {
           <Card key={card.id} style={selectedLayout.child} {...{ card }} />
         ))}
       </View>
-      <SafeAreaView>
-        {layouts.map(({ id, name, layout, color }, index) => (
-          <RectButton key={id} onPress={() => setLayout(layout)}>
+      {layouts.map(({ id, name, layout }) => (
+        <SafeAreaView key={id} style={styles.buttonContainer}>
+          <RectButton onPress={() => setLayout(layout)}>
             <View style={styles.button} accessible>
-              <View style={styles.name}>
-                <Text>{name}</Text>
-              </View>
-              {selectedLayout === layout && <CheckIcon {...{ color }} />}
+              <Text>{name}</Text>
+              {selectedLayout === layout && <CheckIcon />}
             </View>
           </RectButton>
-        ))}
-      </SafeAreaView>
+        </SafeAreaView>
+      ))}
     </>
   );
 };

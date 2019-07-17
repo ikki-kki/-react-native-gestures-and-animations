@@ -3,7 +3,8 @@ const StyleGuide = {
   palette: {
     primary: "#3884ff",
     backgroundPrimary: "#d5e5ff", // === rgba(primary, 0.1)
-    background: "#f2f2f2"
+    background: "#f2f2f2",
+    border: "#f2f2f2"
   },
   typography: {
     body: {

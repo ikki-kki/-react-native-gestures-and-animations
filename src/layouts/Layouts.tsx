@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
 interface Layout {
   container: ViewStyle;
-  child: ViewStyle;
+  child?: (index: number) => ViewStyle;
 }
 
 const column: Layout = {
@@ -42,16 +42,14 @@ const column: Layout = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"
-  },
-  child: {}
+  }
 };
 
 const row: Layout = {
   container: {
     flexDirection: "row",
     alignItems: "center"
-  },
-  child: {}
+  }
 };
 
 const wrap: Layout = {
@@ -59,17 +57,18 @@ const wrap: Layout = {
     flexDirection: "row",
     flexWrap: "wrap"
   },
-  child: {
+  child: () => ({
     flex: 0,
     width: width / 2
-  }
+  })
 };
 
 const stacked: Layout = {
   container: {},
-  child: {
-    ...StyleSheet.absoluteFillObject
-  }
+  child: index => ({
+    ...StyleSheet.absoluteFillObject,
+    top: index * 2 * StyleGuide.spacing
+  })
 };
 
 const layouts = [
@@ -100,8 +99,12 @@ export default () => {
   return (
     <>
       <View style={[styles.container, selectedLayout.container]}>
-        {cards.map(card => (
-          <Card key={card.id} style={selectedLayout.child} {...{ card }} />
+        {cards.map((card, index) => (
+          <Card
+            key={card.id}
+            style={selectedLayout.child && selectedLayout.child(index)}
+            {...{ card }}
+          />
         ))}
       </View>
       {layouts.map(({ id, name, layout }) => (

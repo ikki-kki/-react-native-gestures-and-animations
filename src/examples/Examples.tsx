@@ -6,19 +6,9 @@ import { Thumbnail, StyleGuide } from "../components";
 
 export const examples = [
   {
-    screen: "Layouts",
-    title: "Layouts",
-    source: require("../../assets/examples/layouts.png")
-  },
-  {
     screen: "Transitions",
     title: "Transitions",
     source: require("../../assets/examples/transitions.png")
-  },
-  {
-    screen: "UseTransition",
-    title: "Trigonometry",
-    source: require("../../assets/examples/advanced-transitions.png")
   }
 ];
 

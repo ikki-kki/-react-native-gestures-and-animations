@@ -30,7 +30,12 @@ const styles = StyleSheet.create({
     aspectRatio: CARD_ASPECT_RATIO
   },
   image: {
-    ...StyleSheet.absoluteFillObject,
+    position: "absolute",
+    top: StyleGuide.spacing,
+    left: StyleGuide.spacing,
+    right: StyleGuide.spacing,
+    bottom: StyleGuide.spacing,
+    borderRadius: 18,
     width: undefined,
     height: undefined
   }

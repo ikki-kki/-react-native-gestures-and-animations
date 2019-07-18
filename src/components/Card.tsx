@@ -27,8 +27,9 @@ const CARD_ASPECT_RATIO = 1324 / 863;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: StyleGuide.spacing,
+    maxWidth: "100%",
     aspectRatio: CARD_ASPECT_RATIO,
+    margin: StyleGuide.spacing,
     borderRadius: 18,
     resizeMode: "contain"
   }

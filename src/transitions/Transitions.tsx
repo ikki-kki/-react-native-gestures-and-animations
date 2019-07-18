@@ -8,6 +8,14 @@ import {
 
 import { Card, StyleGuide, Selection, cards } from "../components";
 
+interface Layout {
+  id: string;
+  name: string;
+  layout: {
+    container: ViewStyle;
+    child?: ImageStyle;
+  };
+}
 const { width } = Dimensions.get("window");
 const transition = (
   <Transition.Change interpolation="easeInOut" durationMs={400} />
@@ -18,59 +26,47 @@ const styles = StyleSheet.create({
     backgroundColor: StyleGuide.palette.background
   }
 });
-
-interface Layout {
-  container: ViewStyle;
-  child?: ImageStyle;
-}
-
-const column: Layout = {
-  container: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-};
-
-const row: Layout = {
-  container: {
-    flexDirection: "row",
-    alignItems: "center"
-  }
-};
-
-const wrap: Layout = {
-  container: {
-    flexDirection: "row",
-    flexWrap: "wrap"
-  },
-  child: {
-    flex: 0,
-    width: width / 2 - StyleGuide.spacing * 2
-  }
-};
-
-const layouts = [
+const layouts: Layout[] = [
   {
     id: "column",
     name: "Column",
-    layout: column
+    layout: {
+      container: {
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }
+    }
   },
   {
     id: "row",
     name: "Row",
-    layout: row
+    layout: {
+      container: {
+        flexDirection: "row",
+        alignItems: "center"
+      }
+    }
   },
   {
     id: "wrap",
     name: "Wrap",
-    layout: wrap
+    layout: {
+      container: {
+        flexDirection: "row",
+        flexWrap: "wrap"
+      },
+      child: {
+        flex: 0,
+        width: width / 2 - StyleGuide.spacing * 2
+      }
+    }
   }
 ];
 
 export default () => {
   const ref = useRef<TransitioningView>(null);
-  const [selectedLayout, setLayout] = useState(column);
+  const [selectedLayout, setLayout] = useState(layouts[0].layout);
   return (
     <>
       <Transitioning.View

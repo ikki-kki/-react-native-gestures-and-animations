@@ -9,6 +9,11 @@ export const examples = [
     screen: "Transitions",
     title: "Transitions",
     source: require("../../assets/examples/transitions.png")
+  },
+  {
+    screen: "useTransition",
+    title: "useTransition()",
+    source: require("../../assets/examples/useTransition.png")
   }
 ];
 

@@ -7,7 +7,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "lint": "eslint App.tsx src/**/*",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.3",
@@ -23,6 +24,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-gesture-handler": "~1.2.1",
     "react-native-reanimated": "1.0.1",
+    "react-native-redash": "^7.2.1",
     "react-native-svg": "~9.4.0",
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.1",
@@ -35,6 +37,7 @@
     "babel-preset-expo": "^5.1.1",
     "eslint": "^6.0.1",
     "eslint-config-react-native-wcandillon": "2.0.4",
+    "patch-package": "^6.1.2",
     "typescript": "^3.4.5"
   },
   "private": true

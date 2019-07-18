@@ -1,12 +1,11 @@
-import React, { useState, useRef } from "react";
-import { View, StyleSheet } from "react-native";
-import {
-  TransitioningView,
-  Transitioning,
-  Transition
-} from "react-native-reanimated";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import Animated, { Easing } from "react-native-reanimated";
+import { useTransition, bInterpolate } from "react-native-redash";
+
 import { Card, Button, StyleGuide, cards } from "../components";
 
+const { multiply } = Animated;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -20,39 +19,35 @@ const styles = StyleSheet.create({
     padding: StyleGuide.spacing * 4
   }
 });
+
 export default () => {
-  const ref = useRef<TransitioningView>(null);
   const [toggled, setToggle] = useState(false);
-  const rotate = toggled ? Math.PI / 6 : 0;
+  const transitionVal = useTransition(
+    toggled,
+    toggled ? 0 : 1,
+    toggled ? 1 : 0,
+    400,
+    Easing.inOut(Easing.ease)
+  );
+  const rotate = bInterpolate(transitionVal, 0, Math.PI / 6);
   return (
-    <Transitioning.View
-      style={styles.container}
-      transition={
-        <Transition.Change interpolation="easeInOut" durationMs={400} />
-      }
-      {...{ ref }}
-    >
+    <View style={styles.container}>
       {cards.map((card, index) => (
-        <View
+        <Animated.View
           key={card.id}
           style={[
             styles.overlay,
-            { transform: [{ rotate: `${rotate * index}rad` }] }
+            { transform: [{ rotate: multiply(rotate, index) }] }
           ]}
         >
           <Card {...{ card }} />
-        </View>
+        </Animated.View>
       ))}
       <Button
         label={toggled ? "Reset" : "Start"}
         primary
-        onPress={() => {
-          if (ref.current) {
-            ref.current.animateNextTransition();
-          }
-          setToggle(!toggled);
-        }}
+        onPress={() => setToggle(!toggled)}
       />
-    </Transitioning.View>
+    </View>
   );
 };

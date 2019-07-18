@@ -11,10 +11,10 @@ interface ButtonProps {
 
 const styles = StyleSheet.create({
   container: {
-    padding: StyleGuide.spacing
+    padding: StyleGuide.spacing * 2
   },
   label: {
-    ...StyleGuide.typography.callout,
+    ...StyleGuide.typography.headline,
     textAlign: "center"
   }
 });
@@ -26,7 +26,7 @@ export default ({ label, primary, onPress }: ButtonProps) => {
     <RectButton {...{ onPress }}>
       <SafeAreaView style={{ backgroundColor }} accessible>
         <View style={styles.container}>
-          <Text style={[styles.label, { color }]}>{label.toUpperCase()}</Text>
+          <Text style={[styles.label, { color }]}>{label}</Text>
         </View>
       </SafeAreaView>
     </RectButton>

@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import { View, StyleSheet, SafeAreaView } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import StyleGuide from "./StyleGuide";
+import Text from "./Text";
 
 interface ButtonProps {
   label: string;
@@ -14,7 +15,6 @@ const styles = StyleSheet.create({
     padding: StyleGuide.spacing * 2
   },
   label: {
-    ...StyleGuide.typography.headline,
     textAlign: "center"
   }
 });
@@ -26,7 +26,9 @@ export default ({ label, primary, onPress }: ButtonProps) => {
     <RectButton {...{ onPress }}>
       <SafeAreaView style={{ backgroundColor }} accessible>
         <View style={styles.container}>
-          <Text style={[styles.label, { color }]}>{label}</Text>
+          <Text type="headline" style={[styles.label, { color }]}>
+            {label}
+          </Text>
         </View>
       </SafeAreaView>
     </RectButton>

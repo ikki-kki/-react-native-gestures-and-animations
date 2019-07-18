@@ -18,7 +18,8 @@ export const examples = [
   {
     screen: "DarkMode",
     title: "Dark Mode",
-    source: require("../../assets/examples/dark-mode.png")
+    source: require("../../assets/examples/dark-mode.png"),
+    contrast: true
   }
 ];
 

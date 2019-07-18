@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: undefined,
     height: undefined,
-    resizeMode: "contain",
     transform: [{ scale: 1 }]
   },
   content: {
@@ -44,24 +43,34 @@ interface ThumbnailProps {
   title: string;
   source: number;
   onPress: () => void;
+  contrast?: boolean;
 }
 
-export default ({ title, source, onPress }: ThumbnailProps) => {
+export default ({ title, source, onPress, contrast }: ThumbnailProps) => {
   return (
     <TouchableWithoutFeedback {...{ onPress }}>
       <View style={styles.container}>
-        <Image style={styles.image} {...{ source }} />
-        <LinearGradient
-          style={StyleSheet.absoluteFill}
-          colors={[
-            `rgba(${background.array().join(", ")}, 0)`,
-            `rgba(${background.array().join(", ")}, 0.9)`,
-            `rgba(${background.array().join(", ")}, 1)`
-          ]}
-          locations={[0.7, 0.8, 1]}
+        <Image
+          style={[styles.image, { resizeMode: contrast ? "cover" : "contain" }]}
+          {...{ source }}
         />
+        {!contrast && (
+          <LinearGradient
+            style={StyleSheet.absoluteFill}
+            colors={[
+              `rgba(${background.array().join(", ")}, 0)`,
+              `rgba(${background.array().join(", ")}, 0.9)`,
+              `rgba(${background.array().join(", ")}, 1)`
+            ]}
+            locations={[0.7, 0.8, 1]}
+          />
+        )}
         <View style={styles.content}>
-          <Text style={styles.title}>{title}</Text>
+          <Text
+            style={[styles.title, { color: contrast ? "white" : "#2F2E41" }]}
+          >
+            {title}
+          </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

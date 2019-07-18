@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     padding: StyleGuide.spacing * 4
   }
 });
-const newOrigin = width / 2 - StyleGuide.spacing * 2;
+const newOrigin = -(width / 2 - StyleGuide.spacing * 2);
 
 export default () => {
   const [toggled, setToggle] = useState(0);
@@ -53,17 +53,7 @@ export default () => {
             style={[
               styles.overlay,
               {
-                transform: [
-                  {
-                    translateX: -newOrigin
-                  },
-                  {
-                    rotate
-                  },
-                  {
-                    translateX: newOrigin
-                  }
-                ]
+                transform: transformOrigin(newOrigin, 0, { rotate })
               }
             ]}
           >

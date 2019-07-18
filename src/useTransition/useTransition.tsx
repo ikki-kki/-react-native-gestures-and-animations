@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     padding: StyleGuide.spacing * 4
   }
 });
+const newOrigin = width / 2 - StyleGuide.spacing * 2;
 
 export default () => {
   const [toggled, setToggle] = useState(false);
@@ -54,13 +55,13 @@ export default () => {
               {
                 transform: [
                   {
-                    translateX: -width / 2
+                    translateX: -newOrigin
                   },
                   {
                     rotate
                   },
                   {
-                    translateX: width / 2
+                    translateX: newOrigin
                   }
                 ]
               }

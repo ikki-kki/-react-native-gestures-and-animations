@@ -9,7 +9,7 @@ import {
 
 import { Card, Button, StyleGuide, cards } from "../components";
 
-const { multiply, interpolate } = Animated;
+const { multiply, interpolate, not } = Animated;
 const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
 const newOrigin = width / 2 - StyleGuide.spacing * 2;
 
 export default () => {
-  const [toggled, setToggle] = useState(false);
+  const [toggled, setToggle] = useState(0);
   const transitionVal = useTransition(
     toggled,
-    toggled ? 0 : 1,
-    toggled ? 1 : 0,
+    not(toggled),
+    toggled,
     400,
     Easing.inOut(Easing.ease)
   );

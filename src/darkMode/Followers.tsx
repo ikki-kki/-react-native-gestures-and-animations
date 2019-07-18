@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly"
   },
   separator: {
-    backgroundColor: StyleGuide.palette.border,
+    backgroundColor: "black",
     width: 1,
     height: "100%"
   }

@@ -4,11 +4,11 @@ import {
   View,
   StyleSheet,
   Image,
-  Text,
   TouchableWithoutFeedback
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import StyleGuide from "./StyleGuide";
+import Text from "./Text";
 
 const background = new Color(StyleGuide.palette.backgroundPrimary);
 const styles = StyleSheet.create({
@@ -32,10 +32,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     padding: StyleGuide.spacing,
     justifyContent: "flex-end"
-  },
-  title: {
-    ...StyleGuide.typography.title2,
-    color: "#2F2E41"
   }
 });
 
@@ -66,9 +62,7 @@ export default ({ title, source, onPress, contrast }: ThumbnailProps) => {
           />
         )}
         <View style={styles.content}>
-          <Text
-            style={[styles.title, { color: contrast ? "white" : "#2F2E41" }]}
-          >
+          <Text type="title2" style={{ color: contrast ? "white" : "#2F2E41" }}>
             {title}
           </Text>
         </View>

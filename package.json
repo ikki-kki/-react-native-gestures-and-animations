@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint App.tsx src/**/*",
+    "lint": "eslint --ext .ts,.tsx .",
     "tsc": "tsc",
     "postinstall": "patch-package"
   },

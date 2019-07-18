@@ -1,8 +1,9 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 
 import { Text, Button } from "../components";
 
+import Switch from "./Switch";
 import ProfilePic from "./ProfilePic";
 import SocialMediaIcons from "./SocialMediaIcons";
 import Followers from "./Followers";
@@ -16,10 +17,11 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-// example: https://dribbble.com/shots/6726263-Profile-Page
 export default () => {
+  const [dark, setDark] = useState(false);
   return (
     <View style={styles.container}>
+      <Switch value={dark} onValueChange={value => setDark(value)} />
       <ProfilePic />
       <View>
         <Text type="title3" style={styles.text}>

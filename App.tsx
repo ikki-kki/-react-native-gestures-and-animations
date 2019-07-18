@@ -6,6 +6,7 @@ import { LoadAssets, StyleGuide, cards } from "./src/components";
 import Examples, { examples } from "./src/examples";
 import Transitions from "./src/transitions";
 import UseTransition from "./src/useTransition";
+import DarkMode from "./src/darkMode";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -37,6 +38,12 @@ const AppNavigator = createAppContainer(
         screen: UseTransition,
         navigationOptions: {
           title: "useTransition()"
+        }
+      },
+      DarkMode: {
+        screen: DarkMode,
+        navigationOptions: {
+          title: "Dark Mode"
         }
       }
     },

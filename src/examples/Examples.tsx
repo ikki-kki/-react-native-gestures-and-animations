@@ -14,6 +14,11 @@ export const examples = [
     screen: "useTransition",
     title: "useTransition()",
     source: require("../../assets/examples/useTransition.png")
+  },
+  {
+    screen: "DarkMode",
+    title: "Dark Mode",
+    source: require("../../assets/examples/dark-mode.png")
   }
 ];
 

@@ -64,7 +64,7 @@ export default () => {
       <Button
         label={toggled ? "Reset" : "Start"}
         primary
-        onPress={() => setToggle(!toggled)}
+        onPress={() => setToggle(toggled ^ 1)}
       />
     </View>
   );

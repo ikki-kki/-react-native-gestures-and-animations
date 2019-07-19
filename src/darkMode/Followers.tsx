@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly"
   },
+  text: {
+    textAlign: "center"
+  },
   separator: {
     width: 1,
     height: "100%"
@@ -25,13 +28,21 @@ export default ({ dark, followers, following }: FollowersProps) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text type="body" {...{ dark }}>{`${followers}`}</Text>
-        <Text {...{ dark }}>Followers</Text>
+        <Text type="body" style={styles.text} {...{ dark }}>
+          {`${followers}`}
+        </Text>
+        <Text style={styles.text} {...{ dark }}>
+          Followers
+        </Text>
       </View>
       <View style={[styles.separator, { backgroundColor }]} />
       <View>
-        <Text type="body" {...{ dark }}>{`${following}`}</Text>
-        <Text {...{ dark }}>Following</Text>
+        <Text type="body" style={styles.text} {...{ dark }}>
+          {`${following}`}
+        </Text>
+        <Text style={styles.text} {...{ dark }}>
+          Following
+        </Text>
       </View>
     </View>
   );

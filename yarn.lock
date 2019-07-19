@@ -4807,13 +4807,14 @@ react-native-reanimated@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.0.1.tgz#5ecb6a2f6dad0351077ac9b771ca943b7ad6feda"
 
-react-native-redash@^7.2.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-7.2.1.tgz#7d178263e011639f811143b30874133b83beabbb"
+react-native-redash@7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-7.2.2.tgz#c4ab97c291e4938cdb3670c8daa0518af7d58fce"
   dependencies:
     abs-svg-path "^0.1.1"
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
+    use-memo-one "^1.1.1"
 
 react-native-safe-area-view@^0.14.1:
   version "0.14.6"
@@ -5852,6 +5853,10 @@ url-parse@^1.4.4:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+use-memo-one@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/use-memo-one/-/use-memo-one-1.1.1.tgz#39e6f08fe27e422a7d7b234b5f9056af313bd22c"
 
 use@^3.1.0:
   version "3.1.1"

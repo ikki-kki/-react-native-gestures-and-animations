@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { Text, Button } from "../components";
+import { Button } from "../components";
 
 import Switch from "./Switch";
 import ProfilePic from "./ProfilePic";
 import SocialMediaIcons from "./SocialMediaIcons";
 import Followers from "./Followers";
+import Text from "./Text";
+import View from "./View";
 
 const styles = StyleSheet.create({
   container: {

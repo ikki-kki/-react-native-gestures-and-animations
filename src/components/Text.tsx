@@ -3,7 +3,7 @@ import { Text, TextStyle } from "react-native";
 
 import StyleGuide from "./StyleGuide";
 
-interface TextProps {
+export interface TextProps {
   type?: keyof typeof StyleGuide["typography"];
   style?: TextStyle;
   children: ReactNode;

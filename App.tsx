@@ -3,11 +3,11 @@ import { StatusBar } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import { LoadAssets, StyleGuide, cards } from "./src/components";
-import Examples, { examples } from "./src/examples";
-import Transitions from "./src/transitions";
-import UseTransition from "./src/useTransition";
-import Timing from "./src/timing";
-import DarkMode, { profilePic } from "./src/darkMode";
+import Examples, { examples } from "./src/Examples";
+import Transitions from "./src/Transitions";
+import UseTransition from "./src/UseTransition";
+import Timing from "./src/Timing";
+import DarkMode, { profilePic } from "./src/DarkMode";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),

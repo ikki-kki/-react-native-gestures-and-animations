@@ -6,6 +6,7 @@ import { LoadAssets, StyleGuide, cards } from "./src/components";
 import Examples, { examples } from "./src/examples";
 import Transitions from "./src/transitions";
 import UseTransition from "./src/useTransition";
+import Timing from "./src/timing";
 import DarkMode, { profilePic } from "./src/darkMode";
 
 const fonts = {
@@ -46,6 +47,12 @@ const AppNavigator = createAppContainer(
         screen: DarkMode,
         navigationOptions: {
           title: "Dark Mode"
+        }
+      },
+      Timing: {
+        screen: Timing,
+        navigationOptions: {
+          title: "Timing"
         }
       }
     },

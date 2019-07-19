@@ -20,6 +20,21 @@ export const examples = [
     title: "Dark Mode",
     source: require("../../assets/examples/dark-mode.png"),
     contrast: true
+  },
+  {
+    screen: "Timing",
+    title: "Timing",
+    source: require("../../assets/examples/timing.png")
+  },
+  {
+    screen: "PanGesture",
+    title: "Pan Gesture",
+    source: require("../../assets/examples/pan-gesture.png")
+  },
+  {
+    screen: "Springs",
+    title: "Springs",
+    source: require("../../assets/examples/spring.png")
   }
 ];
 

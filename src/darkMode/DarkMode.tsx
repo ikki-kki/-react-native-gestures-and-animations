@@ -13,7 +13,12 @@ import ProfilePic from "./ProfilePic";
 import SocialMediaIcons from "./SocialMediaIcons";
 import Followers from "./Followers";
 
-const transition = <Transition.In type="fade" durationMs={400} />;
+const transition = (
+  <Transition.Together>
+    <Transition.In type="fade" durationMs={400} />
+    <Transition.Out type="fade" durationMs={500} />
+  </Transition.Together>
+);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

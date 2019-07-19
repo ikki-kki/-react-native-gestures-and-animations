@@ -31,11 +31,8 @@ export default ({ value, onValueChange }: SwitchProps) => {
         }}
         {...{ value, onValueChange }}
       />
-      <Icon
-        name={value ? "sun" : "moon"}
-        color={value ? "white" : "black"}
-        size={32}
-      />
+      {value && <Icon name="sun" color="white" size={32} />}
+      {!value && <Icon name="moon" color="black" size={32} />}
     </View>
   );
 };

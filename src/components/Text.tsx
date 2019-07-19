@@ -1,11 +1,10 @@
 import React, { ReactNode } from "react";
-import { Text, TextStyle } from "react-native";
+import { Text, TextProps as OriginalTextProps } from "react-native";
 
 import StyleGuide from "./StyleGuide";
 
-export interface TextProps {
+export interface TextProps extends OriginalTextProps {
   type?: keyof typeof StyleGuide["typography"];
-  style?: TextStyle;
   children: ReactNode;
 }
 

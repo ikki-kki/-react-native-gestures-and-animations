@@ -1,11 +1,12 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import { Text, StyleGuide } from "../components";
+import Text from "./Text";
 
 interface FollowersProps {
   followers: number;
   following: number;
+  dark?: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -14,23 +15,23 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly"
   },
   separator: {
-    backgroundColor: "black",
     width: 1,
     height: "100%"
   }
 });
 
-export default ({ followers, following }: FollowersProps) => {
+export default ({ dark, followers, following }: FollowersProps) => {
+  const backgroundColor = dark ? "white" : "black";
   return (
     <View style={styles.container}>
       <View>
-        <Text type="body">{`${followers}`}</Text>
-        <Text>Followers</Text>
+        <Text type="body" {...{ dark }}>{`${followers}`}</Text>
+        <Text {...{ dark }}>Followers</Text>
       </View>
-      <View style={styles.separator} />
+      <View style={[styles.separator, { backgroundColor }]} />
       <View>
-        <Text type="body">{`${following}`}</Text>
-        <Text>Following</Text>
+        <Text type="body" {...{ dark }}>{`${following}`}</Text>
+        <Text {...{ dark }}>Following</Text>
       </View>
     </View>
   );

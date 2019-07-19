@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Switch, StyleSheet } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
-import { Text, StyleGuide } from "../components";
+import { StyleGuide } from "../components";
 
 interface SwitchProps {
   value: boolean;
@@ -30,7 +30,11 @@ export default ({ value, onValueChange }: SwitchProps) => {
         }}
         {...{ value, onValueChange }}
       />
-      <Icon name={value ? "sun" : "moon"} size={32} />
+      <Icon
+        name={value ? "sun" : "moon"}
+        color={value ? "white" : "black"}
+        size={32}
+      />
     </View>
   );
 };

@@ -22,20 +22,20 @@ const styles = StyleSheet.create({
 export default () => {
   const [dark, setDark] = useState(false);
   return (
-    <View style={styles.container}>
+    <View style={styles.container} {...{ dark }}>
       <Switch value={dark} onValueChange={value => setDark(value)} />
       <ProfilePic />
       <View>
-        <Text type="title3" style={styles.text}>
+        <Text type="title3" style={styles.text} {...{ dark }}>
           Krzysztof Magiera
         </Text>
-        <Text type="headline" style={styles.text}>
+        <Text type="headline" style={styles.text} {...{ dark }}>
           Kraków, Poland
         </Text>
       </View>
-      <Followers followers={3569} following={310} />
+      <Followers followers={3569} following={310} {...{ dark }} />
       <SocialMediaIcons />
-      <Text type="body" style={styles.text}>
+      <Text type="body" style={styles.text} {...{ dark }}>
         When speaking of animations, the key to success is to avoid frame drops
       </Text>
       <Button label="Follow" primary onPress={() => {}} />

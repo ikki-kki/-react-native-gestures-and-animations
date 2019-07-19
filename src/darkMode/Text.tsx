@@ -1,5 +1,4 @@
 import * as React from "react";
-import { View } from "react-native";
 
 import {
   Text as OriginalText,
@@ -10,6 +9,11 @@ interface TextProps extends OrignalTextProps {
   dark?: boolean;
 }
 
-export default ({ dark, children, ...props }: TextProps) => {
-  return <OriginalText {...props}>{children}</OriginalText>;
+export default ({ dark, style, children, ...props }: TextProps) => {
+  const color = dark ? "white" : "black";
+  return (
+    <OriginalText style={[style, { color }]} {...props}>
+      {children}
+    </OriginalText>
+  );
 };

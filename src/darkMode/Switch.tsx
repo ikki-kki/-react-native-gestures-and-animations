@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Switch, StyleSheet } from "react-native";
+import { View, Switch, StyleSheet, Platform } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 import { StyleGuide } from "../components";
 
@@ -24,6 +24,7 @@ export default ({ value, onValueChange }: SwitchProps) => {
     <View style={styles.container}>
       <Switch
         style={styles.switch}
+        thumbColor={Platform.OS === "android" ? "white" : undefined}
         trackColor={{
           false: StyleGuide.palette.primary,
           true: StyleGuide.palette.primary

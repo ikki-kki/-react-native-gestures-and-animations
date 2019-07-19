@@ -1,1 +1,1 @@
-export { default } from "./DarkMode";
+export { default, profilePic } from "./DarkMode";

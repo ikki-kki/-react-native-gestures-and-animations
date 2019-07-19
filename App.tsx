@@ -6,7 +6,7 @@ import { LoadAssets, StyleGuide, cards } from "./src/components";
 import Examples, { examples } from "./src/examples";
 import Transitions from "./src/transitions";
 import UseTransition from "./src/useTransition";
-import DarkMode from "./src/darkMode";
+import DarkMode, { profilePic } from "./src/darkMode";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -16,8 +16,10 @@ const fonts = {
 
 const assets = [
   ...examples.map(example => example.source),
-  ...cards.map(card => card.source)
+  ...cards.map(card => card.source),
+  profilePic
 ];
+
 const AppNavigator = createAppContainer(
   createStackNavigator(
     {

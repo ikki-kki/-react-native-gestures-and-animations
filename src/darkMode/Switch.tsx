@@ -32,7 +32,9 @@ export default ({ value, onValueChange }: SwitchProps) => {
         {...{ value, onValueChange }}
       />
       {value && <Icon name="sun" color="white" size={32} />}
-      {!value && <Icon name="moon" color="black" size={32} />}
+      {!value && (
+        <Icon name="moon" color={StyleGuide.palette.primary} size={32} />
+      )}
     </View>
   );
 };

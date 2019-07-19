@@ -2,6 +2,9 @@ import * as React from "react";
 import { Image, StyleSheet, Dimensions } from "react-native";
 import { StyleGuide } from "../components";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+export const profilePic = require("../../assets/examples/krzysztof.jpg");
+
 const { width } = Dimensions.get("window");
 const size = width / 2;
 const styles = StyleSheet.create({
@@ -16,10 +19,5 @@ const styles = StyleSheet.create({
 });
 
 export default () => {
-  return (
-    <Image
-      style={styles.image}
-      source={require("../../assets/examples/krzysztof.jpg")}
-    />
-  );
+  return <Image style={styles.image} source={profilePic} />;
 };

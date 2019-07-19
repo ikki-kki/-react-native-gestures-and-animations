@@ -13,6 +13,8 @@ import ProfilePic from "./ProfilePic";
 import SocialMediaIcons from "./SocialMediaIcons";
 import Followers from "./Followers";
 
+export { profilePic } from "./ProfilePic";
+
 const transition = (
   <Transition.Together>
     <Transition.In type="fade" durationMs={400} />

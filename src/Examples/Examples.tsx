@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
 
 import { NavigationScreenConfigProps } from "react-navigation";
 import { Thumbnail, StyleGuide } from "../components";
@@ -54,6 +54,7 @@ export default ({ navigation }: NavigationScreenConfigProps) => {
           {...thumbnail}
         />
       ))}
+      <SafeAreaView />
     </ScrollView>
   );
 };

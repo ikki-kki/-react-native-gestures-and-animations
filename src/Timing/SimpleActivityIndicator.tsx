@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import Animated from "react-native-reanimated";
 import { StyleGuide } from "../components";
 
@@ -7,13 +7,21 @@ interface SimpleActivityIndicatorProps {
   progress: Animated.Value<number>;
 }
 
+const { width: wWidth } = Dimensions.get("window");
+const width = wWidth * 0.8;
 const { interpolate, Extrapolate } = Animated;
 const size = 32;
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    height: width,
+    width,
     flexDirection: "row",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    backgroundColor: "#d3d3d3",
+    borderTopLeftRadius: width / 2,
+    borderTopRightRadius: width / 2,
+    borderBottomLeftRadius: width / 2
   },
   bubble: {
     width: size,

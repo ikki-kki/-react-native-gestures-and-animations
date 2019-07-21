@@ -1,15 +1,15 @@
 import Color from "color";
 import * as React from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  TouchableWithoutFeedback
-} from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Animated from "react-native-reanimated";
+
+import { bInterpolate } from "react-native-redash";
 import StyleGuide from "./StyleGuide";
 import Text from "./Text";
+import TapHandler from "./TapHandler";
 
+const { Value } = Animated;
 const background = new Color(StyleGuide.palette.backgroundPrimary);
 const styles = StyleSheet.create({
   container: {
@@ -43,11 +43,19 @@ interface ThumbnailProps {
 }
 
 export default ({ title, source, onPress, contrast }: ThumbnailProps) => {
+  const value = new Value(0);
+  const scale = bInterpolate(value, 1, 1.5);
   return (
-    <TouchableWithoutFeedback {...{ onPress }}>
+    <TapHandler {...{ onPress, value }}>
       <View style={styles.container}>
-        <Image
-          style={[styles.image, { resizeMode: contrast ? "cover" : "contain" }]}
+        <Animated.Image
+          style={[
+            styles.image,
+            {
+              resizeMode: contrast ? "cover" : "contain",
+              transform: [{ scale }]
+            }
+          ]}
           {...{ source }}
         />
         {!contrast && (
@@ -67,6 +75,6 @@ export default ({ title, source, onPress, contrast }: ThumbnailProps) => {
           </Text>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </TapHandler>
   );
 };

@@ -1,7 +1,12 @@
 import React, { ReactNode } from "react";
 import Animated, { Easing } from "react-native-reanimated";
 import { TapGestureHandler, State } from "react-native-gesture-handler";
-import { onGestureEvent, contains, runTiming } from "react-native-redash";
+import {
+  onGestureEvent,
+  contains,
+  runTiming,
+  runDelay
+} from "react-native-redash";
 
 interface TapHandlerProps {
   value: Animated.Value<number>;
@@ -18,19 +23,9 @@ const {
   eq,
   set,
   call,
-  not,
-  clockRunning,
   onChange
 } = Animated;
 const { BEGAN, FAILED, CANCELLED, END, UNDETERMINED } = State;
-
-const delay = (node: Animated.Node<number>, duration: number) => {
-  const clock = new Clock();
-  return block([
-    runTiming(clock, 0, { toValue: 1, duration, easing: Easing.linear }),
-    cond(not(clockRunning(clock)), node)
-  ]);
-};
 
 export default ({ onPress, children, value }: TapHandlerProps) => {
   const clock = new Clock();
@@ -41,15 +36,15 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
     block([
       cond(eq(state, BEGAN), set(shouldSpring, 1)),
       cond(contains([FAILED, CANCELLED], state), set(shouldSpring, 0)),
-      cond(onChange(state, cond(eq(state, END), call([], onPress)))),
-      cond(eq(state, END), [delay(set(shouldSpring, 0), 250)]),
+      onChange(state, cond(eq(state, END), call([], onPress))),
+      cond(eq(state, END), [runDelay(set(shouldSpring, 0), 250)]),
       cond(
         eq(shouldSpring, 1),
         set(
           value,
           runTiming(clock, value, {
             toValue: 1,
-            duration: 300,
+            duration: 250,
             easing: Easing.inOut(Easing.ease)
           })
         )
@@ -60,7 +55,7 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
           value,
           runTiming(clock, value, {
             toValue: 0,
-            duration: 300,
+            duration: 250,
             easing: Easing.inOut(Easing.ease)
           })
         )

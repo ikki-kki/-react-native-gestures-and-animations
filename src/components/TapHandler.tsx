@@ -9,8 +9,28 @@ interface TapHandlerProps {
   children: ReactNode;
 }
 
-const { Value, Clock, useCode, block, cond, eq, set, call } = Animated;
+const {
+  Value,
+  Clock,
+  useCode,
+  block,
+  cond,
+  eq,
+  set,
+  call,
+  not,
+  clockRunning,
+  onChange
+} = Animated;
 const { BEGAN, FAILED, CANCELLED, END, UNDETERMINED } = State;
+
+const delay = (node: Animated.Node<number>, duration: number) => {
+  const clock = new Clock();
+  return block([
+    runTiming(clock, 0, { toValue: 1, duration, easing: Easing.linear }),
+    cond(not(clockRunning(clock)), node)
+  ]);
+};
 
 export default ({ onPress, children, value }: TapHandlerProps) => {
   const clock = new Clock();
@@ -21,7 +41,8 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
     block([
       cond(eq(state, BEGAN), set(shouldSpring, 1)),
       cond(contains([FAILED, CANCELLED], state), set(shouldSpring, 0)),
-      cond(eq(state, END), call([], onPress)),
+      cond(onChange(state, cond(eq(state, END), call([], onPress)))),
+      cond(eq(state, END), [delay(set(shouldSpring, 0), 250)]),
       cond(
         eq(shouldSpring, 1),
         set(

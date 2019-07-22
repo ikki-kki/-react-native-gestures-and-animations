@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
 import { NavigationScreenConfigProps } from "react-navigation";
 import { Thumbnail, StyleGuide } from "../components";
@@ -19,7 +19,9 @@ export const examples = [
     screen: "DarkMode",
     title: "Dark Mode",
     source: require("../../assets/examples/dark-mode.png"),
-    contrast: true
+    noGradient: true,
+    resizeMode: "cover" as "cover",
+    dark: true
   },
   {
     screen: "Timing",
@@ -41,12 +43,15 @@ export const examples = [
 const styles = StyleSheet.create({
   container: {
     backgroundColor: StyleGuide.palette.background
+  },
+  content: {
+    paddingBottom: 32
   }
 });
 
 export default ({ navigation }: NavigationScreenConfigProps) => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {examples.map(thumbnail => (
         <Thumbnail
           key={thumbnail.screen}
@@ -54,7 +59,6 @@ export default ({ navigation }: NavigationScreenConfigProps) => {
           {...thumbnail}
         />
       ))}
-      <SafeAreaView />
     </ScrollView>
   );
 };

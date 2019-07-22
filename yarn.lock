@@ -4807,9 +4807,9 @@ react-native-reanimated@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.0.1.tgz#5ecb6a2f6dad0351077ac9b771ca943b7ad6feda"
 
-react-native-redash@7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-7.2.2.tgz#c4ab97c291e4938cdb3670c8daa0518af7d58fce"
+react-native-redash@7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-7.4.0.tgz#2953b45e53336a299428e59ea0bdca1741a1a448"
   dependencies:
     abs-svg-path "^0.1.1"
     normalize-svg-path "^1.0.1"

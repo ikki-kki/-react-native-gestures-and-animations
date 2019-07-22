@@ -1,6 +1,6 @@
 import Color from "color";
 import * as React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated from "react-native-reanimated";
 
@@ -39,10 +39,19 @@ interface ThumbnailProps {
   title: string;
   source: number;
   onPress: () => void;
-  contrast?: boolean;
+  resizeMode?: "cover" | "contain";
+  noGradient?: boolean;
+  dark?: boolean;
 }
 
-export default ({ title, source, onPress, contrast }: ThumbnailProps) => {
+export default ({
+  title,
+  source,
+  onPress,
+  dark,
+  resizeMode,
+  noGradient
+}: ThumbnailProps) => {
   const value = new Value(0);
   const scale = bInterpolate(value, 1, 1.5);
   return (
@@ -52,13 +61,13 @@ export default ({ title, source, onPress, contrast }: ThumbnailProps) => {
           style={[
             styles.image,
             {
-              resizeMode: contrast ? "cover" : "contain",
+              resizeMode: resizeMode || "contain",
               transform: [{ scale }]
             }
           ]}
           {...{ source }}
         />
-        {!contrast && (
+        {!noGradient && (
           <LinearGradient
             style={StyleSheet.absoluteFill}
             colors={[
@@ -70,7 +79,7 @@ export default ({ title, source, onPress, contrast }: ThumbnailProps) => {
           />
         )}
         <View style={styles.content}>
-          <Text type="title2" style={{ color: contrast ? "white" : "#2F2E41" }}>
+          <Text type="title2" style={{ color: dark ? "white" : "#2F2E41" }}>
             {title}
           </Text>
         </View>

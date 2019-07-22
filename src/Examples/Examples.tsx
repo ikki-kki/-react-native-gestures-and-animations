@@ -19,12 +19,15 @@ export const examples = [
     screen: "DarkMode",
     title: "Dark Mode",
     source: require("../../assets/examples/dark-mode.png"),
-    contrast: true
+    noGradient: true,
+    resizeMode: "cover",
+    dark: true
   },
   {
     screen: "Timing",
     title: "Timing",
     source: require("../../assets/examples/timing.png")
+    // noGradient: true
   },
   {
     screen: "PanGesture",
@@ -35,6 +38,7 @@ export const examples = [
     screen: "Springs",
     title: "Springs",
     source: require("../../assets/examples/spring.png")
+    // noGradient: true
   }
 ];
 

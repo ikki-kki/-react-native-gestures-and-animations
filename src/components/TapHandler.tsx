@@ -1,12 +1,7 @@
 import React, { ReactNode } from "react";
 import Animated, { Easing } from "react-native-reanimated";
 import { TapGestureHandler, State } from "react-native-gesture-handler";
-import {
-  onGestureEvent,
-  contains,
-  runSpring,
-  runTiming
-} from "react-native-redash";
+import { onGestureEvent, contains, runTiming } from "react-native-redash";
 
 interface TapHandlerProps {
   value: Animated.Value<number>;

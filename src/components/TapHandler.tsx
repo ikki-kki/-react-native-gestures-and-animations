@@ -13,6 +13,8 @@ interface TapHandlerProps {
 
 const { Value, useCode, block, cond, eq, set, call, onChange } = Animated;
 const { BEGAN, FAILED, CANCELLED, END, UNDETERMINED } = State;
+const easing = Easing.inOut(Easing.ease);
+const duration = 250;
 
 export default ({ onPress, children, value }: TapHandlerProps) => {
   const shouldSpring = new Value(-1);
@@ -23,13 +25,15 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
       cond(eq(state, BEGAN), set(shouldSpring, 1)),
       cond(contains([FAILED, CANCELLED], state), set(shouldSpring, 0)),
       onChange(state, cond(eq(state, END), call([], onPress))),
-      cond(eq(state, END), [runDelay(set(shouldSpring, 0), 250)]),
+      cond(eq(state, END), [runDelay(set(shouldSpring, 0), duration)]),
       cond(
         eq(shouldSpring, 1),
         set(
           value,
           timing({
-            easing: Easing.inOut(Easing.ease)
+            from: 0,
+            to: 1,
+            easing
           })
         )
       ),
@@ -40,7 +44,7 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
           timing({
             from: 1,
             to: 0,
-            easing: Easing.inOut(Easing.ease)
+            easing
           })
         )
       )

@@ -1,9 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
+import { loop } from "react-native-redash";
+import { useMemoOne } from "use-memo-one";
 
 import SimpleActivityIndicator from "./SimpleActivityIndicator";
-import { StyleGuide, Button, loop } from "../components";
+import { StyleGuide, Button } from "../components";
 
 const {
   Clock,
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
 
 export default () => {
   const [play, setPlay] = useState(true);
-  const { clock, isPlaying, progress } = useMemo(
+  const { clock, isPlaying, progress } = useMemoOne(
     () => ({
       clock: new Clock(),
       isPlaying: new Value(0) as Animated.Value<0 | 1>,

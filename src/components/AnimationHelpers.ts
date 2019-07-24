@@ -5,29 +5,27 @@ const {
   Value,
   block,
   cond,
-  and,
   not,
   clockRunning,
   startClock,
   timing: reTiming,
-  stopClock
+  stopClock,
+  set
 } = Animated;
 
 export interface TimingProps {
   clock?: Animated.Clock;
-  from?: Animated.Value<number> | number;
-  to?: Animated.Value<number>;
+  from?: Animated.Adaptable<number>;
+  to?: Animated.Adaptable<number>;
   duration?: Animated.Adaptable<number>;
   easing?: Animated.EasingFunction;
-  autoStart?: boolean;
 }
 
 export const timing = (timingConfig: TimingProps) => {
-  const { clock, easing, duration, autoStart, from, to } = {
+  const { clock, easing, duration, from, to: toValue } = {
     clock: new Clock(),
     easing: Easing.linear,
     duration: 250,
-    autoStart: true,
     from: 0,
     to: 1,
     ...timingConfig
@@ -35,21 +33,35 @@ export const timing = (timingConfig: TimingProps) => {
 
   const state: Animated.TimingState = {
     finished: new Value(0),
-    position: typeof from === "number" ? new Value(from) : from,
+    position: new Value(0),
     time: new Value(0),
     frameTime: new Value(0)
   };
 
   const config = {
-    toValue: to,
+    toValue,
     duration,
     easing
   };
 
   return block([
-    cond(and(not(clockRunning(clock)), autoStart ? 1 : 0), startClock(clock)),
+    cond(not(clockRunning(clock)), [
+      set(state.finished, 0),
+      set(state.time, 0),
+      set(state.position, from),
+      set(state.frameTime, 0),
+      startClock(clock)
+    ]),
     reTiming(clock, state, config),
     cond(state.finished, stopClock(clock)),
     state.position
+  ]);
+};
+
+export const delay = (node: Animated.Node<number>, duration: number) => {
+  const clock = new Clock();
+  return block([
+    timing({ clock, from: 0, to: 1, duration }),
+    cond(not(clockRunning(clock)), node)
   ]);
 };

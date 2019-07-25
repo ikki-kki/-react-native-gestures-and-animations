@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Image, ImageStyle } from "react-native";
+import { StyleSheet, Image, ImageStyle, Dimensions } from "react-native";
 import StyleGuide from "./StyleGuide";
 
 type CardId = "1" | "2" | "3";
@@ -23,9 +23,18 @@ export const cards: Card[] = [
   }
 ];
 
+const { width } = Dimensions.get("window");
 const CARD_ASPECT_RATIO = 1324 / 863;
+const cardWidth = width - StyleGuide.spacing * 8;
+const cardHeight = cardWidth / CARD_ASPECT_RATIO;
+
 const styles = StyleSheet.create({
   container: {
+    width: cardWidth,
+    height: cardHeight,
+    borderRadius: 18
+  },
+  flexibleContainer: {
     flex: 1,
     maxWidth: "100%",
     aspectRatio: CARD_ASPECT_RATIO,
@@ -37,9 +46,16 @@ const styles = StyleSheet.create({
 
 interface CardProps {
   card: Card;
+}
+
+interface FlexibleCardProps extends CardProps {
   style?: ImageStyle;
 }
 
-export default ({ card, style }: CardProps) => {
-  return <Image style={[styles.container, style]} source={card.source} />;
+export const FlexibleCard = ({ card, style }: FlexibleCardProps) => (
+  <Image style={[styles.flexibleContainer, style]} source={card.source} />
+);
+
+export default ({ card }: CardProps) => {
+  return <Image style={styles.container} source={card.source} />;
 };

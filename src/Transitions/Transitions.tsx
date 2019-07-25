@@ -6,7 +6,7 @@ import {
   TransitioningView
 } from "react-native-reanimated";
 
-import { Card, StyleGuide, Selection, cards } from "../components";
+import { FlexibleCard, StyleGuide, Selection, cards } from "../components";
 
 interface Layout {
   id: string;
@@ -74,7 +74,11 @@ export default () => {
         {...{ transition, ref }}
       >
         {cards.map(card => (
-          <Card key={card.id} style={selectedLayout.child} {...{ card }} />
+          <FlexibleCard
+            key={card.id}
+            style={selectedLayout.child}
+            {...{ card }}
+          />
         ))}
       </Transitioning.View>
       {layouts.map(({ id, name, layout }) => (

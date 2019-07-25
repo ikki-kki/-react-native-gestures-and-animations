@@ -5,9 +5,9 @@ import Animated from "react-native-reanimated";
 import Constants from "expo-constants";
 
 import { onGestureEvent, decay, clamp } from "react-native-redash";
-import { cards, StyleGuide } from "../components";
+import { cards, StyleGuide, Card } from "../components";
 
-const { Value } = Animated;
+const { Value, block, cond, set, eq, add } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
 const containerHeight = height - Constants.statusBarHeight - 44;
@@ -21,10 +21,22 @@ const styles = StyleSheet.create({
   },
   card: {
     width: cardWidth,
-    height: cardHeight
+    height: cardHeight,
+    borderRadius: 18
   }
 });
 const [card] = cards;
+const withOffset = (
+  value: Animated.Value<number>,
+  state: Animated.Value<State>
+) => {
+  const offset = new Value(0);
+  return cond(
+    eq(state, State.END),
+    [set(offset, add(offset, value)), offset],
+    add(offset, value)
+  );
+};
 
 export default () => {
   const state = new Value(State.UNDETERMINED);
@@ -39,16 +51,8 @@ export default () => {
     velocityX,
     velocityY
   });
-  const translateX = clamp(
-    decay(translationX, state, velocityX),
-    0,
-    containerWidth - cardWidth
-  );
-  const translateY = clamp(
-    decay(translationY, state, velocityY),
-    0,
-    containerHeight - cardHeight
-  );
+  const translateX = withOffset(translationX, state);
+  const translateY = withOffset(translationY, state);
   return (
     <View style={styles.container}>
       <PanGestureHandler {...gestureHandler}>
@@ -57,7 +61,7 @@ export default () => {
             transform: [{ translateX }, { translateY }]
           }}
         >
-          <Image style={styles.card} source={card.source} />
+          <Card {...{ card }} />
         </Animated.View>
       </PanGestureHandler>
     </View>

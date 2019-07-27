@@ -25,13 +25,13 @@ export const cards: Card[] = [
 
 const { width } = Dimensions.get("window");
 const CARD_ASPECT_RATIO = 1324 / 863;
-const cardWidth = width - StyleGuide.spacing * 8;
-const cardHeight = cardWidth / CARD_ASPECT_RATIO;
+export const CARD_WIDTH = width - StyleGuide.spacing * 8;
+export const CARD_HEIGHT = CARD_WIDTH / CARD_ASPECT_RATIO;
 
 const styles = StyleSheet.create({
   container: {
-    width: cardWidth,
-    height: cardHeight,
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
     borderRadius: 18
   },
   flexibleContainer: {

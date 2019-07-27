@@ -76,19 +76,16 @@ const decay = (decayConfig: DecayProps) => {
 export const withDecay = (
   value: Animated.Node<number>,
   velocity: Animated.Node<number>,
-  state: Animated.Value<State>
+  state: Animated.Value<State>,
+  clock: Animated.Clock = new Clock()
 ) => {
-  const clock = new Clock();
-  return block([cond(eq(state, State.END), decay({ value, velocity }), value)]);
+  return cond(eq(state, State.END), decay({ value, velocity, clock }), value);
 };
 
-const withOffset = (
-  value: Animated.Value<number>,
-  state: Animated.Value<State>
-) => {
+const withOffset = (value: Animated.Value<number>, clock: Animated.Clock) => {
   const offset = new Value(0);
   return cond(
-    eq(state, State.END),
+    and(not(clockRunning(clock)), diff(not(clockRunning(clock)))),
     [set(offset, add(offset, value)), offset],
     add(offset, value)
   );
@@ -96,6 +93,8 @@ const withOffset = (
 
 export default () => {
   const state = new Value(State.UNDETERMINED);
+  const clockX = new Clock();
+  const clockY = new Clock();
   const translationX = new Value(0);
   const translationY = new Value(0);
   const velocityX = new Value(0);
@@ -107,15 +106,13 @@ export default () => {
     velocityX,
     velocityY
   });
-  const translateX = withDecay(
-    withOffset(translationX, state),
-    velocityX,
-    state
+  const translateX = withOffset(
+    withDecay(translationX, velocityX, state, clockX),
+    clockX
   );
-  const translateY = withDecay(
-    withOffset(translationY, state),
-    velocityY,
-    state
+  const translateY = withOffset(
+    withDecay(translationY, velocityY, state, clockY),
+    clockY
   );
   return (
     <View style={styles.container}>

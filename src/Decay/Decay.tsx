@@ -77,7 +77,10 @@ export const withDecay = (
   value: Animated.Node<number>,
   velocity: Animated.Node<number>,
   state: Animated.Value<State>
-) => cond(eq(state, State.END), decay({ value, velocity }), value);
+) => {
+  const clock = new Clock();
+  return block([cond(eq(state, State.END), decay({ value, velocity }), value)]);
+};
 
 const withOffset = (
   value: Animated.Value<number>,

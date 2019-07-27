@@ -42,8 +42,8 @@ export const examples = [
     noGradient: true
   },
   {
-    screen: "Springs",
-    title: "Springs",
+    screen: "Spring",
+    title: "Spring",
     source: require("../../assets/examples/spring.png"),
     noGradient: true
   }

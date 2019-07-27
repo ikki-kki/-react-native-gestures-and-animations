@@ -10,6 +10,7 @@ import Timing from "./src/Timing";
 import DarkMode, { profilePic } from "./src/DarkMode";
 import PanGesture from "./src/PanGesture";
 import Decay from "./src/Decay";
+import Spring from "./src/Spring";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -67,6 +68,12 @@ const AppNavigator = createAppContainer(
         screen: Decay,
         navigationOptions: {
           title: "Decay"
+        }
+      },
+      Spring: {
+        screen: Spring,
+        navigationOptions: {
+          title: "Spring"
         }
       }
     },

@@ -19,7 +19,11 @@ const {
   decay: reDecay,
   clockRunning,
   startClock,
-  stopClock
+  stopClock,
+  block,
+  and,
+  not,
+  diff
 } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
@@ -56,21 +60,20 @@ const decay = (decayConfig: DecayProps) => {
   const config = { deceleration };
 
   return [
-    cond(clockRunning(clock), 0, [
+    cond(and(not(clockRunning(clock)), eq(state.time, 0)), [
       set(state.finished, 0),
       set(state.velocity, velocity),
       set(state.position, value),
       set(state.time, 0),
       startClock(clock)
     ]),
-    set(state.position, value),
     reDecay(clock, state, config),
     cond(state.finished, stopClock(clock)),
     state.position
   ];
 };
 
-const widthDecay = (
+export const withDecay = (
   value: Animated.Node<number>,
   velocity: Animated.Node<number>,
   state: Animated.Value<State>
@@ -101,15 +104,15 @@ export default () => {
     velocityX,
     velocityY
   });
-  const translateX = diffClamp(
+  const translateX = withDecay(
     withOffset(translationX, state),
-    0,
-    containerWidth - CARD_WIDTH
+    velocityX,
+    state
   );
-  const translateY = diffClamp(
+  const translateY = withDecay(
     withOffset(translationY, state),
-    0,
-    containerHeight - CARD_HEIGHT
+    velocityY,
+    state
   );
   return (
     <View style={styles.container}>

@@ -26,17 +26,26 @@ export const examples = [
   {
     screen: "Timing",
     title: "Timing",
-    source: require("../../assets/examples/timing.png")
+    source: require("../../assets/examples/timing.png"),
+    noGradient: true
   },
   {
     screen: "PanGesture",
     title: "Pan Gesture",
-    source: require("../../assets/examples/pan-gesture.png")
+    source: require("../../assets/examples/pan-gesture.png"),
+    noGradient: true
+  },
+  {
+    screen: "Decay",
+    title: "Decay",
+    source: require("../../assets/examples/decay.png"),
+    noGradient: true
   },
   {
     screen: "Springs",
     title: "Springs",
-    source: require("../../assets/examples/spring.png")
+    source: require("../../assets/examples/spring.png"),
+    noGradient: true
   }
 ];
 

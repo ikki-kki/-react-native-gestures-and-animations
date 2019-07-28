@@ -16,7 +16,9 @@ const {
   clockRunning,
   startClock,
   stopClock,
-  spring: reSpring
+  spring: reSpring,
+  and,
+  not
 } = Animated;
 
 interface InteractableProps {
@@ -57,7 +59,7 @@ export function spring(springProps: SpringProps) {
   };
 
   return block([
-    cond(clockRunning(clock), 0, [
+    cond(and(not(clockRunning(clock)), eq(state.finished, 0)), [
       set(state.finished, 0),
       set(state.time, 0),
       set(state.position, value),

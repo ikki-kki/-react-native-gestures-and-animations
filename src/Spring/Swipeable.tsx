@@ -1,22 +1,12 @@
 import * as React from "react";
-import { StyleSheet, ViewStyle } from "react-native";
-
-import { DangerZone, GestureHandler } from "expo";
-import {
-  runSpring,
-  bInterpolate,
-  snapPoint,
-  onGestureEvent
-} from "react-native-redash";
+import { StyleSheet } from "react-native";
+import { snapPoint, onGestureEvent } from "react-native-redash";
 import Animated from "react-native-reanimated";
-import { State } from "react-native-gesture-handler";
+import { PanGestureHandler, State } from "react-native-gesture-handler";
 
-const { PanGestureHandler, State } = GestureHandler;
-const { Animated } = DangerZone;
 const {
   Value,
   useCode,
-  event,
   block,
   set,
   cond,
@@ -37,7 +27,7 @@ interface InteractableProps {
 }
 
 interface SpringProps {
-  clock: Animated.Clock;
+  clock?: Animated.Clock;
   value: Animated.Node<number>;
   velocity: Animated.Node<number>;
   dest: Animated.Adaptable<number>;
@@ -45,7 +35,8 @@ interface SpringProps {
 }
 
 export function spring(springProps: SpringProps) {
-  const { clock, value, dest, config } = {
+  const { clock, value, dest, config, velocity } = {
+    clock: new Clock(),
     config: {
       toValue: new Value(0),
       damping: 7,
@@ -86,7 +77,7 @@ const withSpring = (
   state: Animated.Value<State>,
   snapPoints: number[]
 ) => {
-  cond(
+  return cond(
     eq(state, State.END),
     spring({ value, velocity, dest: snapPoint(value, velocity, snapPoints) }),
     value
@@ -97,6 +88,7 @@ export default ({ x, y, snapPoints, onSnap }: InteractableProps) => {
   const translationX = new Value(0);
   const translationY = new Value(0);
   const velocityX = new Value(0);
+  const velocityY = new Value(0);
   const state = new Value(State.UNDETERMINED);
   const gestureHandler = onGestureEvent({
     velocityX,
@@ -105,7 +97,7 @@ export default ({ x, y, snapPoints, onSnap }: InteractableProps) => {
     state
   });
   const translateX = withSpring(translationX, velocityX, state, snapPoints);
-  const translateY = translationY;
+  const translateY = withSpring(translationY, velocityY, state, [0]);
   useCode(block([set(x, translateX), set(y, translateY)]), []);
   return (
     <PanGestureHandler {...gestureHandler}>

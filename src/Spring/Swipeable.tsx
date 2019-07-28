@@ -18,7 +18,9 @@ const {
   stopClock,
   spring: reSpring,
   and,
-  not
+  not,
+  neq,
+  add
 } = Animated;
 
 interface InteractableProps {
@@ -28,17 +30,18 @@ interface InteractableProps {
   onSnap: (x: number) => void;
 }
 
-interface SpringProps {
-  clock?: Animated.Clock;
-  value: Animated.Node<number>;
-  velocity: Animated.Node<number>;
-  dest: Animated.Adaptable<number>;
+interface WithSpringProps {
+  value: Animated.Adaptable<number>;
+  velocity: Animated.Adaptable<number>;
+  state: Animated.Value<State>;
+  snapPoints: number[];
+  offset?: Animated.Value<number>;
   config?: Animated.SpringConfig;
 }
 
-export function spring(springProps: SpringProps) {
-  const { clock, value, dest, config, velocity } = {
-    clock: new Clock(),
+const withSpring = (props: WithSpringProps) => {
+  const { value, velocity, state, snapPoints, offset, config } = {
+    offset: new Value(0),
     config: {
       toValue: new Value(0),
       damping: 7,
@@ -48,42 +51,37 @@ export function spring(springProps: SpringProps) {
       restSpeedThreshold: 0.001,
       restDisplacementThreshold: 0.001
     },
-    ...springProps
+    ...props
   };
-
-  const state = {
+  const clock = new Clock();
+  const springState: Animated.SpringState = {
     finished: new Value(0),
     velocity: new Value(0),
     position: new Value(0),
     time: new Value(0)
   };
 
-  return block([
-    cond(and(not(clockRunning(clock)), eq(state.finished, 0)), [
-      set(state.finished, 0),
-      set(state.time, 0),
-      set(state.position, value),
-      set(state.velocity, velocity),
-      set(config.toValue, dest),
-      startClock(clock)
-    ]),
-    reSpring(clock, state, config),
-    cond(state.finished, stopClock(clock)),
-    state.position
-  ]);
-}
+  const isDecayInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
+  const finishDecay = [set(offset, springState.position), stopClock(clock)];
 
-const withSpring = (
-  value: Animated.Node<number>,
-  velocity: Animated.Node<number>,
-  state: Animated.Value<State>,
-  snapPoints: number[]
-) => {
-  return cond(
-    eq(state, State.END),
-    spring({ value, velocity, dest: snapPoint(value, velocity, snapPoints) }),
-    value
-  );
+  return block([
+    cond(isDecayInterrupted, finishDecay),
+    cond(neq(state, State.END), [
+      set(springState.finished, 0),
+      set(springState.position, add(offset, value))
+    ]),
+    cond(eq(state, State.END), [
+      cond(and(not(clockRunning(clock)), not(springState.finished)), [
+        set(springState.velocity, velocity),
+        set(springState.time, 0),
+        set(config.toValue, snapPoint(value, velocity, snapPoints)),
+        startClock(clock)
+      ]),
+      reSpring(clock, springState, config),
+      cond(springState.finished, finishDecay)
+    ]),
+    springState.position
+  ]);
 };
 
 export default ({ x, y, snapPoints, onSnap }: InteractableProps) => {
@@ -98,8 +96,18 @@ export default ({ x, y, snapPoints, onSnap }: InteractableProps) => {
     translationY,
     state
   });
-  const translateX = withSpring(translationX, velocityX, state, snapPoints);
-  const translateY = withSpring(translationY, velocityY, state, [0]);
+  const translateX = withSpring({
+    value: translationX,
+    velocity: velocityX,
+    state,
+    snapPoints
+  });
+  const translateY = withSpring({
+    value: translationY,
+    velocity: velocityY,
+    state,
+    snapPoints: [0]
+  });
   useCode(block([set(x, translateX), set(y, translateY)]), []);
   return (
     <PanGestureHandler {...gestureHandler}>

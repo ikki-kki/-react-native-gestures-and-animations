@@ -12,6 +12,8 @@ const { Value, diffClamp, cond, set, eq, add } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
 const containerHeight = height - Constants.statusBarHeight - 44;
+const offsetX = new Value((containerWidth - CARD_WIDTH) / 2);
+const offsetY = new Value((containerHeight - CARD_HEIGHT) / 2);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -22,16 +24,15 @@ const [card] = cards;
 
 // TODO: replace with withOffset from redash
 const withOffset = (
-  value: Animated.Value<number>,
-  state: Animated.Value<State>
-) => {
-  const offset = new Value(0);
-  return cond(
+  value: Animated.Node<number>,
+  state: Animated.Value<State>,
+  offset: Animated.Value<number> = new Value(0)
+) =>
+  cond(
     eq(state, State.END),
     [set(offset, add(offset, value)), offset],
     add(offset, value)
   );
-};
 
 export default () => {
   const state = new Value(State.UNDETERMINED);
@@ -47,12 +48,12 @@ export default () => {
     velocityY
   });
   const translateX = diffClamp(
-    withOffset(translationX, state),
+    withOffset(translationX, state, offsetX),
     0,
     containerWidth - CARD_WIDTH
   );
   const translateY = diffClamp(
-    withOffset(translationY, state),
+    withOffset(translationY, state, offsetY),
     0,
     containerHeight - CARD_HEIGHT
   );

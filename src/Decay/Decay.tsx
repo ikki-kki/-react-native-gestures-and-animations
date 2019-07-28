@@ -32,6 +32,8 @@ const {
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
 const containerHeight = height - Constants.statusBarHeight - 44;
+const offsetX = new Value((containerWidth - CARD_WIDTH) / 2);
+const offsetY = new Value((containerHeight - CARD_HEIGHT) / 2);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -44,6 +46,7 @@ const withDecay = (
   value: Animated.Adaptable<number>,
   velocity: Animated.Adaptable<number>,
   state: Animated.Value<State>,
+  offset: Animated.Value<number> = new Value(0),
   deceleration: number = 0.998
 ) => {
   const clock = new Clock();
@@ -54,7 +57,6 @@ const withDecay = (
     time: new Value(0)
   };
 
-  const offset = new Value(0);
   const isDecayInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
   const finishDecay = [set(offset, decayState.position), stopClock(clock)];
 
@@ -91,12 +93,12 @@ export default () => {
     velocityY
   });
   const translateX = diffClamp(
-    withDecay(translationX, velocityX, state),
+    withDecay(translationX, velocityX, state, offsetX),
     0,
     containerWidth - CARD_WIDTH
   );
   const translateY = diffClamp(
-    withDecay(translationY, velocityY, state),
+    withDecay(translationY, velocityY, state, offsetY),
     0,
     containerHeight - CARD_HEIGHT
   );

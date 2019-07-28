@@ -10,7 +10,7 @@ import Timing from "./src/Timing";
 import DarkMode, { profilePic } from "./src/DarkMode";
 import PanGesture from "./src/PanGesture";
 import Decay from "./src/Decay";
-import Spring from "./src/Spring";
+import Spring, { profiles } from "./src/Spring";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -21,6 +21,7 @@ const fonts = {
 const assets = [
   ...examples.map(example => example.source),
   ...cards.map(card => card.source),
+  ...profiles.map(profile => profile.profile),
   profilePic
 ];
 

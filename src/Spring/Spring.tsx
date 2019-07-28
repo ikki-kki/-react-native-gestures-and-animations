@@ -3,7 +3,7 @@ import * as React from "react";
 import { Profile } from "./Profile";
 import Profiles from "./Profiles";
 
-const profiles: Profile[] = [
+export const profiles: Profile[] = [
   {
     id: "1",
     name: "Caroline",

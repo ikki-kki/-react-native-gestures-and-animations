@@ -82,6 +82,14 @@ export default ({ profiles }: ProfilesProps) => {
     ...StyleSheet.absoluteFillObject,
     transform: [{ translateX }, { translateY }, { rotateZ }]
   };
+  /*
+
+        <Interactable
+          snapPoints={[{ x: -1 * A }, { x: 0 }, { x: A }]}
+          style={StyleSheet.absoluteFill}
+          {...{ onSnap, x, y }}
+        />
+        */
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -92,11 +100,6 @@ export default ({ profiles }: ProfilesProps) => {
         <Animated.View {...{ style }}>
           <Card {...{ profile, likeOpacity, nopeOpacity }} />
         </Animated.View>
-        <Interactable
-          snapPoints={[{ x: -1 * A }, { x: 0 }, { x: A }]}
-          style={StyleSheet.absoluteFill}
-          {...{ onSnap, x, y }}
-        />
       </View>
       <View style={styles.footer}>
         <View style={styles.circle}>

@@ -68,12 +68,9 @@ const decay = (config: DecayProps) => {
   //       reDecay(clock, decayState, { deceleration }),
 
   return block([
-    cond(neq(state, State.END), set(decayState.position, value)),
-    cond(
-      eq(state, State.END),
-      [set(offset, add(offset, value)), offset],
-      add(offset, decayState.position)
-    )
+    cond(neq(state, State.END), set(decayState.position, add(offset, value))),
+    cond(eq(state, State.END), set(offset, add(offset, value))),
+    decayState.position
   ]);
 };
 

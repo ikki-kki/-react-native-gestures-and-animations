@@ -19,33 +19,33 @@ export const examples = [
     screen: "DarkMode",
     title: "Dark Mode",
     source: require("../../assets/examples/dark-mode.png"),
-    noGradient: true,
     resizeMode: "cover" as "cover",
     dark: true
   },
   {
     screen: "Timing",
     title: "Timing",
-    source: require("../../assets/examples/timing.png"),
-    noGradient: true
+    source: require("../../assets/examples/timing.png")
   },
   {
     screen: "PanGesture",
     title: "Pan Gesture",
-    source: require("../../assets/examples/pan-gesture.png"),
-    noGradient: true
+    source: require("../../assets/examples/pan-gesture.png")
   },
   {
     screen: "Decay",
     title: "Decay",
-    source: require("../../assets/examples/decay.png"),
-    noGradient: true
+    source: require("../../assets/examples/decay.png")
   },
   {
     screen: "Spring",
     title: "Spring",
-    source: require("../../assets/examples/spring.png"),
-    noGradient: true
+    source: require("../../assets/examples/spring.png")
+  },
+  {
+    screen: "Swipe",
+    title: "Swipe",
+    source: require("../../assets/examples/swipe.png")
   }
 ];
 

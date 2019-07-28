@@ -10,7 +10,8 @@ import Timing from "./src/Timing";
 import DarkMode, { profilePic } from "./src/DarkMode";
 import PanGesture from "./src/PanGesture";
 import Decay from "./src/Decay";
-import Spring, { profiles } from "./src/Spring";
+import Spring from "./src/Spring";
+import Swipe, { profiles } from "./src/Swipe";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -75,6 +76,12 @@ const AppNavigator = createAppContainer(
         screen: Spring,
         navigationOptions: {
           title: "Spring"
+        }
+      },
+      Swipe: {
+        screen: Swipe,
+        navigationOptions: {
+          title: "Swipe"
         }
       }
     },

@@ -1,1 +1,1 @@
-export { default, profiles } from "./Spring";
+export { default } from "./Spring";

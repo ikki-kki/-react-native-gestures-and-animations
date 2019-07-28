@@ -1,7 +1,5 @@
-import Color from "color";
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Animated from "react-native-reanimated";
 
 import { bInterpolate } from "react-native-redash";
@@ -10,7 +8,6 @@ import Text from "./Text";
 import TapHandler from "./TapHandler";
 
 const { Value } = Animated;
-const background = new Color(StyleGuide.palette.backgroundPrimary);
 const styles = StyleSheet.create({
   container: {
     margin: StyleGuide.spacing * 2,
@@ -49,8 +46,7 @@ export default ({
   source,
   onPress,
   dark,
-  resizeMode,
-  noGradient
+  resizeMode
 }: ThumbnailProps) => {
   const value = new Value(0);
   const scale = bInterpolate(value, 1, 1.5);
@@ -67,17 +63,6 @@ export default ({
           ]}
           {...{ source }}
         />
-        {!noGradient && (
-          <LinearGradient
-            style={StyleSheet.absoluteFill}
-            colors={[
-              `rgba(${background.array().join(", ")}, 0)`,
-              `rgba(${background.array().join(", ")}, 0.9)`,
-              `rgba(${background.array().join(", ")}, 1)`
-            ]}
-            locations={[0.7, 0.8, 1]}
-          />
-        )}
         <View style={styles.content}>
           <Text type="title2" style={{ color: dark ? "white" : "#2F2E41" }}>
             {title}

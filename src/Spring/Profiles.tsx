@@ -1,8 +1,9 @@
-import * as React from "react";
+import React, { useState, useMemo } from "react";
 import { View, Dimensions, SafeAreaView, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import { Feather as Icon } from "@expo/vector-icons";
 
+import { useMemoOne } from "use-memo-one";
 import Card, { Profile } from "./Profile";
 import Swipeable from "./Swipeable";
 
@@ -59,12 +60,23 @@ interface ProfilesProps {
 }
 
 export default ({ profiles }: ProfilesProps) => {
-  const x = new Value(0);
-  const y = new Value(0);
-  const profile = profiles[0];
-  const onSnap = ([x]) => {
-    console.log({ x });
-  };
+  const [index, setIndex] = useState(0);
+  const { x, y } = useMemoOne(
+    () => ({
+      x: new Value(0),
+      y: new Value(0)
+    }),
+    []
+  );
+  const onSnap = useMemo(
+    () => ([point]: [number]) => {
+      if (point !== 0) {
+        setIndex((index + 1) % profiles.length);
+      }
+    },
+    [index, profiles.length]
+  );
+  const profile = profiles[index];
   const rotateZ = concat(
     interpolate(x, {
       inputRange: [-1 * deltaX, deltaX],
@@ -97,7 +109,7 @@ export default ({ profiles }: ProfilesProps) => {
         <Animated.View {...{ style }}>
           <Card {...{ profile, likeOpacity, nopeOpacity }} />
         </Animated.View>
-        <Swipeable {...{ snapPoints, onSnap, x, y }} />
+        <Swipeable key={index} {...{ snapPoints, onSnap, x, y }} />
       </View>
       <View style={styles.footer}>
         <View style={styles.circle}>

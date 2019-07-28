@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { snapPoint, onGestureEvent } from "react-native-redash";
 import Animated from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
+import { useMemoOne } from "use-memo-one";
 
 const {
   Value,
@@ -28,7 +29,7 @@ interface InteractableProps {
   x: Animated.Value<number>;
   y: Animated.Value<number>;
   snapPoints: number[];
-  onSnap?: (x: number) => void;
+  onSnap?: (value: [number]) => void;
 }
 
 interface WithSpringProps {
@@ -38,7 +39,7 @@ interface WithSpringProps {
   snapPoints: number[];
   offset?: Animated.Value<number>;
   config?: Animated.SpringConfig;
-  onSnap: (value: number) => void;
+  onSnap?: (value: [number]) => void;
 }
 
 const withSpring = (props: WithSpringProps) => {
@@ -46,12 +47,12 @@ const withSpring = (props: WithSpringProps) => {
     offset: new Value(0),
     config: {
       toValue: new Value(0),
-      damping: 7,
+      damping: 26,
       mass: 1,
-      stiffness: 121.6,
+      stiffness: 170,
       overshootClamping: false,
-      restSpeedThreshold: 0.01,
-      restDisplacementThreshold: 0.01
+      restSpeedThreshold: 1,
+      restDisplacementThreshold: 1
     },
     ...props
   };
@@ -90,30 +91,55 @@ const withSpring = (props: WithSpringProps) => {
 };
 
 export default ({ x, y, snapPoints, onSnap }: InteractableProps) => {
-  const translationX = new Value(0);
-  const translationY = new Value(0);
-  const velocityX = new Value(0);
-  const velocityY = new Value(0);
-  const state = new Value(State.UNDETERMINED);
-  const gestureHandler = onGestureEvent({
-    velocityX,
+  const {
     translationX,
     translationY,
+    velocityX,
+    velocityY,
     state
-  });
-  const translateX = withSpring({
-    value: translationX,
-    velocity: velocityX,
-    state,
-    snapPoints,
-    onSnap
-  });
-  const translateY = withSpring({
-    value: translationY,
-    velocity: velocityY,
-    state,
-    snapPoints: [0]
-  });
+  } = useMemoOne(
+    () => ({
+      translationX: new Value(0),
+      translationY: new Value(0),
+      velocityX: new Value(0),
+      velocityY: new Value(0),
+      state: new Value(State.UNDETERMINED)
+    }),
+    []
+  );
+  const { gestureHandler, translateX, translateY } = useMemoOne(
+    () => ({
+      gestureHandler: onGestureEvent({
+        velocityX,
+        translationX,
+        translationY,
+        state
+      }),
+      translateX: withSpring({
+        value: translationX,
+        velocity: velocityX,
+        state,
+        snapPoints,
+        onSnap
+      }),
+      translateY: withSpring({
+        value: translationY,
+        velocity: velocityY,
+        state,
+        snapPoints: [0]
+      })
+    }),
+    [
+      onSnap,
+      snapPoints,
+      state,
+      translationX,
+      translationY,
+      velocityX,
+      velocityY
+    ]
+  );
+
   useCode(block([set(x, translateX), set(y, translateY)]), []);
   return (
     <PanGestureHandler {...gestureHandler}>

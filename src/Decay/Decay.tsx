@@ -42,13 +42,20 @@ const styles = StyleSheet.create({
 });
 const [card] = cards;
 
-const withDecay = (
-  value: Animated.Adaptable<number>,
-  velocity: Animated.Adaptable<number>,
-  state: Animated.Value<State>,
-  offset: Animated.Value<number> = new Value(0),
-  deceleration: number = 0.998
-) => {
+interface WithDecayProps {
+  value: Animated.Adaptable<number>;
+  velocity: Animated.Adaptable<number>;
+  state: Animated.Value<State>;
+  offset?: Animated.Value<number>;
+  deceleration?: number;
+}
+
+const withDecay = (config: WithDecayProps) => {
+  const { value, velocity, state, offset, deceleration } = {
+    offset: new Value(0),
+    deceleration: 0.998,
+    ...config
+  };
   const clock = new Clock();
   const decayState = {
     finished: new Value(0),
@@ -93,12 +100,22 @@ export default () => {
     velocityY
   });
   const translateX = diffClamp(
-    withDecay(translationX, velocityX, state, offsetX),
+    withDecay({
+      value: translationX,
+      velocity: velocityX,
+      state,
+      offset: offsetX
+    }),
     0,
     containerWidth - CARD_WIDTH
   );
   const translateY = diffClamp(
-    withDecay(translationY, velocityY, state, offsetY),
+    withDecay({
+      value: translationY,
+      velocity: velocityY,
+      state,
+      offset: offsetY
+    }),
     0,
     containerHeight - CARD_HEIGHT
   );

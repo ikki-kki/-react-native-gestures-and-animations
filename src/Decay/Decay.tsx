@@ -13,7 +13,6 @@ const {
   Value,
   diffClamp,
   cond,
-  defined,
   set,
   eq,
   add,
@@ -22,11 +21,8 @@ const {
   startClock,
   stopClock,
   block,
-  debug,
   and,
   not,
-  diff,
-  onChange,
   neq
 } = Animated;
 const { width, height } = Dimensions.get("window");

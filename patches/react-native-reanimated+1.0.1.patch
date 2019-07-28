@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-reanimated/react-native-reanimated.d.ts b/node_modules/react-native-reanimated/react-native-reanimated.d.ts
-index b1a0886..21cc8b8 100644
+index b1a0886..07b1038 100644
 --- a/node_modules/react-native-reanimated/react-native-reanimated.d.ts
 +++ b/node_modules/react-native-reanimated/react-native-reanimated.d.ts
 @@ -113,8 +113,10 @@ declare module 'react-native-reanimated' {
@@ -23,3 +23,14 @@ index b1a0886..21cc8b8 100644
      };
  
      type AnimateProps<
+@@ -192,9 +194,7 @@ declare module 'react-native-reanimated' {
+       sourceNode: Adaptable<number>,
+     ): AnimatedNode<number>;
+     export function concat(
+-      a: AnimatedNode<string>,
+-      b: AnimatedNode<string>,
+-      ...others: AnimatedNode<string>[],
++      ...args: Array<Adaptable<string> | Adaptable<number>>,
+     ): AnimatedNode<string>;
+     export function cond(
+       conditionNode: Adaptable<number>,

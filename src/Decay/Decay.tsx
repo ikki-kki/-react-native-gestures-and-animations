@@ -64,12 +64,11 @@ const decay = (config: DecayProps) => {
   };
 
   const offset = new Value(0);
+  const isDecayInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
+  const finishDecay = [set(offset, decayState.position), stopClock(clock)];
 
   return block([
-    cond(and(eq(state, State.BEGAN), clockRunning(clock)), [
-      set(offset, decayState.position),
-      stopClock(clock)
-    ]),
+    cond(isDecayInterrupted, finishDecay),
     cond(neq(state, State.END), [
       set(decayState.finished, 0),
       set(decayState.position, add(offset, value))
@@ -81,10 +80,7 @@ const decay = (config: DecayProps) => {
         startClock(clock)
       ]),
       reDecay(clock, decayState, { deceleration }),
-      cond(decayState.finished, [
-        set(offset, decayState.position),
-        stopClock(clock)
-      ])
+      cond(decayState.finished, finishDecay)
     ]),
     decayState.position
   ]);

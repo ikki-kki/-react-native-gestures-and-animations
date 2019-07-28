@@ -4,6 +4,7 @@ import Animated from "react-native-reanimated";
 import { Feather as Icon } from "@expo/vector-icons";
 
 import Card, { Profile } from "./Profile";
+import Swipeable from "./Swipeable";
 
 const { Value, interpolate, concat, Extrapolate } = Animated;
 const { width, height } = Dimensions.get("window");
@@ -13,6 +14,7 @@ const w = width - 32;
 const h = w * φ;
 const α = Math.PI / 12;
 const A = width * Math.cos(α) + height * Math.sin(α);
+const snapPoints = [-A, 0, A];
 
 const styles = StyleSheet.create({
   container: {
@@ -60,6 +62,9 @@ export default ({ profiles }: ProfilesProps) => {
   const x = new Value(0);
   const y = new Value(0);
   const profile = profiles[0];
+  const onSnap = x => {
+    console.log({ x });
+  };
   const rotateZ = concat(
     interpolate(x, {
       inputRange: [-1 * deltaX, deltaX],
@@ -82,14 +87,6 @@ export default ({ profiles }: ProfilesProps) => {
     ...StyleSheet.absoluteFillObject,
     transform: [{ translateX }, { translateY }, { rotateZ }]
   };
-  /*
-
-        <Interactable
-          snapPoints={[{ x: -1 * A }, { x: 0 }, { x: A }]}
-          style={StyleSheet.absoluteFill}
-          {...{ onSnap, x, y }}
-        />
-        */
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -100,6 +97,7 @@ export default ({ profiles }: ProfilesProps) => {
         <Animated.View {...{ style }}>
           <Card {...{ profile, likeOpacity, nopeOpacity }} />
         </Animated.View>
+        <Swipeable {...{ snapPoints, onSnap, x, y }} />
       </View>
       <View style={styles.footer}>
         <View style={styles.circle}>

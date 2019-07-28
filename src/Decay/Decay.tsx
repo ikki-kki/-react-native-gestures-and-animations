@@ -65,11 +65,23 @@ const decay = (config: DecayProps) => {
 
   const offset = new Value(0);
 
-  //       reDecay(clock, decayState, { deceleration }),
-
   return block([
-    cond(neq(state, State.END), set(decayState.position, add(offset, value))),
-    cond(eq(state, State.END), set(offset, add(offset, value))),
+    cond(neq(state, State.END), [
+      set(decayState.finished, 0),
+      set(decayState.position, add(offset, value))
+    ]),
+    cond(eq(state, State.END), [
+      cond(and(not(clockRunning(clock)), not(decayState.finished)), [
+        set(decayState.velocity, velocity),
+        set(decayState.time, 0),
+        startClock(clock)
+      ]),
+      reDecay(clock, decayState, { deceleration }),
+      cond(decayState.finished, [
+        set(offset, decayState.position),
+        stopClock(clock)
+      ])
+    ]),
     decayState.position
   ]);
 };

@@ -36,7 +36,7 @@ const StyleGuide = {
     subhead: {
       fontSize: 15,
       lineHeight: 20,
-      fontFamily: "SFProText-Regular"
+      fontFamily: "SFProText-Bold"
     },
     title1: {
       fontSize: 34,

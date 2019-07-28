@@ -46,6 +46,12 @@ export const examples = [
     screen: "Swipe",
     title: "Swipe",
     source: require("../../assets/examples/swipe.png")
+  },
+  {
+    screen: "TransformOrigin",
+    title: "Transform Origin",
+    source: require("../../assets/examples/transform-origin.png"),
+    comingSoon: true
   }
 ];
 

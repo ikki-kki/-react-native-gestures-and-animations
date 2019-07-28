@@ -37,8 +37,8 @@ interface ThumbnailProps {
   source: number;
   onPress: () => void;
   resizeMode?: "cover" | "contain";
-  noGradient?: boolean;
   dark?: boolean;
+  comingSoon?: boolean;
 }
 
 export default ({
@@ -46,7 +46,8 @@ export default ({
   source,
   onPress,
   dark,
-  resizeMode
+  resizeMode,
+  comingSoon
 }: ThumbnailProps) => {
   const value = new Value(0);
   const scale = bInterpolate(value, 1, 1.5);
@@ -64,6 +65,11 @@ export default ({
           {...{ source }}
         />
         <View style={styles.content}>
+          {comingSoon && (
+            <Text type="subhead" style={{ color: "#2F2E41" }}>
+              {"Coming soon".toUpperCase()}
+            </Text>
+          )}
           <Text type="title2" style={{ color: dark ? "white" : "#2F2E41" }}>
             {title}
           </Text>

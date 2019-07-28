@@ -66,6 +66,10 @@ const decay = (config: DecayProps) => {
   const offset = new Value(0);
 
   return block([
+    cond(and(eq(state, State.BEGAN), clockRunning(clock)), [
+      set(offset, decayState.position),
+      stopClock(clock)
+    ]),
     cond(neq(state, State.END), [
       set(decayState.finished, 0),
       set(decayState.position, add(offset, value))

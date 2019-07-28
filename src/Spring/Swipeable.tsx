@@ -20,14 +20,15 @@ const {
   and,
   not,
   neq,
-  add
+  add,
+  debug
 } = Animated;
 
 interface InteractableProps {
   x: Animated.Value<number>;
   y: Animated.Value<number>;
   snapPoints: number[];
-  onSnap: (x: number) => void;
+  onSnap?: (x: number) => void;
 }
 
 interface WithSpringProps {
@@ -37,10 +38,11 @@ interface WithSpringProps {
   snapPoints: number[];
   offset?: Animated.Value<number>;
   config?: Animated.SpringConfig;
+  onSnap: (value: number) => void;
 }
 
 const withSpring = (props: WithSpringProps) => {
-  const { value, velocity, state, snapPoints, offset, config } = {
+  const { value, velocity, state, snapPoints, offset, config, onSnap } = {
     offset: new Value(0),
     config: {
       toValue: new Value(0),
@@ -48,8 +50,8 @@ const withSpring = (props: WithSpringProps) => {
       mass: 1,
       stiffness: 121.6,
       overshootClamping: false,
-      restSpeedThreshold: 0.001,
-      restDisplacementThreshold: 0.001
+      restSpeedThreshold: 0.01,
+      restDisplacementThreshold: 0.01
     },
     ...props
   };
@@ -61,11 +63,14 @@ const withSpring = (props: WithSpringProps) => {
     time: new Value(0)
   };
 
-  const isDecayInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
-  const finishDecay = [set(offset, springState.position), stopClock(clock)];
+  const isSpringInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
+  const finishSpring = [set(offset, springState.position), stopClock(clock)];
+  const snap = [
+    cond(clockRunning(clock), onSnap && call([springState.position], onSnap))
+  ];
 
   return block([
-    cond(isDecayInterrupted, finishDecay),
+    cond(isSpringInterrupted, finishSpring),
     cond(neq(state, State.END), [
       set(springState.finished, 0),
       set(springState.position, add(offset, value))
@@ -78,7 +83,7 @@ const withSpring = (props: WithSpringProps) => {
         startClock(clock)
       ]),
       reSpring(clock, springState, config),
-      cond(springState.finished, finishDecay)
+      cond(springState.finished, [...snap, ...finishSpring])
     ]),
     springState.position
   ]);
@@ -100,7 +105,8 @@ export default ({ x, y, snapPoints, onSnap }: InteractableProps) => {
     value: translationX,
     velocity: velocityX,
     state,
-    snapPoints
+    snapPoints,
+    onSnap
   });
   const translateY = withSpring({
     value: translationY,

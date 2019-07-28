@@ -62,7 +62,7 @@ export default ({ profiles }: ProfilesProps) => {
   const x = new Value(0);
   const y = new Value(0);
   const profile = profiles[0];
-  const onSnap = x => {
+  const onSnap = ([x]) => {
     console.log({ x });
   };
   const rotateZ = concat(

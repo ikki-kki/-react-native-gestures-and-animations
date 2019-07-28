@@ -40,22 +40,13 @@ const styles = StyleSheet.create({
 });
 const [card] = cards;
 
-interface DecayProps {
-  clock?: Animated.Clock;
-  value: Animated.Adaptable<number>;
-  velocity: Animated.Adaptable<number>;
-  deceleration?: Animated.Adaptable<number>;
-  state?: Animated.Value<State>;
-}
-
-const decay = (config: DecayProps) => {
-  const { clock, value, velocity, deceleration, state } = {
-    clock: new Clock(),
-    deceleration: 0.998,
-    state: new Value(State.END),
-    ...config
-  };
-
+const withDecay = (
+  value: Animated.Adaptable<number>,
+  velocity: Animated.Adaptable<number>,
+  state: Animated.Value<State>,
+  deceleration: number = 0.998
+) => {
+  const clock = new Clock();
   const decayState = {
     finished: new Value(0),
     velocity: new Value(0),
@@ -99,8 +90,16 @@ export default () => {
     velocityX,
     velocityY
   });
-  const translateX = decay({ value: translationX, velocity: velocityX, state });
-  const translateY = decay({ value: translationY, velocity: velocityY, state });
+  const translateX = diffClamp(
+    withDecay(translationX, velocityX, state),
+    0,
+    containerWidth - CARD_WIDTH
+  );
+  const translateY = diffClamp(
+    withDecay(translationY, velocityY, state),
+    0,
+    containerHeight - CARD_HEIGHT
+  );
   return (
     <View style={styles.container}>
       <PanGestureHandler {...gestureHandler}>

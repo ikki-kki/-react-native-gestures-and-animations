@@ -13,6 +13,7 @@ const {
   Value,
   diffClamp,
   cond,
+  defined,
   set,
   eq,
   add,
@@ -21,9 +22,12 @@ const {
   startClock,
   stopClock,
   block,
+  debug,
   and,
   not,
-  diff
+  diff,
+  onChange,
+  neq
 } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
@@ -41,60 +45,40 @@ interface DecayProps {
   value: Animated.Adaptable<number>;
   velocity: Animated.Adaptable<number>;
   deceleration?: Animated.Adaptable<number>;
+  state?: Animated.Value<State>;
 }
 
-const decay = (decayConfig: DecayProps) => {
-  const { clock, value, velocity, deceleration } = {
+const decay = (config: DecayProps) => {
+  const { clock, value, velocity, deceleration, state } = {
     clock: new Clock(),
     deceleration: 0.998,
-    ...decayConfig
+    state: new Value(State.END),
+    ...config
   };
 
-  const state = {
+  const decayState = {
     finished: new Value(0),
     velocity: new Value(0),
     position: new Value(0),
     time: new Value(0)
   };
 
-  const config = { deceleration };
-
-  return [
-    cond(and(not(clockRunning(clock)), eq(state.time, 0)), [
-      set(state.finished, 0),
-      set(state.velocity, velocity),
-      set(state.position, value),
-      set(state.time, 0),
-      startClock(clock)
-    ]),
-    reDecay(clock, state, config),
-    cond(state.finished, stopClock(clock)),
-    state.position
-  ];
-};
-
-export const withDecay = (
-  value: Animated.Node<number>,
-  velocity: Animated.Node<number>,
-  state: Animated.Value<State>,
-  clock: Animated.Clock = new Clock()
-) => {
-  return cond(eq(state, State.END), decay({ value, velocity, clock }), value);
-};
-
-const withOffset = (value: Animated.Value<number>, clock: Animated.Clock) => {
   const offset = new Value(0);
-  return cond(
-    and(not(clockRunning(clock)), diff(not(clockRunning(clock)))),
-    [set(offset, add(offset, value)), offset],
-    add(offset, value)
-  );
+
+  //       reDecay(clock, decayState, { deceleration }),
+
+  return block([
+    cond(neq(state, State.END), set(decayState.position, value)),
+    cond(
+      eq(state, State.END),
+      [set(offset, add(offset, value)), offset],
+      add(offset, decayState.position)
+    )
+  ]);
 };
 
 export default () => {
   const state = new Value(State.UNDETERMINED);
-  const clockX = new Clock();
-  const clockY = new Clock();
   const translationX = new Value(0);
   const translationY = new Value(0);
   const velocityX = new Value(0);
@@ -106,14 +90,8 @@ export default () => {
     velocityX,
     velocityY
   });
-  const translateX = withOffset(
-    withDecay(translationX, velocityX, state, clockX),
-    clockX
-  );
-  const translateY = withOffset(
-    withDecay(translationY, velocityY, state, clockY),
-    clockY
-  );
+  const translateX = decay({ value: translationX, velocity: velocityX, state });
+  const translateY = decay({ value: translationY, velocity: velocityY, state });
   return (
     <View style={styles.container}>
       <PanGestureHandler {...gestureHandler}>

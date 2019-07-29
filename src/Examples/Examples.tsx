@@ -48,9 +48,21 @@ export const examples = [
     source: require("../../assets/examples/swipe.png")
   },
   {
+    screen: "SVG",
+    title: "SVG Animations",
+    source: require("../../assets/examples/svg.png"),
+    comingSoon: true
+  },
+  {
     screen: "TransformOrigin",
     title: "Transform Origin",
     source: require("../../assets/examples/transform-origin.png"),
+    comingSoon: true
+  },
+  {
+    screen: "Trigonometry",
+    title: "Trigonometry",
+    source: require("../../assets/examples/trigonometry.png"),
     comingSoon: true
   }
 ];

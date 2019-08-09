@@ -89,7 +89,7 @@ const withSpring = (props: WithSpringProps) => {
       cond(and(not(clockRunning(clock)), not(springState.finished)), [
         set(springState.velocity, velocity),
         set(springState.time, 0),
-        set(config.toValue, snapPoint(value, velocity, snapPoints)),
+        set(config.toValue, snapPoint(springState.position, velocity, snapPoints)),
         startClock(clock)
       ]),
       reSpring(clock, springState, config),

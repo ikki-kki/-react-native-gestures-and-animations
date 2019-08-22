@@ -48,7 +48,7 @@ interface WithSpringProps {
   snapPoints: number[];
   offset?: Animated.Value<number>;
   config?: Animated.SpringConfig;
-  onSnap?: (value: [number]) => void;
+  onSnap?: (value: readonly number[]) => void;
 }
 
 const withSpring = (props: WithSpringProps) => {
@@ -75,9 +75,9 @@ const withSpring = (props: WithSpringProps) => {
 
   const isSpringInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
   const finishSpring = [set(offset, springState.position), stopClock(clock)];
-  const snap = [
-    cond(clockRunning(clock), onSnap && call([springState.position], onSnap))
-  ];
+  const snap = onSnap
+    ? [cond(clockRunning(clock), call([springState.position], onSnap))]
+    : [];
 
   return block([
     cond(isSpringInterrupted, finishSpring),
@@ -89,7 +89,7 @@ const withSpring = (props: WithSpringProps) => {
       cond(and(not(clockRunning(clock)), not(springState.finished)), [
         set(springState.velocity, velocity),
         set(springState.time, 0),
-        set(config.toValue, snapPoint(value, velocity, snapPoints)),
+        set(config.toValue, snapPoint(springState.position, velocity, snapPoints)),
         startClock(clock)
       ]),
       reSpring(clock, springState, config),

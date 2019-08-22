@@ -3,10 +3,6 @@ import { View, StyleSheet, Dimensions } from "react-native";
 import Animated from "react-native-reanimated";
 import { StyleGuide } from "../components";
 
-interface SimpleActivityIndicatorProps {
-  progress: Animated.Value<number>;
-}
-
 const { width: wWidth } = Dimensions.get("window");
 const width = wWidth * 0.8;
 const { interpolate, Extrapolate } = Animated;
@@ -35,6 +31,10 @@ const styles = StyleSheet.create({
     backgroundColor: StyleGuide.palette.primary
   }
 });
+
+interface SimpleActivityIndicatorProps {
+  progress: Animated.Value<number>;
+}
 
 export default ({ progress }: SimpleActivityIndicatorProps) => {
   const bubbles = [0, 1, 2];

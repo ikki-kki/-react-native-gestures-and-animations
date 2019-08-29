@@ -4,14 +4,13 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Constants from "expo-constants";
 
-import { onGestureEvent, snapPoint } from "react-native-redash";
+import { onGestureEvent } from "react-native-redash";
 import { cards, StyleGuide, Card } from "../components";
 import { CARD_WIDTH, CARD_HEIGHT } from "../components/Card";
 
 const {
   Clock,
   Value,
-  diffClamp,
   cond,
   set,
   eq,
@@ -23,8 +22,7 @@ const {
   block,
   and,
   not,
-  neq,
-  call
+  neq
 } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
@@ -41,18 +39,21 @@ const styles = StyleSheet.create({
 });
 const [card] = cards;
 
+interface SpringConfig extends Animated.SpringConfig {
+  toValue: Animated.Value<number>;
+}
+
 interface WithSpringProps {
   value: Animated.Adaptable<number>;
   velocity: Animated.Adaptable<number>;
   state: Animated.Value<State>;
-  snapPoints: number[];
+  snapPoint: number;
   offset?: Animated.Value<number>;
-  config?: Animated.SpringConfig;
-  onSnap?: (value: readonly number[]) => void;
+  config?: SpringConfig;
 }
 
 const withSpring = (props: WithSpringProps) => {
-  const { value, velocity, state, snapPoints, offset, config, onSnap } = {
+  const { value, velocity, state, snapPoint, offset, config } = {
     offset: new Value(0),
     config: {
       toValue: new Value(0),
@@ -75,9 +76,6 @@ const withSpring = (props: WithSpringProps) => {
 
   const isSpringInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
   const finishSpring = [set(offset, springState.position), stopClock(clock)];
-  const snap = onSnap
-    ? [cond(clockRunning(clock), call([springState.position], onSnap))]
-    : [];
 
   return block([
     cond(isSpringInterrupted, finishSpring),
@@ -89,11 +87,11 @@ const withSpring = (props: WithSpringProps) => {
       cond(and(not(clockRunning(clock)), not(springState.finished)), [
         set(springState.velocity, velocity),
         set(springState.time, 0),
-        set(config.toValue, snapPoint(springState.position, velocity, snapPoints)),
+        set(config.toValue, snapPoint),
         startClock(clock)
       ]),
       reSpring(clock, springState, config),
-      cond(springState.finished, [...snap, ...finishSpring])
+      cond(springState.finished, [...finishSpring])
     ]),
     springState.position
   ]);
@@ -117,14 +115,14 @@ export default () => {
     velocity: velocityX,
     state,
     offset: offsetX,
-    snapPoints: [snapX]
+    snapPoint: snapX
   });
   const translateY = withSpring({
     value: translationY,
     velocity: velocityY,
     state,
     offset: offsetY,
-    snapPoints: [snapY]
+    snapPoint: snapY
   });
   return (
     <View style={styles.container}>

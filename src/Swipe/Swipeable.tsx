@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import { snapPoint, onGestureEvent } from "react-native-redash";
 import Animated from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import { useMemoOne } from "use-memo-one";
 
 const {
   Value,
@@ -21,8 +20,7 @@ const {
   and,
   not,
   neq,
-  add,
-  debug
+  add
 } = Animated;
 
 interface InteractableProps {

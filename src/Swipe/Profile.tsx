@@ -10,8 +10,6 @@ export interface Profile {
   profile: number;
 }
 
-const { Value } = Animated;
-
 const styles = StyleSheet.create({
   image: {
     ...StyleSheet.absoluteFillObject,

@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 });
 const [card] = cards;
 
-// TODO: replace with withOffset from redash
 const withOffset = (
   value: Animated.Node<number>,
   state: Animated.Value<State>,

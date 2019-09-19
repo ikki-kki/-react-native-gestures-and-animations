@@ -11,6 +11,7 @@ import DarkMode, { profilePic } from "./src/DarkMode";
 import PanGesture from "./src/PanGesture";
 import Decay from "./src/Decay";
 import Spring from "./src/Spring";
+import DynamicSpring from "./src/DynamicSpring";
 import Swipe, { profiles } from "./src/Swipe";
 
 const fonts = {
@@ -82,6 +83,12 @@ const AppNavigator = createAppContainer(
         screen: Swipe,
         navigationOptions: {
           title: "Swipe"
+        }
+      },
+      DynamicSpring: {
+        screen: DynamicSpring,
+        navigationOptions: {
+          title: "Dynamic Spring"
         }
       }
     },

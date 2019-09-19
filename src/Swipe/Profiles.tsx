@@ -1,18 +1,30 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { View, Dimensions, SafeAreaView, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import { Feather as Icon } from "@expo/vector-icons";
 
 import { useMemoOne } from "use-memo-one";
+import { RectButton } from "react-native-gesture-handler";
 import Card, { Profile } from "./Profile";
 import Swipeable from "./Swipeable";
+import { timing, StyleGuide } from "../components";
 
-const { Value, interpolate, concat, Extrapolate } = Animated;
+const {
+  Value,
+  Clock,
+  interpolate,
+  concat,
+  Extrapolate,
+  block,
+  cond,
+  set,
+  useCode,
+  not,
+  clockRunning,
+  call
+} = Animated;
 const { width, height } = Dimensions.get("window");
-const φ = (1 + Math.sqrt(5)) / 2;
 const deltaX = width / 2;
-const w = width - 32;
-const h = w * φ;
 const α = Math.PI / 12;
 const A = width * Math.cos(α) + height * Math.sin(α);
 const snapPoints = [-A, 0, A];
@@ -20,22 +32,20 @@ const snapPoints = [-A, 0, A];
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fbfaff",
+    backgroundColor: StyleGuide.palette.background,
     justifyContent: "space-evenly"
   },
   header: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 16
   },
   cards: {
-    width: w,
-    height: h,
-    marginLeft: 16
+    flex: 1,
+    marginHorizontal: 16,
+    zIndex: 100
   },
   footer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
     padding: 16
@@ -61,20 +71,24 @@ interface ProfilesProps {
 
 export default ({ profiles }: ProfilesProps) => {
   const [index, setIndex] = useState(0);
-  const { x, y } = useMemoOne(
+  const { x, y, offsetX, like, dislike } = useMemoOne(
     () => ({
       x: new Value(0),
-      y: new Value(0)
+      y: new Value(0),
+      offsetX: new Value(0),
+      like: new Value(0) as Animated.Value<0 | 1>,
+      dislike: new Value(0) as Animated.Value<0 | 1>
     }),
     []
   );
-  const onSnap = useMemo(
-    () => ([point]: [number]) => {
+  const onSnap = useMemoOne(
+    () => ([point]: readonly number[]) => {
       if (point !== 0) {
+        offsetX.setValue(0);
         setIndex((index + 1) % profiles.length);
       }
     },
-    [index, profiles.length]
+    [index]
   );
   const profile = profiles[index];
   const rotateZ = concat(
@@ -95,10 +109,34 @@ export default ({ profiles }: ProfilesProps) => {
   });
   const translateX = x;
   const translateY = y;
-  const style = {
-    ...StyleSheet.absoluteFillObject,
-    transform: [{ translateX }, { translateY }, { rotateZ }]
-  };
+  const clock = new Clock();
+  useCode(
+    block([
+      cond(dislike, [
+        set(
+          offsetX,
+          timing({
+            clock,
+            from: offsetX,
+            to: -A
+          })
+        ),
+        cond(not(clockRunning(clock)), [set(dislike, 0), call([], onSnap)])
+      ]),
+      cond(like, [
+        set(
+          offsetX,
+          timing({
+            clock,
+            from: offsetX,
+            to: A
+          })
+        ),
+        cond(not(clockRunning(clock)), [set(like, 0), call([], onSnap)])
+      ])
+    ]),
+    [onSnap, like, dislike]
+  );
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -106,18 +144,23 @@ export default ({ profiles }: ProfilesProps) => {
         <Icon name="message-circle" size={32} color="gray" />
       </View>
       <View style={styles.cards}>
-        <Animated.View {...{ style }}>
+        <Animated.View
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            transform: [{ translateX }, { translateY }, { rotateZ }]
+          }}
+        >
           <Card {...{ profile, likeOpacity, nopeOpacity }} />
         </Animated.View>
-        <Swipeable key={index} {...{ snapPoints, onSnap, x, y }} />
+        <Swipeable key={index} {...{ snapPoints, onSnap, x, y, offsetX }} />
       </View>
       <View style={styles.footer}>
-        <View style={styles.circle}>
+        <RectButton style={styles.circle} onPress={() => dislike.setValue(1)}>
           <Icon name="x" size={32} color="#ec5288" />
-        </View>
-        <View style={styles.circle}>
+        </RectButton>
+        <RectButton style={styles.circle} onPress={() => like.setValue(1)}>
           <Icon name="heart" size={32} color="#6ee3b4" />
-        </View>
+        </RectButton>
       </View>
     </SafeAreaView>
   );

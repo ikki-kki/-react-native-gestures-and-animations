@@ -1,10 +1,23 @@
+diff --git a/node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj/xcuserdata/mdk.xcuserdatad/xcschemes/xcschememanagement.plist b/node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj/xcuserdata/mdk.xcuserdatad/xcschemes/xcschememanagement.plist
+index 2e11062..98fd95a 100644
+--- a/node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj/xcuserdata/mdk.xcuserdatad/xcschemes/xcschememanagement.plist
++++ b/node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj/xcuserdata/mdk.xcuserdatad/xcschemes/xcschememanagement.plist
+@@ -12,7 +12,7 @@
+ 		<key>RNReanimated.xcscheme_^#shared#^_</key>
+ 		<dict>
+ 			<key>orderHint</key>
+-			<integer>3</integer>
++			<integer>4</integer>
+ 		</dict>
+ 	</dict>
+ </dict>
 diff --git a/node_modules/react-native-reanimated/react-native-reanimated.d.ts b/node_modules/react-native-reanimated/react-native-reanimated.d.ts
-index b1a0886..07b1038 100644
+index 7a30d62..f21493c 100644
 --- a/node_modules/react-native-reanimated/react-native-reanimated.d.ts
 +++ b/node_modules/react-native-reanimated/react-native-reanimated.d.ts
-@@ -113,8 +113,10 @@ declare module 'react-native-reanimated' {
-       toValue: Adaptable<number>;
-     }
+@@ -141,8 +141,10 @@ declare module 'react-native-reanimated' {
+ 
+     export const SpringUtils: SpringUtils
  
 +    type AnimatedTransform = { [P in keyof TransformStyle["transform"]]: Animated.Adaptable<TransformStyle["transform"][P]> };
 +
@@ -14,7 +27,7 @@ index b1a0886..07b1038 100644
          ? ReadonlyArray<AnimateStyle<S[K][0]>>
          : S[K] extends object
            ? AnimateStyle<S[K]>
-@@ -123,7 +125,7 @@ declare module 'react-native-reanimated' {
+@@ -151,7 +153,7 @@ declare module 'react-native-reanimated' {
                | AnimatedNode<
                    // allow `number` where `string` normally is to support colors
                    S[K] extends string ? S[K] | number : S[K]
@@ -23,14 +36,3 @@ index b1a0886..07b1038 100644
      };
  
      type AnimateProps<
-@@ -192,9 +194,7 @@ declare module 'react-native-reanimated' {
-       sourceNode: Adaptable<number>,
-     ): AnimatedNode<number>;
-     export function concat(
--      a: AnimatedNode<string>,
--      b: AnimatedNode<string>,
--      ...others: AnimatedNode<string>[],
-+      ...args: Array<Adaptable<string> | Adaptable<number>>,
-     ): AnimatedNode<string>;
-     export function cond(
-       conditionNode: Adaptable<number>,

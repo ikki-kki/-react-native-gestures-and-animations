@@ -6,7 +6,14 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 import { withSpring } from "../components";
 
 const { Value, useCode, block, set } = Animated;
-
+const config = {
+  damping: 40,
+  mass: 1,
+  stiffness: 300,
+  overshootClamping: false,
+  restSpeedThreshold: 1,
+  restDisplacementThreshold: 1
+};
 interface SwipeableProps {
   x: Animated.Value<number>;
   y: Animated.Value<number>;
@@ -41,14 +48,16 @@ export default ({
     offset: offsetX,
     state,
     snapPoints,
-    onSnap
+    onSnap,
+    config
   });
   const translateY = withSpring({
     value: translationY,
     velocity: velocityY,
     offset: offsetY || new Value(0),
     state,
-    snapPoints: [0]
+    snapPoints: [0],
+    config
   });
   useCode(block([set(x, translateX), set(y, translateY)]), []);
   return (

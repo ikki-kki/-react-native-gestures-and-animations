@@ -26,7 +26,7 @@ const {
 const { width, height } = Dimensions.get("window");
 const deltaX = width / 2;
 const α = Math.PI / 12;
-const A = width * Math.cos(α) + height * Math.sin(α);
+const A = Math.round(width * Math.cos(α) + height * Math.sin(α));
 const snapPoints = [-A, 0, A];
 
 const styles = StyleSheet.create({

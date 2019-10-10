@@ -43,7 +43,11 @@ const runTiming = (clock: Animated.Clock): Animated.Node<number> => {
     easing: Easing.linear
   };
   return block([
-    timing(clock, state, config),
+    cond(
+      not(clockRunning(clock)),
+      set(state.time, 0),
+      timing(clock, state, config)
+    ),
     cond(eq(state.finished, 1), [
       set(state.finished, 0),
       set(state.frameTime, 0),
@@ -79,7 +83,7 @@ export default () => {
       <Button
         label={play ? "Pause" : "Play"}
         primary
-        onPress={() => setPlay(!play)}
+        onPress={() => setPlay(prev => !prev)}
       />
     </View>
   );

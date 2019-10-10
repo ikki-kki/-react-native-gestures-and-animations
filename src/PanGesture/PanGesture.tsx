@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, Platform } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Constants from "expo-constants";
@@ -11,7 +11,8 @@ import { CARD_WIDTH, CARD_HEIGHT } from "../components/Card";
 const { Value, diffClamp, cond, set, eq, add } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
-const containerHeight = height - Constants.statusBarHeight - 44;
+const containerHeight =
+  height - Constants.statusBarHeight - (Platform.OS === "ios" ? 44 : 52);
 const offsetX = new Value((containerWidth - CARD_WIDTH) / 2);
 const offsetY = new Value((containerHeight - CARD_HEIGHT) / 2);
 const styles = StyleSheet.create({

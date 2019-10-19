@@ -28,13 +28,13 @@ const createState = () => ({
   x: {
     finished: new Value(0),
     velocity: new Value(0),
-    position: new Value(0),
+    position: new Value(snapX),
     time: new Value(0)
   },
   y: {
     finished: new Value(0),
     velocity: new Value(0),
-    position: new Value(0),
+    position: new Value(snapY),
     time: new Value(0)
   }
 });

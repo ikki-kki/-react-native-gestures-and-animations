@@ -4,9 +4,13 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import { panGestureHandler } from "react-native-redash";
 
-import { CardProps, FlexibleCard } from "../components/Card";
+import Card, {
+  CardProps,
+  CARD_HEIGHT as INNER_CARD_HEIGHT
+} from "../components/Card";
 import { withOffset, withTransition } from "../components";
 
+export const CARD_HEIGHT = INNER_CARD_HEIGHT + 32;
 const { width } = Dimensions.get("window");
 const {
   Value,
@@ -41,12 +45,11 @@ const isMoving = (position: Animated.Node<number>) => {
 };
 
 interface SortableCardProps extends CardProps {
-  height: number;
   offsets: Animated.Value<number>[];
   index: number;
 }
 
-export default ({ card, height, index, offsets }: SortableCardProps) => {
+export default ({ card, index, offsets }: SortableCardProps) => {
   const {
     gestureHandler,
     translationX,
@@ -72,8 +75,8 @@ export default ({ card, height, index, offsets }: SortableCardProps) => {
     200,
     cond(isMoving(translateY), 100, 1)
   );
-  const currentIndex = max(floor(divide(y, height)), 0);
-  const currentOffset = multiply(currentIndex, height);
+  const currentIndex = max(floor(divide(y, CARD_HEIGHT)), 0);
+  const currentOffset = multiply(currentIndex, CARD_HEIGHT);
   useCode(
     block([
       ...offsets.map(offset =>
@@ -93,7 +96,7 @@ export default ({ card, height, index, offsets }: SortableCardProps) => {
           top: 0,
           left: 0,
           width,
-          height,
+          height: CARD_HEIGHT,
           justifyContent: "center",
           alignItems: "center",
           zIndex,
@@ -105,7 +108,7 @@ export default ({ card, height, index, offsets }: SortableCardProps) => {
           ]
         }}
       >
-        <FlexibleCard {...{ card }} />
+        <Card {...{ card }} />
       </Animated.View>
     </PanGestureHandler>
   );

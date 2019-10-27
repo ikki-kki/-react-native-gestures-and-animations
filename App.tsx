@@ -12,6 +12,7 @@ import PanGesture from "./src/PanGesture";
 import Decay from "./src/Decay";
 import Spring from "./src/Spring";
 import DynamicSpring from "./src/DynamicSpring";
+import DragToSort from "./src/DragToSort";
 import Swipe, { profiles } from "./src/Swipe";
 
 const fonts = {
@@ -89,6 +90,12 @@ const AppNavigator = createAppContainer(
         screen: DynamicSpring,
         navigationOptions: {
           title: "Dynamic Spring"
+        }
+      },
+      DragToSort: {
+        screen: DragToSort,
+        navigationOptions: {
+          title: "Drag to Sort"
         }
       }
     },

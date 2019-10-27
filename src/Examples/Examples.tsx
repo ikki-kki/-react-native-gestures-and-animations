@@ -51,6 +51,11 @@ export const examples = [
     screen: "DynamicSpring",
     title: "Dynamic Spring",
     source: require("../../assets/examples/dynamic-spring.png")
+  },
+  {
+    screen: "Drag to Sort",
+    title: "DragToSort",
+    source: require("../../assets/examples/dynamic-spring.png")
   }
 ];
 

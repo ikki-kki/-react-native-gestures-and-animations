@@ -174,3 +174,55 @@ export const withSpring = (props: WithSpringParams) => {
     springState.position
   ]);
 };
+
+export const withOffset = ({
+  offset,
+  value,
+  state: gestureState
+}: {
+  offset: Animated.Adaptable<number>;
+  value: Animated.Value<number>;
+  state: Animated.Value<State>;
+}) => {
+  const safeOffset = new Value(0);
+  return block([
+    cond(
+      eq(gestureState, State.ACTIVE),
+      [add(safeOffset, value)],
+      [set(safeOffset, offset), safeOffset]
+    )
+  ]);
+};
+
+export const withTransition = (
+  value: Animated.Node<number>,
+  velocity: Animated.Value<number>,
+  gestureState: Animated.Value<State>
+) => {
+  const clock = new Clock();
+  const state = {
+    finished: new Value(0),
+    velocity: new Value(0),
+    position: new Value(0),
+    time: new Value(0)
+  };
+  const config = {
+    toValue: new Value(0),
+    damping: 15,
+    mass: 1,
+    stiffness: 150,
+    overshootClamping: false,
+    restSpeedThreshold: 1,
+    restDisplacementThreshold: 1
+  };
+  return block([
+    startClock(clock),
+    set(config.toValue, value),
+    cond(
+      eq(gestureState, State.ACTIVE),
+      [set(state.velocity, velocity), set(state.position, value)],
+      reSpring(clock, state, config)
+    ),
+    state.position
+  ]);
+};

@@ -1,8 +1,9 @@
 import * as React from "react";
 import { StyleSheet, Image, ImageStyle, Dimensions } from "react-native";
+import Animated from "react-native-reanimated";
 import StyleGuide from "./StyleGuide";
 
-type CardId = "1" | "2" | "3";
+type CardId = number;
 interface Card {
   id: CardId;
   source: number;
@@ -10,15 +11,15 @@ interface Card {
 
 export const cards: Card[] = [
   {
-    id: "1",
+    id: 0,
     source: require("../../assets/examples/card1.png")
   },
   {
-    id: "2",
+    id: 1,
     source: require("../../assets/examples/card2.png")
   },
   {
-    id: "3",
+    id: 2,
     source: require("../../assets/examples/card3.png")
   }
 ];
@@ -44,16 +45,19 @@ const styles = StyleSheet.create({
   }
 });
 
-interface CardProps {
+export interface CardProps {
   card: Card;
 }
 
 interface FlexibleCardProps extends CardProps {
-  style?: ImageStyle;
+  style?: Animated.AnimateStyle<ImageStyle>;
 }
 
 export const FlexibleCard = ({ card, style }: FlexibleCardProps) => (
-  <Image style={[styles.flexibleContainer, style]} source={card.source} />
+  <Animated.Image
+    style={[styles.flexibleContainer, style]}
+    source={card.source}
+  />
 );
 
 export default ({ card }: CardProps) => {

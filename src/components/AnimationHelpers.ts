@@ -185,13 +185,11 @@ export const withOffset = ({
   state: Animated.Value<State>;
 }) => {
   const safeOffset = new Value(0);
-  return block([
-    cond(
-      eq(gestureState, State.ACTIVE),
-      [add(safeOffset, value)],
-      [set(safeOffset, offset), safeOffset]
-    )
-  ]);
+  return cond(
+    eq(gestureState, State.ACTIVE),
+    add(safeOffset, value),
+    set(safeOffset, offset)
+  );
 };
 
 export const withTransition = (

@@ -18,8 +18,7 @@ const {
   cond,
   useCode,
   divide,
-  floor,
-  max,
+  round,
   multiply,
   block,
   set,
@@ -28,7 +27,8 @@ const {
   add,
   greaterThan,
   abs,
-  not
+  not,
+  and
 } = Animated;
 
 const isMoving = (position: Animated.Node<number>) => {
@@ -75,12 +75,12 @@ export default ({ card, index, offsets }: SortableCardProps) => {
     200,
     cond(isMoving(translateY), 100, 1)
   );
-  const currentIndex = max(floor(divide(y, CARD_HEIGHT)), 0);
+  const currentIndex = round(divide(y, CARD_HEIGHT));
   const currentOffset = multiply(currentIndex, CARD_HEIGHT);
   useCode(
     block([
       ...offsets.map(offset =>
-        cond(eq(currentOffset, offset), [
+        cond(and(eq(currentOffset, offset), eq(state, State.ACTIVE)), [
           set(offset, offsets[index]),
           set(offsets[index], currentOffset)
         ])

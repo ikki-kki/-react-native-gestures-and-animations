@@ -28,7 +28,9 @@ const {
   greaterThan,
   abs,
   not,
-  and
+  and,
+  neq,
+  call
 } = Animated;
 
 const isMoving = (position: Animated.Node<number>) => {
@@ -80,10 +82,19 @@ export default ({ card, index, offsets }: SortableCardProps) => {
   useCode(
     block([
       ...offsets.map(offset =>
-        cond(and(eq(currentOffset, offset), eq(state, State.ACTIVE)), [
-          set(offset, offsets[index]),
-          set(offsets[index], currentOffset)
-        ])
+        cond(
+          and(
+            eq(currentOffset, offset),
+            neq(currentOffset, offsets[index]),
+            eq(state, State.ACTIVE)
+          ),
+          [
+            set(offset, offsets[index]),
+            set(offsets[index], currentOffset),
+            // eslint-disable-next-line no-console
+            call([currentOffset], c => console.log(`set new order: ${c}`))
+          ]
+        )
       )
     ]),
     []

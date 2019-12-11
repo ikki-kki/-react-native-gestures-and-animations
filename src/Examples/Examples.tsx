@@ -2,7 +2,7 @@ import * as React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
 import { NavigationScreenConfigProps } from "react-navigation";
-import { Thumbnail, StyleGuide } from "../components";
+import { StyleGuide, Thumbnail } from "../components";
 
 export const examples = [
   {
@@ -55,7 +55,12 @@ export const examples = [
   {
     screen: "DragToSort",
     title: "Drag to Sort",
-    source: require("../../assets/examples/dynamic-spring.png")
+    source: require("../../assets/examples/drag-to-sort.png")
+  },
+  {
+    screen: "Svg",
+    title: "Svg",
+    source: require("../../assets/examples/svg2.png")
   }
 ];
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Image, ImageStyle, Dimensions } from "react-native";
+import { Dimensions, Image, ImageStyle, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import StyleGuide from "./StyleGuide";
 

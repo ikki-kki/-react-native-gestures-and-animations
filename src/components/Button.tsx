@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import StyleGuide from "./StyleGuide";
 import Text from "./Text";

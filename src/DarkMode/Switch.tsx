@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Switch, StyleSheet, Platform } from "react-native";
+import { Platform, StyleSheet, Switch, View } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 import { StyleGuide } from "../components";
 

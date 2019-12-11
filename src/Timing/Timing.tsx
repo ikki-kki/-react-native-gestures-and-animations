@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import { useMemoOne } from "use-memo-one";
 
 import SimpleActivityIndicator from "./SimpleActivityIndicator";
-import { StyleGuide, Button } from "../components";
+import { Button, StyleGuide } from "../components";
 
 const {
   Clock,
@@ -70,11 +70,12 @@ export default () => {
   );
   isPlaying.setValue(play ? 1 : 0);
   useCode(
-    block([
-      cond(and(isPlaying, not(clockRunning(clock))), startClock(clock)),
-      cond(and(not(isPlaying), clockRunning(clock)), stopClock(clock)),
-      set(progress, runTiming(clock))
-    ]),
+    () =>
+      block([
+        cond(and(isPlaying, not(clockRunning(clock))), startClock(clock)),
+        cond(and(not(isPlaying), clockRunning(clock)), stopClock(clock)),
+        set(progress, runTiming(clock))
+      ]),
     []
   );
   return (

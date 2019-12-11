@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Dimensions, SafeAreaView, StyleSheet } from "react-native";
+import { Dimensions, SafeAreaView, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { Feather as Icon } from "@expo/vector-icons";
 
@@ -7,7 +7,7 @@ import { useMemoOne } from "use-memo-one";
 import { RectButton } from "react-native-gesture-handler";
 import Card, { Profile } from "./Profile";
 import Swipeable from "./Swipeable";
-import { timing, StyleGuide } from "../components";
+import { StyleGuide, timing } from "../components";
 
 const {
   Value,
@@ -111,30 +111,31 @@ export default ({ profiles }: ProfilesProps) => {
   const translateY = y;
   const clock = new Clock();
   useCode(
-    block([
-      cond(dislike, [
-        set(
-          offsetX,
-          timing({
-            clock,
-            from: offsetX,
-            to: -A
-          })
-        ),
-        cond(not(clockRunning(clock)), [set(dislike, 0), call([], onSnap)])
+    () =>
+      block([
+        cond(dislike, [
+          set(
+            offsetX,
+            timing({
+              clock,
+              from: offsetX,
+              to: -A
+            })
+          ),
+          cond(not(clockRunning(clock)), [set(dislike, 0), call([], onSnap)])
+        ]),
+        cond(like, [
+          set(
+            offsetX,
+            timing({
+              clock,
+              from: offsetX,
+              to: A
+            })
+          ),
+          cond(not(clockRunning(clock)), [set(like, 0), call([], onSnap)])
+        ])
       ]),
-      cond(like, [
-        set(
-          offsetX,
-          timing({
-            clock,
-            from: offsetX,
-            to: A
-          })
-        ),
-        cond(not(clockRunning(clock)), [set(like, 0), call([], onSnap)])
-      ])
-    ]),
     [onSnap, like, dislike]
   );
   return (

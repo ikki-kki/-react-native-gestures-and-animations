@@ -1,6 +1,6 @@
 // @flow
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import Animated from "react-native-reanimated";
 
 export interface Profile {

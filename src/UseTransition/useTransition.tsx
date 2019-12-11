@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import { bInterpolate, transformOrigin, useToggle } from "react-native-redash";
 
-import { Card, Button, StyleGuide, cards } from "../components";
+import { Button, Card, StyleGuide, cards } from "../components";
 
 const { multiply, interpolate } = Animated;
 const { width } = Dimensions.get("window");

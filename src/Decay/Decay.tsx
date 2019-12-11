@@ -1,12 +1,12 @@
 import * as React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Constants from "expo-constants";
 
 import { onGestureEvent } from "react-native-redash";
-import { cards, StyleGuide, Card } from "../components";
-import { CARD_WIDTH, CARD_HEIGHT } from "../components/Card";
+import { Card, StyleGuide, cards } from "../components";
+import { CARD_HEIGHT, CARD_WIDTH } from "../components/Card";
 
 const {
   Clock,

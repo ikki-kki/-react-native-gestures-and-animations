@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
-import { StyleSheet, ViewStyle, Dimensions, ImageStyle } from "react-native";
+import React, { useRef, useState } from "react";
+import { Dimensions, ImageStyle, StyleSheet, ViewStyle } from "react-native";
 import {
-  Transitioning,
   Transition,
+  Transitioning,
   TransitioningView
 } from "react-native-reanimated";
 
-import { FlexibleCard, StyleGuide, Selection, cards } from "../components";
+import { FlexibleCard, Selection, StyleGuide, cards } from "../components";
 
 interface Layout {
   id: string;

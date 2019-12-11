@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Text, TextProps as OriginalTextProps } from "react-native";
+import { TextProps as OriginalTextProps, Text } from "react-native";
 
 import StyleGuide from "./StyleGuide";
 

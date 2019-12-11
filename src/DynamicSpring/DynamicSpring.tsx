@@ -1,12 +1,12 @@
 import * as React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Constants from "expo-constants";
 
 import { onGestureEvent } from "react-native-redash";
-import { cards, StyleGuide, Card, withSpring } from "../components";
-import { CARD_WIDTH, CARD_HEIGHT } from "../components/Card";
+import { Card, StyleGuide, cards, withSpring } from "../components";
+import { CARD_HEIGHT, CARD_WIDTH } from "../components/Card";
 
 const { Value, Clock, startClock, useCode, block, spring, set } = Animated;
 const config = {
@@ -87,17 +87,18 @@ export default () => {
   const states = [createState(), createState()];
   const configs = [createConfig(), createConfig()];
   useCode(
-    block([
-      startClock(clock),
-      set(configs[0].x.toValue, translateX),
-      set(configs[0].y.toValue, translateY),
-      spring(clock, states[0].x, configs[0].x),
-      spring(clock, states[0].y, configs[0].y),
-      set(configs[1].x.toValue, states[0].x.position),
-      set(configs[1].y.toValue, states[0].y.position),
-      spring(clock, states[1].x, configs[1].x),
-      spring(clock, states[1].y, configs[1].y)
-    ]),
+    () =>
+      block([
+        startClock(clock),
+        set(configs[0].x.toValue, translateX),
+        set(configs[0].y.toValue, translateY),
+        spring(clock, states[0].x, configs[0].x),
+        spring(clock, states[0].y, configs[0].y),
+        set(configs[1].x.toValue, states[0].x.position),
+        set(configs[1].y.toValue, states[0].y.position),
+        spring(clock, states[1].x, configs[1].x),
+        spring(clock, states[1].y, configs[1].y)
+      ]),
     []
   );
   return (

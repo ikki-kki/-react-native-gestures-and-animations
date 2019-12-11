@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
 import Animated, { Easing } from "react-native-reanimated";
-import { TapGestureHandler, State } from "react-native-gesture-handler";
-import { onGestureEvent, contains } from "react-native-redash";
+import { State, TapGestureHandler } from "react-native-gesture-handler";
+import { contains, onGestureEvent } from "react-native-redash";
 
-import { timing, delay } from "./AnimationHelpers";
+import { delay, timing } from "./AnimationHelpers";
 
 interface TapHandlerProps {
   value: Animated.Value<number>;
@@ -32,36 +32,37 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
   const state = new Value(UNDETERMINED);
   const gestureHandler = onGestureEvent({ state });
   useCode(
-    block([
-      cond(eq(state, BEGAN), set(shouldSpring, 1)),
-      cond(contains([FAILED, CANCELLED], state), set(shouldSpring, 0)),
-      onChange(state, cond(eq(state, END), call([], onPress))),
-      cond(eq(state, END), [delay(set(shouldSpring, 0), duration)]),
-      cond(
-        and(eq(shouldSpring, 1), neq(value, 1)),
-        set(
-          value,
-          timing({
-            from: value,
-            to: 1,
-            easing,
-            duration
-          })
+    () =>
+      block([
+        cond(eq(state, BEGAN), set(shouldSpring, 1)),
+        cond(contains([FAILED, CANCELLED], state), set(shouldSpring, 0)),
+        onChange(state, cond(eq(state, END), call([], onPress))),
+        cond(eq(state, END), [delay(set(shouldSpring, 0), duration)]),
+        cond(
+          and(eq(shouldSpring, 1), neq(value, 1)),
+          set(
+            value,
+            timing({
+              from: value,
+              to: 1,
+              easing,
+              duration
+            })
+          )
+        ),
+        cond(
+          and(eq(shouldSpring, 0), neq(value, 0)),
+          set(
+            value,
+            timing({
+              from: value,
+              to: 0,
+              easing,
+              duration
+            })
+          )
         )
-      ),
-      cond(
-        and(eq(shouldSpring, 0), neq(value, 0)),
-        set(
-          value,
-          timing({
-            from: value,
-            to: 0,
-            easing,
-            duration
-          })
-        )
-      )
-    ]),
+      ]),
     []
   );
   return (

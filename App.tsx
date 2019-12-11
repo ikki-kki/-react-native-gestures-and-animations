@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import { LoadAssets, StyleGuide, cards } from "./src/components";
 import Examples, { examples } from "./src/Examples";
@@ -14,6 +14,7 @@ import Spring from "./src/Spring";
 import DynamicSpring from "./src/DynamicSpring";
 import DragToSort from "./src/DragToSort";
 import Swipe, { profiles } from "./src/Swipe";
+import Svg from "./src/Svg";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -96,6 +97,12 @@ const AppNavigator = createAppContainer(
         screen: DragToSort,
         navigationOptions: {
           title: "Drag to Sort"
+        }
+      },
+      Svg: {
+        screen: Svg,
+        navigationOptions: {
+          title: "SVG"
         }
       }
     },

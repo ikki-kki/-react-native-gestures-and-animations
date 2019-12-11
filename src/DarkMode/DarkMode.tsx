@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import {
@@ -64,7 +64,7 @@ export default () => {
       <Text type="body" style={styles.text} {...{ dark }}>
         When speaking of animations, the key to success is to avoid frame drops
       </Text>
-      <Button label="Follow" primary onPress={() => {}} />
+      <Button label="Follow" primary onPress={() => true} />
     </Transitioning.View>
   );
 };

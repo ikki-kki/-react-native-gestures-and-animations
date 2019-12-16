@@ -15,6 +15,7 @@ import DynamicSpring from "./src/DynamicSpring";
 import DragToSort from "./src/DragToSort";
 import Swipe, { profiles } from "./src/Swipe";
 import Svg from "./src/Svg";
+import Trigonometry from "./src/Trigonometry";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -103,6 +104,12 @@ const AppNavigator = createAppContainer(
         screen: Svg,
         navigationOptions: {
           title: "SVG"
+        }
+      },
+      Trigonometry: {
+        screen: Trigonometry,
+        navigationOptions: {
+          title: "Trigonometry"
         }
       }
     },

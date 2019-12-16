@@ -61,6 +61,11 @@ export const examples = [
     screen: "Svg",
     title: "Svg",
     source: require("../../assets/examples/svg2.png")
+  },
+  {
+    screen: "Trigonometry",
+    title: "Trigonometry",
+    source: require("../../assets/examples/trigonometry.png")
   }
 ];
 

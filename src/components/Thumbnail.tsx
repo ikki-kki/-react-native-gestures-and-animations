@@ -1,8 +1,9 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
-
+import { LinearGradient } from "expo-linear-gradient";
 import { bInterpolate } from "react-native-redash";
+
 import StyleGuide from "./StyleGuide";
 import Text from "./Text";
 import TapHandler from "./TapHandler";
@@ -62,6 +63,13 @@ export default ({
           ]}
           {...{ source }}
         />
+        {!dark && (
+          <LinearGradient
+            style={StyleSheet.absoluteFill}
+            colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+            locations={[0.61, 1]}
+          />
+        )}
         <View style={styles.content}>
           <Text type="title2" style={{ color: dark ? "white" : "#2F2E41" }}>
             {title}

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
-import { bInterpolate, transformOrigin, useToggle } from "react-native-redash";
+import {
+  bInterpolate,
+  transformOrigin,
+  useTimingTransition
+} from "react-native-redash";
 
 import { Button, Card, StyleGuide, cards } from "../components";
 
@@ -24,7 +28,10 @@ const newOrigin = -(width / 2 - StyleGuide.spacing * 2);
 
 export default () => {
   const [toggled, setToggle] = useState(false);
-  const transitionVal = useToggle(toggled, 400, Easing.inOut(Easing.ease));
+  const transitionVal = useTimingTransition(toggled, {
+    duration: 400,
+    easing: Easing.inOut(Easing.ease)
+  });
   return (
     <View style={styles.container}>
       {cards.map((card, index) => {

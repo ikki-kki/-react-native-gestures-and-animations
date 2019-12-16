@@ -29,8 +29,7 @@ const {
   abs,
   not,
   and,
-  neq,
-  call
+  neq
 } = Animated;
 
 const isMoving = (position: Animated.Node<number>) => {
@@ -91,9 +90,8 @@ export default ({ card, index, offsets }: SortableCardProps) => {
             ),
             [
               set(offset, offsets[index]),
-              set(offsets[index], currentOffset),
-              // eslint-disable-next-line no-console
-              call([currentOffset], c => console.log(`set new order: ${c}`))
+              set(offsets[index], currentOffset)
+              // call([currentOffset], c => console.log(`set new order: ${c}`))
             ]
           )
         )

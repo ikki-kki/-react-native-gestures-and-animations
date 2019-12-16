@@ -195,7 +195,8 @@ export const withOffset = ({
 export const withTransition = (
   value: Animated.Node<number>,
   velocity: Animated.Value<number>,
-  gestureState: Animated.Value<State>
+  gestureState: Animated.Value<State> = new Value(State.UNDETERMINED),
+  springConfig?: Partial<Omit<Animated.SpringConfig, "toValue">>
 ) => {
   const clock = new Clock();
   const state = {
@@ -211,7 +212,8 @@ export const withTransition = (
     stiffness: 150,
     overshootClamping: false,
     restSpeedThreshold: 1,
-    restDisplacementThreshold: 1
+    restDisplacementThreshold: 1,
+    ...springConfig
   };
   return block([
     startClock(clock),

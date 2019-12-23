@@ -44,7 +44,10 @@ export default () => {
     }),
     []
   );
-  const opacity = progress;
+  const opacity = interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: show ? [0, 1] : [1, 0]
+  });
   useCode(
     () =>
       block([
@@ -56,7 +59,7 @@ export default () => {
           progress,
           interpolate(clock, {
             inputRange: [time, add(time, duration)],
-            outputRange: show ? [0, 1] : [1, 0],
+            outputRange: [0, 1],
             extrapolate: Extrapolate.CLAMP
           })
         ),

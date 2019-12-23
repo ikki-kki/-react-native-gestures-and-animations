@@ -4,6 +4,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import { LoadAssets, StyleGuide, cards } from "./src/components";
 import Examples, { examples } from "./src/Examples";
+import ClockValuesAndIdentities from "./src/ClockValuesAndIdentities";
 import Transitions from "./src/Transitions";
 import UseTransition from "./src/UseTransition";
 import Timing from "./src/Timing";
@@ -38,6 +39,12 @@ const AppNavigator = createAppContainer(
         navigationOptions: {
           title: "Gestures & Animations",
           headerBackTitle: null
+        }
+      },
+      ClockValuesAndIdentities: {
+        screen: ClockValuesAndIdentities,
+        navigationOptions: {
+          title: "Clock Values & Identities"
         }
       },
       Transitions: {

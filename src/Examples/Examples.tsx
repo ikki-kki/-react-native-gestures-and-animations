@@ -6,6 +6,11 @@ import { StyleGuide, Thumbnail } from "../components";
 
 export const examples = [
   {
+    screen: "ClockValuesAndIdentities",
+    title: "Clock Values & Identities",
+    source: require("../../assets/examples/clock-values-and-identities.png")
+  },
+  {
     screen: "Transitions",
     title: "Transitions",
     source: require("../../assets/examples/transitions.png")

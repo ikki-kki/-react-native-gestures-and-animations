@@ -130,7 +130,8 @@ const AppNavigator = createAppContainer(
       BezierCurves: {
         screen: BezierCurves,
         navigationOptions: {
-          title: "Bezier Curves"
+          title: "Bezier Curves",
+          gesturesEnabled: false
         }
       }
     },

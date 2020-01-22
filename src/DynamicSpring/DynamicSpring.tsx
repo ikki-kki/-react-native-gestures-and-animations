@@ -99,7 +99,7 @@ export default () => {
         spring(clock, states[1].x, configs[1].x),
         spring(clock, states[1].y, configs[1].y)
       ]),
-    []
+    [clock, configs, states, translateX, translateY]
   );
   return (
     <View style={styles.container}>

@@ -59,7 +59,12 @@ export default ({
     snapPoints: [0],
     config
   });
-  useCode(() => block([set(x, translateX), set(y, translateY)]), []);
+  useCode(() => block([set(x, translateX), set(y, translateY)]), [
+    translateX,
+    translateY,
+    x,
+    y
+  ]);
   return (
     <PanGestureHandler {...gestureHandler}>
       <Animated.View style={StyleSheet.absoluteFill} />

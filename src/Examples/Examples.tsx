@@ -71,6 +71,16 @@ export const examples = [
     screen: "Trigonometry",
     title: "Trigonometry",
     source: require("../../assets/examples/trigonometry.png")
+  },
+  {
+    screen: "CircularProgress",
+    title: "Circular Progress",
+    source: require("../../assets/examples/circular-progress.png")
+  },
+  {
+    screen: "BezierCurves",
+    title: "Bezier Curves",
+    source: require("../../assets/examples/bezier-curves.png")
   }
 ];
 

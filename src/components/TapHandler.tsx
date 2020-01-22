@@ -63,7 +63,7 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
           )
         )
       ]),
-    []
+    [onPress, shouldSpring, state, value]
   );
   return (
     <TapGestureHandler {...gestureHandler}>

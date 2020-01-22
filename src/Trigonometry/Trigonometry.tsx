@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 export default () => {
   const progress = new Value(0);
-  useCode(() => set(progress, timing({ duration: 4000 })), []);
+  useCode(() => set(progress, timing({ duration: 4000 })), [progress]);
   const p1 = interpolate(progress, {
     inputRange: [0, 0.3],
     outputRange: [0, 0.3],

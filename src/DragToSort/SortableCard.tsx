@@ -96,7 +96,7 @@ export default ({ card, index, offsets }: SortableCardProps) => {
           )
         )
       ]),
-    []
+    [currentOffset, index, offsets, state]
   );
   return (
     <PanGestureHandler {...gestureHandler}>

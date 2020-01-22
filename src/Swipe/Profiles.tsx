@@ -88,7 +88,7 @@ export default ({ profiles }: ProfilesProps) => {
         setIndex((index + 1) % profiles.length);
       }
     },
-    [index]
+    [index, offsetX, profiles.length]
   );
   const profile = profiles[index];
   const rotateZ = concat(
@@ -136,7 +136,7 @@ export default ({ profiles }: ProfilesProps) => {
           cond(not(clockRunning(clock)), [set(like, 0), call([], onSnap)])
         ])
       ]),
-    [onSnap, like, dislike]
+    [dislike, offsetX, clock, onSnap, like]
   );
   return (
     <SafeAreaView style={styles.container}>

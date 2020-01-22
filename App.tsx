@@ -17,6 +17,8 @@ import DragToSort from "./src/DragToSort";
 import Swipe, { profiles } from "./src/Swipe";
 import Svg from "./src/Svg";
 import Trigonometry from "./src/Trigonometry";
+import CircularSlider from "./src/CircularSlider";
+import BezierCurves from "./src/BezierCurves";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -77,12 +79,6 @@ const AppNavigator = createAppContainer(
           title: "Pan Gesture"
         }
       },
-      Decay: {
-        screen: Decay,
-        navigationOptions: {
-          title: "Decay"
-        }
-      },
       Spring: {
         screen: Spring,
         navigationOptions: {
@@ -117,6 +113,24 @@ const AppNavigator = createAppContainer(
         screen: Trigonometry,
         navigationOptions: {
           title: "Trigonometry"
+        }
+      },
+      Decay: {
+        screen: Decay,
+        navigationOptions: {
+          title: "Decay"
+        }
+      },
+      CircularSlider: {
+        screen: CircularSlider,
+        navigationOptions: {
+          title: "Circular Slider"
+        }
+      },
+      BezierCurves: {
+        screen: BezierCurves,
+        navigationOptions: {
+          title: "Bezier Curves"
         }
       }
     },

@@ -66,7 +66,7 @@ export default () => {
         // 3. If the animation is over, stop the clock
         cond(eq(progress, 1), stopClock(clock))
       ]),
-    [show]
+    [clock, progress, time]
   );
   return (
     <View style={styles.container}>

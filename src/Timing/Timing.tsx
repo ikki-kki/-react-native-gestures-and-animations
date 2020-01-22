@@ -76,7 +76,7 @@ export default () => {
         cond(and(not(isPlaying), clockRunning(clock)), stopClock(clock)),
         set(progress, runTiming(clock))
       ]),
-    []
+    [clock, isPlaying, progress]
   );
   return (
     <View style={styles.container}>

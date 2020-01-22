@@ -21,7 +21,8 @@ const {
   abs,
   sub,
   neq,
-  set
+  set,
+  defined
 } = Animated;
 
 export interface TimingProps {
@@ -180,16 +181,20 @@ export const withOffset = ({
   value,
   state: gestureState
 }: {
-  offset: Animated.Adaptable<number>;
+  offset?: Animated.Adaptable<number>;
   value: Animated.Value<number>;
   state: Animated.Value<State>;
 }) => {
-  const safeOffset = new Value(0);
-  return cond(
-    eq(gestureState, State.ACTIVE),
-    add(safeOffset, value),
-    set(safeOffset, offset)
-  );
+  const safeOffset: Animated.Value<number> = new Value();
+  return block([
+    cond(
+      not(defined(safeOffset)),
+      set(safeOffset, offset === undefined ? 0 : offset)
+    ),
+    cond(eq(gestureState, State.ACTIVE), add(safeOffset, value), [
+      set(safeOffset, add(safeOffset, value))
+    ])
+  ]);
 };
 
 export const withTransition = (

@@ -49,7 +49,7 @@ export default () => {
             style={[
               styles.overlay,
               {
-                transform: transformOrigin(newOrigin, 0, { rotate })
+                transform: transformOrigin({ x: newOrigin, y: 0 }, { rotate })
               }
             ]}
           >

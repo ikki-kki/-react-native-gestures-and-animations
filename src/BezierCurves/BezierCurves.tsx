@@ -8,7 +8,7 @@ import { StyleGuide } from "../components";
 
 const { Value, concat } = Animated;
 const { width } = Dimensions.get("window");
-const size = width - 32;
+const size = width - 48;
 const STROKE_WIDTH = 4;
 const styles = StyleSheet.create({
   container: {

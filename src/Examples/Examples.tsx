@@ -73,8 +73,8 @@ export const examples = [
     source: require("../../assets/examples/trigonometry.png")
   },
   {
-    screen: "CircularProgress",
-    title: "Circular Progress",
+    screen: "CircularSlider",
+    title: "Circular Slider",
     source: require("../../assets/examples/circular-progress.png")
   },
   {

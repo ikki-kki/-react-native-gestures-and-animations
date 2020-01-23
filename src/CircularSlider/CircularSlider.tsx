@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { Dimensions, PixelRatio, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { interpolateColor } from "react-native-redash";
@@ -12,7 +12,7 @@ const { PI } = Math;
 const { width } = Dimensions.get("window");
 const size = width - 32;
 const STROKE_WIDTH = 40;
-const r = size / 2;
+const r = PixelRatio.roundToNearestPixel(size / 2);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

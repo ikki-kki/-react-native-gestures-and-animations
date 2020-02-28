@@ -81,6 +81,11 @@ export const examples = [
     screen: "BezierCurves",
     title: "Bezier Curves",
     source: require("../../assets/examples/bezier-curves.png")
+  },
+  {
+    screen: "PathMorphing",
+    title: "PathMorphing",
+    source: require("../../assets/examples/path-morphing.png")
   }
 ];
 

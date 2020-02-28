@@ -19,6 +19,7 @@ import Svg from "./src/Svg";
 import Trigonometry from "./src/Trigonometry";
 import CircularSlider from "./src/CircularSlider";
 import BezierCurves from "./src/BezierCurves";
+import PathMorphing from "./src/PathMorphing";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -132,6 +133,12 @@ const AppNavigator = createAppContainer(
         navigationOptions: {
           title: "Bezier Curves",
           gesturesEnabled: false
+        }
+      },
+      PathMorphing: {
+        screen: PathMorphing,
+        navigationOptions: {
+          title: "Path Morphing"
         }
       }
     },

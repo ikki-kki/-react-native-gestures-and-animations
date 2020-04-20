@@ -21,7 +21,7 @@ export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
   const rotate = interpolate(theta, {
     inputRange: [PI, 2 * PI],
     outputRange: [0, PI],
-    extrapolate: Extrapolate.CLAMP
+    extrapolate: Extrapolate.CLAMP,
   });
   return (
     <>
@@ -31,7 +31,7 @@ export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
           style={{
             ...StyleSheet.absoluteFillObject,
             transform: transformOrigin({ x: 0, y: r / 2 }, { rotate: theta }),
-            opacity
+            opacity,
           }}
         >
           <HalfCircle color={bg} {...{ r }} />
@@ -42,7 +42,7 @@ export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
         <Animated.View
           style={{
             ...StyleSheet.absoluteFillObject,
-            transform: transformOrigin({ x: 0, y: r / 2 }, { rotate })
+            transform: transformOrigin({ x: 0, y: r / 2 }, { rotate }),
           }}
         >
           <HalfCircle color={bg} {...{ r }} />
@@ -53,7 +53,7 @@ export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
           ...StyleSheet.absoluteFillObject,
           justifyContent: "center",
           alignItems: "center",
-          zIndex: 2
+          zIndex: 2,
         }}
       >
         <View
@@ -61,7 +61,7 @@ export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
             backgroundColor: "white",
             width: (r - strokeWidth) * 2,
             height: (r - strokeWidth) * 2,
-            borderRadius: r - strokeWidth
+            borderRadius: r - strokeWidth,
           }}
         />
       </View>

@@ -26,15 +26,15 @@ export default ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
       nativeEvent: {
         translationX,
         translationY,
-        state
-      }
-    }
+        state,
+      },
+    },
   ]);
   useCode(() => block([set(theta, canvas2Polar({ x, y }, center).theta)]), [
     center,
     theta,
     x,
-    y
+    y,
   ]);
   const { x: translateX, y: translateY } = polar2Canvas(
     { theta, radius: r },
@@ -54,7 +54,7 @@ export default ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
           borderRadius: strokeWidth / 2,
           transform: [{ translateX }, { translateY }],
           borderColor: "white",
-          borderWidth: 5
+          borderWidth: 5,
         }}
       />
     </PanGestureHandler>

@@ -3,7 +3,7 @@ import { Dimensions, ImageStyle, StyleSheet, ViewStyle } from "react-native";
 import {
   Transition,
   Transitioning,
-  TransitioningView
+  TransitioningView,
 } from "react-native-reanimated";
 
 import { FlexibleCard, Selection, StyleGuide, cards } from "../components";
@@ -23,8 +23,8 @@ const transition = (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: StyleGuide.palette.background
-  }
+    backgroundColor: StyleGuide.palette.background,
+  },
 });
 const layouts: Layout[] = [
   {
@@ -34,9 +34,9 @@ const layouts: Layout[] = [
       container: {
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center"
-      }
-    }
+        alignItems: "center",
+      },
+    },
   },
   {
     id: "row",
@@ -44,9 +44,9 @@ const layouts: Layout[] = [
     layout: {
       container: {
         flexDirection: "row",
-        alignItems: "center"
-      }
-    }
+        alignItems: "center",
+      },
+    },
   },
   {
     id: "wrap",
@@ -54,14 +54,14 @@ const layouts: Layout[] = [
     layout: {
       container: {
         flexDirection: "row",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
       },
       child: {
         flex: 0,
-        width: width / 2 - StyleGuide.spacing * 2
-      }
-    }
-  }
+        width: width / 2 - StyleGuide.spacing * 2,
+      },
+    },
+  },
 ];
 
 export default () => {
@@ -73,7 +73,7 @@ export default () => {
         style={[styles.container, selectedLayout.container]}
         {...{ transition, ref }}
       >
-        {cards.map(card => (
+        {cards.map((card) => (
           <FlexibleCard
             key={card.id}
             style={selectedLayout.child}

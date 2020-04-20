@@ -20,18 +20,20 @@ import Trigonometry from "./src/Trigonometry";
 import CircularSlider from "./src/CircularSlider";
 import BezierCurves from "./src/BezierCurves";
 import PathMorphing from "./src/PathMorphing";
+import PinchGesture, { pictures } from "./src/PinchGesture";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
   "SFProText-Semibold": require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
-  "SFProText-Regular": require("./assets/fonts/SF-Pro-Text-Regular.otf")
+  "SFProText-Regular": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
 };
 
 const assets = [
-  ...examples.map(example => example.source),
-  ...cards.map(card => card.source),
-  ...profiles.map(profile => profile.profile),
-  profilePic
+  ...examples.map((example) => example.source),
+  ...cards.map((card) => card.source),
+  ...profiles.map((profile) => profile.profile),
+  profilePic,
+  ...pictures,
 ];
 
 const AppNavigator = createAppContainer(
@@ -41,115 +43,122 @@ const AppNavigator = createAppContainer(
         screen: Examples,
         navigationOptions: {
           title: "Gestures & Animations",
-          headerBackTitle: null
-        }
+          headerBackTitle: null,
+        },
       },
       ClockValuesAndIdentities: {
         screen: ClockValuesAndIdentities,
         navigationOptions: {
-          title: "Clock Values & Identities"
-        }
+          title: "Clock Values & Identities",
+        },
       },
       Transitions: {
         screen: Transitions,
         navigationOptions: {
-          title: "Transitions"
-        }
+          title: "Transitions",
+        },
       },
       useTransition: {
         screen: UseTransition,
         navigationOptions: {
-          title: "useTransition()"
-        }
+          title: "useTransition()",
+        },
       },
       DarkMode: {
         screen: DarkMode,
         navigationOptions: {
-          title: "Dark Mode"
-        }
+          title: "Dark Mode",
+        },
       },
       Timing: {
         screen: Timing,
         navigationOptions: {
-          title: "Timing"
-        }
+          title: "Timing",
+        },
       },
       PanGesture: {
         screen: PanGesture,
         navigationOptions: {
-          title: "Pan Gesture"
-        }
+          title: "Pan Gesture",
+        },
       },
       Spring: {
         screen: Spring,
         navigationOptions: {
-          title: "Spring"
-        }
+          title: "Spring",
+        },
       },
       Swipe: {
         screen: Swipe,
         navigationOptions: {
-          title: "Swipe"
-        }
+          title: "Swipe",
+        },
       },
       DynamicSpring: {
         screen: DynamicSpring,
         navigationOptions: {
-          title: "Dynamic Spring"
-        }
+          title: "Dynamic Spring",
+        },
       },
       DragToSort: {
         screen: DragToSort,
         navigationOptions: {
-          title: "Drag to Sort"
-        }
+          title: "Drag to Sort",
+        },
       },
       Svg: {
         screen: Svg,
         navigationOptions: {
-          title: "SVG"
-        }
+          title: "SVG",
+        },
       },
       Trigonometry: {
         screen: Trigonometry,
         navigationOptions: {
-          title: "Trigonometry"
-        }
+          title: "Trigonometry",
+        },
       },
       Decay: {
         screen: Decay,
         navigationOptions: {
-          title: "Decay"
-        }
+          title: "Decay",
+        },
       },
       CircularSlider: {
         screen: CircularSlider,
         navigationOptions: {
-          title: "Circular Slider"
-        }
+          title: "Circular Slider",
+        },
       },
       BezierCurves: {
         screen: BezierCurves,
         navigationOptions: {
           title: "Bezier Curves",
-          gesturesEnabled: false
-        }
+          gesturesEnabled: false,
+        },
       },
       PathMorphing: {
         screen: PathMorphing,
         navigationOptions: {
-          title: "Path Morphing"
-        }
-      }
+          title: "Path Morphing",
+        },
+      },
+      Pinch: {
+        screen: PinchGesture,
+        navigationOptions: {
+          title: "PinchGesture",
+          header: null,
+        },
+      },
     },
     {
       defaultNavigationOptions: {
         headerStyle: {
           backgroundColor: StyleGuide.palette.primary,
-          borderBottomWidth: 0
+          borderBottomWidth: 0,
         },
-        headerTintColor: "white"
-      }
+        headerTintColor: "white",
+      },
     }
   )
 );

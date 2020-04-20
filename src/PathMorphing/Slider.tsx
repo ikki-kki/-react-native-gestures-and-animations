@@ -2,7 +2,7 @@ import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import { onGestureEvent, withOffset } from "react-native-redash";
+import { diffClamp, onGestureEvent, withOffset } from "react-native-redash";
 
 interface SliderProps {
   progress: Animated.Value<number>;
@@ -13,21 +13,21 @@ const { width } = Dimensions.get("window");
 const CURSOR_SIZE = 40;
 const CONTAINER_WIDTH = width - 64;
 const SLIDER_WIDTH = CONTAINER_WIDTH - CURSOR_SIZE;
-const { Value, set, divide, useCode, diffClamp } = Animated;
+const { Value, set, divide, useCode } = Animated;
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    width: CONTAINER_WIDTH
+    width: CONTAINER_WIDTH,
   },
   dividerContainer: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   divider: {
     borderColor: "rgba(50, 50, 50, 0.5)",
     width: SLIDER_WIDTH,
-    borderWidth: StyleSheet.hairlineWidth
+    borderWidth: StyleSheet.hairlineWidth,
   },
   cursor: {
     width: CURSOR_SIZE,
@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "white",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   cursorPoint: {
     borderRadius: 5,
     width: 10,
     height: 10,
-    backgroundColor: "black"
-  }
+    backgroundColor: "black",
+  },
 });
 
 export default ({ progress, state }: SliderProps) => {
@@ -56,7 +56,7 @@ export default ({ progress, state }: SliderProps) => {
   );
   useCode(() => set(progress, divide(translateX, SLIDER_WIDTH)), [
     progress,
-    translateX
+    translateX,
   ]);
   return (
     <View style={styles.container}>

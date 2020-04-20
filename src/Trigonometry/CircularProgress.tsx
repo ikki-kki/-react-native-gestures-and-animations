@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   svg: {
-    transform: [{ rotateZ: "270deg" }]
-  }
+    transform: [{ rotateZ: "270deg" }],
+  },
 });
 
 interface CircularProgressProps {
@@ -45,7 +45,7 @@ export default ({ color, size, progress, icon }: CircularProgressProps) => {
           {...{
             cx,
             cy,
-            r
+            r,
           }}
         />
         <AnimatedCircle
@@ -58,7 +58,7 @@ export default ({ color, size, progress, icon }: CircularProgressProps) => {
             strokeDashoffset,
             cx,
             cy,
-            r
+            r,
           }}
         />
       </Svg>
@@ -66,7 +66,7 @@ export default ({ color, size, progress, icon }: CircularProgressProps) => {
         style={{
           ...StyleSheet.absoluteFillObject,
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Icon

@@ -21,7 +21,7 @@ const {
   call,
   onChange,
   and,
-  neq
+  neq,
 } = Animated;
 const { BEGAN, FAILED, CANCELLED, END, UNDETERMINED } = State;
 const easing = Easing.inOut(Easing.ease);
@@ -46,7 +46,7 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
               from: value,
               to: 1,
               easing,
-              duration
+              duration,
             })
           )
         ),
@@ -58,10 +58,10 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
               from: value,
               to: 0,
               easing,
-              duration
+              duration,
             })
           )
-        )
+        ),
       ]),
     [onPress, shouldSpring, state, value]
   );

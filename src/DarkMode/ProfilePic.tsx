@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     height: size,
     borderRadius: size / 2,
     resizeMode: "cover",
-    alignSelf: "center"
-  }
+    alignSelf: "center",
+  },
 });
 
 export default () => {

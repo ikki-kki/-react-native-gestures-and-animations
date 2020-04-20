@@ -4,14 +4,13 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Constants from "expo-constants";
 
-import { onGestureEvent } from "react-native-redash";
+import { diffClamp, onGestureEvent } from "react-native-redash";
 import { Card, StyleGuide, cards } from "../components";
 import { CARD_HEIGHT, CARD_WIDTH } from "../components/Card";
 
 const {
   Clock,
   Value,
-  diffClamp,
   cond,
   set,
   eq,
@@ -23,7 +22,7 @@ const {
   block,
   and,
   not,
-  neq
+  neq,
 } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
@@ -33,8 +32,8 @@ const offsetY = new Value((containerHeight - CARD_HEIGHT) / 2);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: StyleGuide.palette.background
-  }
+    backgroundColor: StyleGuide.palette.background,
+  },
 });
 const [card] = cards;
 
@@ -50,14 +49,14 @@ const withDecay = (config: WithDecayProps) => {
   const { value, velocity, state, offset, deceleration } = {
     offset: new Value(0),
     deceleration: 0.998,
-    ...config
+    ...config,
   };
   const clock = new Clock();
   const decayState = {
     finished: new Value(0),
     velocity: new Value(0),
     position: new Value(0),
-    time: new Value(0)
+    time: new Value(0),
   };
 
   const isDecayInterrupted = and(eq(state, State.BEGAN), clockRunning(clock));
@@ -67,18 +66,18 @@ const withDecay = (config: WithDecayProps) => {
     cond(isDecayInterrupted, finishDecay),
     cond(neq(state, State.END), [
       set(decayState.finished, 0),
-      set(decayState.position, add(offset, value))
+      set(decayState.position, add(offset, value)),
     ]),
     cond(eq(state, State.END), [
       cond(and(not(clockRunning(clock)), not(decayState.finished)), [
         set(decayState.velocity, velocity),
         set(decayState.time, 0),
-        startClock(clock)
+        startClock(clock),
       ]),
       reDecay(clock, decayState, { deceleration }),
-      cond(decayState.finished, finishDecay)
+      cond(decayState.finished, finishDecay),
     ]),
-    decayState.position
+    decayState.position,
   ]);
 };
 
@@ -93,14 +92,14 @@ export default () => {
     translationX,
     translationY,
     velocityX,
-    velocityY
+    velocityY,
   });
   const translateX = diffClamp(
     withDecay({
       value: translationX,
       velocity: velocityX,
       state,
-      offset: offsetX
+      offset: offsetX,
     }),
     0,
     containerWidth - CARD_WIDTH
@@ -110,7 +109,7 @@ export default () => {
       value: translationY,
       velocity: velocityY,
       state,
-      offset: offsetY
+      offset: offsetY,
     }),
     0,
     containerHeight - CARD_HEIGHT
@@ -120,7 +119,7 @@ export default () => {
       <PanGestureHandler {...gestureHandler}>
         <Animated.View
           style={{
-            transform: [{ translateX }, { translateY }]
+            transform: [{ translateX }, { translateY }],
           }}
         >
           <Card {...{ card }} />

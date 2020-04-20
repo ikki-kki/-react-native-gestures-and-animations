@@ -6,9 +6,9 @@ import { panGestureHandler } from "react-native-redash";
 
 import Card, {
   CardProps,
-  CARD_HEIGHT as INNER_CARD_HEIGHT
+  CARD_HEIGHT as INNER_CARD_HEIGHT,
 } from "../components/Card";
-import { withOffset, withTransition } from "../components";
+import { withTransition } from "../components";
 
 export const CARD_HEIGHT = INNER_CARD_HEIGHT + 32;
 const { width } = Dimensions.get("window");
@@ -29,7 +29,7 @@ const {
   abs,
   not,
   and,
-  neq
+  neq,
 } = Animated;
 
 const isMoving = (position: Animated.Node<number>) => {
@@ -39,9 +39,26 @@ const isMoving = (position: Animated.Node<number>) => {
     lessThan(abs(delta), 1e-3),
     [
       set(noMovementFrames, add(noMovementFrames, 1)),
-      not(greaterThan(noMovementFrames, 20))
+      not(greaterThan(noMovementFrames, 20)),
     ],
     [set(noMovementFrames, 0), 1]
+  );
+};
+
+export const withOffset = ({
+  offset,
+  value,
+  state: gestureState,
+}: {
+  offset: Animated.Adaptable<number>;
+  value: Animated.Value<number>;
+  state: Animated.Value<State>;
+}) => {
+  const safeOffset = new Value(0);
+  return cond(
+    eq(gestureState, State.ACTIVE),
+    add(safeOffset, value),
+    set(safeOffset, offset)
   );
 };
 
@@ -51,26 +68,19 @@ interface SortableCardProps extends CardProps {
 }
 
 export default ({ card, index, offsets }: SortableCardProps) => {
-  const {
-    gestureHandler,
-    translationX,
-    translationY,
-    velocityY,
-    velocityX,
-    state
-  } = panGestureHandler();
+  const { gestureHandler, translation, velocity, state } = panGestureHandler();
   const x = withOffset({
     offset: 0,
-    value: translationX,
-    state
+    value: translation.x,
+    state,
   });
-  const translateX = withTransition(x, velocityX, state);
+  const translateX = withTransition(x, velocity.x, state);
   const y = withOffset({
     offset: offsets[index],
-    value: translationY,
-    state
+    value: translation.y,
+    state,
   });
-  const translateY = withTransition(y, velocityY, state);
+  const translateY = withTransition(y, velocity.y, state);
   const zIndex = cond(
     eq(state, State.ACTIVE),
     200,
@@ -81,7 +91,7 @@ export default ({ card, index, offsets }: SortableCardProps) => {
   useCode(
     () =>
       block([
-        ...offsets.map(offset =>
+        ...offsets.map((offset) =>
           cond(
             and(
               eq(currentOffset, offset),
@@ -90,11 +100,11 @@ export default ({ card, index, offsets }: SortableCardProps) => {
             ),
             [
               set(offset, offsets[index]),
-              set(offsets[index], currentOffset)
+              set(offsets[index], currentOffset),
               // call([currentOffset], c => console.log(`set new order: ${c}`))
             ]
           )
-        )
+        ),
       ]),
     [currentOffset, index, offsets, state]
   );
@@ -113,9 +123,9 @@ export default ({ card, index, offsets }: SortableCardProps) => {
           transform: [
             { translateX },
             {
-              translateY
-            }
-          ]
+              translateY,
+            },
+          ],
         }}
       >
         <Card {...{ card }} />

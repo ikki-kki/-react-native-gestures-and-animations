@@ -12,7 +12,7 @@ const config = {
   stiffness: 300,
   overshootClamping: false,
   restSpeedThreshold: 1,
-  restDisplacementThreshold: 1
+  restDisplacementThreshold: 1,
 };
 interface SwipeableProps {
   x: Animated.Value<number>;
@@ -29,7 +29,7 @@ export default ({
   offsetX,
   offsetY,
   snapPoints,
-  onSnap
+  onSnap,
 }: SwipeableProps) => {
   const translationX = new Value(0);
   const translationY = new Value(0);
@@ -40,7 +40,7 @@ export default ({
     velocityX,
     translationX,
     translationY,
-    state
+    state,
   });
   const translateX = withSpring({
     value: translationX,
@@ -49,7 +49,7 @@ export default ({
     state,
     snapPoints,
     onSnap,
-    config
+    config,
   });
   const translateY = withSpring({
     value: translationY,
@@ -57,13 +57,13 @@ export default ({
     offset: offsetY || new Value(0),
     state,
     snapPoints: [0],
-    config
+    config,
   });
   useCode(() => block([set(x, translateX), set(y, translateY)]), [
     translateX,
     translateY,
     x,
-    y
+    y,
   ]);
   return (
     <PanGestureHandler {...gestureHandler}>

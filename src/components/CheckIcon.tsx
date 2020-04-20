@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    backgroundColor: StyleGuide.palette.primary
-  }
+    backgroundColor: StyleGuide.palette.primary,
+  },
 });
 
 export default () => {

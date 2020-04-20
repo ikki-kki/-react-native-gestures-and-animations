@@ -22,7 +22,7 @@ const {
   sub,
   neq,
   set,
-  defined
+  defined,
 } = Animated;
 
 export interface TimingProps {
@@ -40,20 +40,20 @@ export const timing = (timingConfig: TimingProps) => {
     duration: 250,
     from: 0,
     to: 1,
-    ...timingConfig
+    ...timingConfig,
   };
 
   const state: Animated.TimingState = {
     finished: new Value(0),
     position: new Value(0),
     time: new Value(0),
-    frameTime: new Value(0)
+    frameTime: new Value(0),
   };
 
   const config = {
     toValue,
     duration,
-    easing
+    easing,
   };
 
   return block([
@@ -62,11 +62,11 @@ export const timing = (timingConfig: TimingProps) => {
       set(state.time, 0),
       set(state.position, from),
       set(state.frameTime, 0),
-      startClock(clock)
+      startClock(clock),
     ]),
     reTiming(clock, state, config),
     cond(state.finished, stopClock(clock)),
-    state.position
+    state.position,
   ]);
 };
 
@@ -74,7 +74,7 @@ export const delay = (node: Animated.Node<number>, duration: number) => {
   const clock = new Clock();
   return block([
     timing({ clock, from: 0, to: 1, duration }),
-    cond(not(clockRunning(clock)), node)
+    cond(not(clockRunning(clock)), node),
   ]);
 };
 
@@ -101,7 +101,7 @@ export const snapPoint = (
 ) => {
   const point = add(value, multiply(0.2, velocity));
   const diffPoint = (p: Animated.Adaptable<number>) => abs(sub(point, p));
-  const deltas = points.map(p => diffPoint(p));
+  const deltas = points.map((p) => diffPoint(p));
   const minDelta = min(...deltas);
   return points.reduce(
     (acc, p) => cond(eq(diffPoint(p), minDelta), p, acc),
@@ -117,17 +117,17 @@ export const withSpring = (props: WithSpringParams) => {
     snapPoints,
     offset,
     config: springConfig,
-    onSnap
+    onSnap,
   } = {
     offset: new Value(0),
-    ...props
+    ...props,
   };
   const clock = new Clock();
   const springState: Animated.SpringState = {
     finished: new Value(0),
     velocity: new Value(0),
     position: new Value(0),
-    time: new Value(0)
+    time: new Value(0),
   };
 
   const config: PrivateSpringConfig = {
@@ -138,7 +138,7 @@ export const withSpring = (props: WithSpringParams) => {
     overshootClamping: false,
     restSpeedThreshold: 1,
     restDisplacementThreshold: 1,
-    ...springConfig
+    ...springConfig,
   };
 
   const gestureAndAnimationIsOver = new Value(1);
@@ -146,7 +146,7 @@ export const withSpring = (props: WithSpringParams) => {
   const finishSpring = [
     set(offset, springState.position),
     stopClock(clock),
-    set(gestureAndAnimationIsOver, 1)
+    set(gestureAndAnimationIsOver, 1),
   ];
   const snap = onSnap
     ? [cond(clockRunning(clock), call([springState.position], onSnap))]
@@ -157,7 +157,7 @@ export const withSpring = (props: WithSpringParams) => {
     cond(neq(state, State.END), [
       set(gestureAndAnimationIsOver, 0),
       set(springState.finished, 0),
-      set(springState.position, add(offset, value))
+      set(springState.position, add(offset, value)),
     ]),
     cond(and(eq(state, State.END), not(gestureAndAnimationIsOver)), [
       cond(and(not(clockRunning(clock)), not(springState.finished)), [
@@ -167,19 +167,19 @@ export const withSpring = (props: WithSpringParams) => {
           config.toValue,
           snapPoint(springState.position, velocity, snapPoints)
         ),
-        startClock(clock)
+        startClock(clock),
       ]),
       reSpring(clock, springState, config),
-      cond(springState.finished, [...snap, ...finishSpring])
+      cond(springState.finished, [...snap, ...finishSpring]),
     ]),
-    springState.position
+    springState.position,
   ]);
 };
 
 export const withOffset = ({
   offset,
   value,
-  state: gestureState
+  state: gestureState,
 }: {
   offset?: Animated.Adaptable<number>;
   value: Animated.Value<number>;
@@ -192,8 +192,8 @@ export const withOffset = ({
       set(safeOffset, offset === undefined ? 0 : offset)
     ),
     cond(eq(gestureState, State.ACTIVE), add(safeOffset, value), [
-      set(safeOffset, add(safeOffset, value))
-    ])
+      set(safeOffset, add(safeOffset, value)),
+    ]),
   ]);
 };
 
@@ -208,7 +208,7 @@ export const withTransition = (
     finished: new Value(0),
     velocity: new Value(0),
     position: new Value(0),
-    time: new Value(0)
+    time: new Value(0),
   };
   const config = {
     toValue: new Value(0),
@@ -218,7 +218,7 @@ export const withTransition = (
     overshootClamping: false,
     restSpeedThreshold: 1,
     restDisplacementThreshold: 1,
-    ...springConfig
+    ...springConfig,
   };
   return block([
     startClock(clock),
@@ -228,6 +228,6 @@ export const withTransition = (
       [set(state.velocity, velocity), set(state.position, value)],
       reSpring(clock, state, config)
     ),
-    state.position
+    state.position,
   ]);
 };

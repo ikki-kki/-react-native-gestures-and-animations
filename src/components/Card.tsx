@@ -12,16 +12,16 @@ interface Card {
 export const cards: Card[] = [
   {
     id: 0,
-    source: require("../../assets/examples/card1.png")
+    source: require("../../assets/examples/card1.png"),
   },
   {
     id: 1,
-    source: require("../../assets/examples/card2.png")
+    source: require("../../assets/examples/card2.png"),
   },
   {
     id: 2,
-    source: require("../../assets/examples/card3.png")
-  }
+    source: require("../../assets/examples/card3.png"),
+  },
 ];
 
 const { width } = Dimensions.get("window");
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
-    borderRadius: 18
+    borderRadius: 18,
   },
   flexibleContainer: {
     flex: 1,
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     aspectRatio: CARD_ASPECT_RATIO,
     margin: StyleGuide.spacing,
     borderRadius: 18,
-    resizeMode: "contain"
-  }
+    resizeMode: "contain",
+  },
 });
 
 export interface CardProps {

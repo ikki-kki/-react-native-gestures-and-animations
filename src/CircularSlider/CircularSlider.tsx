@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   content: {
     width: r * 2,
-    height: r * 2
-  }
+    height: r * 2,
+  },
 });
 
 export default () => {
@@ -34,7 +34,7 @@ export default () => {
   );
   const backgroundColor = interpolateColor(theta, {
     inputRange: [0, PI, 2 * PI],
-    outputRange: ["#ff3884", StyleGuide.palette.primary, "#38ffb3"]
+    outputRange: ["#ff3884", StyleGuide.palette.primary, "#38ffb3"],
   });
   const rotate = sub(PI, end);
   return (

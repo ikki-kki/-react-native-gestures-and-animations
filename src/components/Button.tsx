@@ -12,11 +12,11 @@ interface ButtonProps {
 
 const styles = StyleSheet.create({
   container: {
-    padding: StyleGuide.spacing * 2
+    padding: StyleGuide.spacing * 2,
   },
   label: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default ({ label, primary, onPress }: ButtonProps) => {

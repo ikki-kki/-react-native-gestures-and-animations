@@ -19,15 +19,15 @@ export const interpolateColor = <T extends readonly number[]>(
 ) => {
   const r = interpolate(value, {
     inputRange,
-    outputRange: outputRange.map(c => c.r)
+    outputRange: outputRange.map((c) => c.r),
   });
   const g = interpolate(value, {
     inputRange,
-    outputRange: outputRange.map(c => c.g)
+    outputRange: outputRange.map((c) => c.g),
   });
   const b = interpolate(value, {
     inputRange,
-    outputRange: outputRange.map(c => c.b)
+    outputRange: outputRange.map((c) => c.b),
   });
   return color(round(r), round(g), round(b));
 };

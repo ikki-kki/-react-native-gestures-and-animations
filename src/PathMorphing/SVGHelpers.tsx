@@ -6,7 +6,7 @@ const { concat, interpolate } = Animated;
 enum SVGCommand {
   MOVE,
   CURVE,
-  CLOSE
+  CLOSE,
 }
 
 interface SVGSegment {
@@ -44,7 +44,7 @@ const isCurve = (command: SVGSegment): command is Curve =>
 
 export const serialize = (path: SVGSegment[]) => {
   return path
-    .map(segment => {
+    .map((segment) => {
       if (isMove(segment)) {
         return serializeMove(segment);
       }
@@ -67,12 +67,12 @@ export const interpolatePath = <T extends readonly number[]>(
 ) => {
   const path = outputRange[0].map((segment, index) => {
     if (isMove(segment)) {
-      const points = outputRange.map(p => {
+      const points = outputRange.map((p) => {
         const s = p[index];
         if (isMove(s)) {
           return {
             x: s.x,
-            y: s.y
+            y: s.y,
           };
         }
         throw new Error("Paths to interpolate are not symetrical");
@@ -81,22 +81,22 @@ export const interpolatePath = <T extends readonly number[]>(
         type: SVGCommand.MOVE,
         x: interpolate(value, {
           inputRange,
-          outputRange: points.map(p => p.x)
+          outputRange: points.map((p) => p.x),
         }),
         y: interpolate(value, {
           inputRange,
-          outputRange: points.map(p => p.y)
-        })
+          outputRange: points.map((p) => p.y),
+        }),
       };
     }
     if (isCurve(segment)) {
-      const curves = outputRange.map(p => {
+      const curves = outputRange.map((p) => {
         const s = p[index];
         if (isCurve(s)) {
           return {
             to: s.to,
             c1: s.c1,
-            c2: s.c2
+            c2: s.c2,
           };
         }
         throw new Error("Paths to interpolate are not symetrical");
@@ -106,33 +106,33 @@ export const interpolatePath = <T extends readonly number[]>(
         to: {
           x: interpolate(value, {
             inputRange,
-            outputRange: curves.map(c => c.to.x)
+            outputRange: curves.map((c) => c.to.x),
           }),
           y: interpolate(value, {
             inputRange,
-            outputRange: curves.map(c => c.to.y)
-          })
+            outputRange: curves.map((c) => c.to.y),
+          }),
         },
         c1: {
           x: interpolate(value, {
             inputRange,
-            outputRange: curves.map(c => c.c1.x)
+            outputRange: curves.map((c) => c.c1.x),
           }),
           y: interpolate(value, {
             inputRange,
-            outputRange: curves.map(c => c.c1.y)
-          })
+            outputRange: curves.map((c) => c.c1.y),
+          }),
         },
         c2: {
           x: interpolate(value, {
             inputRange,
-            outputRange: curves.map(c => c.c2.x)
+            outputRange: curves.map((c) => c.c2.x),
           }),
           y: interpolate(value, {
             inputRange,
-            outputRange: curves.map(c => c.c2.y)
-          })
-        }
+            outputRange: curves.map((c) => c.c2.y),
+          }),
+        },
       };
     }
     return segment;

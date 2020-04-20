@@ -4,11 +4,11 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Constants from "expo-constants";
 
-import { onGestureEvent } from "react-native-redash";
+import { diffClamp, onGestureEvent } from "react-native-redash";
 import { Card, StyleGuide, cards } from "../components";
 import { CARD_HEIGHT, CARD_WIDTH } from "../components/Card";
 
-const { Value, diffClamp, cond, set, eq, add } = Animated;
+const { Value, cond, set, eq, add } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
 const containerHeight =
@@ -18,8 +18,8 @@ const offsetY = new Value((containerHeight - CARD_HEIGHT) / 2);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: StyleGuide.palette.background
-  }
+    backgroundColor: StyleGuide.palette.background,
+  },
 });
 const [card] = cards;
 
@@ -45,7 +45,7 @@ export default () => {
     translationX,
     translationY,
     velocityX,
-    velocityY
+    velocityY,
   });
   const translateX = diffClamp(
     withOffset(translationX, state, offsetX),
@@ -62,7 +62,7 @@ export default () => {
       <PanGestureHandler {...gestureHandler}>
         <Animated.View
           style={{
-            transform: [{ translateX }, { translateY }]
+            transform: [{ translateX }, { translateY }],
           }}
         >
           <Card {...{ card }} />

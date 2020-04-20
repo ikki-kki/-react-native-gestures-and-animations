@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import {
   Transition,
   Transitioning,
-  TransitioningView
+  TransitioningView,
 } from "react-native-reanimated";
 import { Button, Text } from "../components";
 
@@ -24,15 +24,15 @@ const transition = (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   darkMask: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "black"
+    backgroundColor: "black",
   },
   text: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default () => {
@@ -43,7 +43,7 @@ export default () => {
       {dark && <View style={styles.darkMask} />}
       <Switch
         value={dark}
-        onValueChange={value => {
+        onValueChange={(value) => {
           if (ref.current) {
             ref.current.animateNextTransition();
           }

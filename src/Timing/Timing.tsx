@@ -19,15 +19,15 @@ const {
   and,
   not,
   eq,
-  timing
+  timing,
 } = Animated;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    backgroundColor: StyleGuide.palette.background
-  }
+    backgroundColor: StyleGuide.palette.background,
+  },
 });
 
 const runTiming = (clock: Animated.Clock): Animated.Node<number> => {
@@ -35,12 +35,12 @@ const runTiming = (clock: Animated.Clock): Animated.Node<number> => {
     finished: new Value(0),
     position: new Value(0),
     time: new Value(0),
-    frameTime: new Value(0)
+    frameTime: new Value(0),
   };
   const config = {
     toValue: new Value(1),
     duration: 1000,
-    easing: Easing.linear
+    easing: Easing.linear,
   };
   return block([
     cond(
@@ -52,9 +52,9 @@ const runTiming = (clock: Animated.Clock): Animated.Node<number> => {
       set(state.finished, 0),
       set(state.frameTime, 0),
       set(state.time, 0),
-      set(config.toValue, cond(eq(state.position, 1), 0, 1))
+      set(config.toValue, cond(eq(state.position, 1), 0, 1)),
     ]),
-    state.position
+    state.position,
   ]);
 };
 
@@ -64,7 +64,7 @@ export default () => {
     () => ({
       clock: new Clock(),
       isPlaying: new Value(0) as Animated.Value<0 | 1>,
-      progress: new Value(0)
+      progress: new Value(0),
     }),
     []
   );
@@ -74,7 +74,7 @@ export default () => {
       block([
         cond(and(isPlaying, not(clockRunning(clock))), startClock(clock)),
         cond(and(not(isPlaying), clockRunning(clock)), stopClock(clock)),
-        set(progress, runTiming(clock))
+        set(progress, runTiming(clock)),
       ]),
     [clock, isPlaying, progress]
   );
@@ -84,7 +84,7 @@ export default () => {
       <Button
         label={play ? "Pause" : "Play"}
         primary
-        onPress={() => setPlay(prev => !prev)}
+        onPress={() => setPlay((prev) => !prev)}
       />
     </View>
   );

@@ -16,30 +16,30 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "center",
-    marginBottom: 32
+    marginBottom: 32,
   },
   eyes: {
     flexDirection: "row",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 });
 
 const bad = {
   r: 0.9921568627 * 255,
   g: 0.7450980392 * 255,
-  b: 0.9215686275 * 255
+  b: 0.9215686275 * 255,
 };
 
 const normal = {
   r: 0.9921568627 * 255,
   g: 0.9333333333 * 255,
-  b: 0.7450980392 * 255
+  b: 0.7450980392 * 255,
 };
 
 const good = {
   r: 0.7450980392 * 255,
   g: 0.9921568627 * 255,
-  b: 0.8980392157 * 255
+  b: 0.8980392157 * 255,
 };
 
 export default () => {
@@ -47,7 +47,7 @@ export default () => {
   const progress = new Value(1);
   const backgroundColor = interpolateColor(progress, {
     inputRange: [0, 0.5, 1] as const,
-    outputRange: [bad, normal, good]
+    outputRange: [bad, normal, good],
   });
   return (
     <Animated.View

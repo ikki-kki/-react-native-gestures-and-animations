@@ -16,19 +16,19 @@ const {
   startClock,
   interpolate,
   Extrapolate,
-  add
+  add,
 } = Animated;
 
 const duration = 2000;
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   card: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 export default () => {
@@ -38,7 +38,7 @@ export default () => {
       clock: new Clock(),
       progress: new Value(0),
       from: new Value(0),
-      to: new Value(0)
+      to: new Value(0),
     }),
     []
   );
@@ -55,7 +55,7 @@ export default () => {
           set(from, progress),
           set(to, show ? 1 : 0),
           startClock(clock),
-          set(time, clock)
+          set(time, clock),
         ]),
         // 2. Calculate the progress of the animation
         set(
@@ -63,9 +63,9 @@ export default () => {
           interpolate(clock, {
             inputRange: [time, add(time, duration)],
             outputRange: [from, to],
-            extrapolate: Extrapolate.CLAMP
+            extrapolate: Extrapolate.CLAMP,
           })
-        )
+        ),
       ]),
     [clock, from, progress, show, time, to]
   );
@@ -79,7 +79,7 @@ export default () => {
       <Button
         label={show ? "Hide" : "Show"}
         primary
-        onPress={() => setShow(prev => !prev)}
+        onPress={() => setShow((prev) => !prev)}
       />
     </View>
   );

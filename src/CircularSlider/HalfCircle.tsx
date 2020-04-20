@@ -13,7 +13,7 @@ export default ({ color, r }: HalfCircleProps) => {
       style={{
         width: r * 2,
         height: r,
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       <Animated.View
@@ -21,7 +21,7 @@ export default ({ color, r }: HalfCircleProps) => {
           backgroundColor: color,
           width: r * 2,
           height: r * 2,
-          borderRadius: r
+          borderRadius: r,
         }}
       />
     </View>

@@ -3,7 +3,6 @@
     "name": "react-native-gestures-and-animations",
     "slug": "react-native-gestures-and-animations",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",

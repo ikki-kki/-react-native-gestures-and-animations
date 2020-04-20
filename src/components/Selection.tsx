@@ -7,15 +7,15 @@ import CheckIcon, { CHECK_ICON_SIZE } from "./CheckIcon";
 const styles = StyleSheet.create({
   buttonContainer: {
     borderBottomWidth: 1,
-    borderColor: "#f4f6f3"
+    borderColor: "#f4f6f3",
   },
   button: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     height: StyleGuide.spacing * 2 + CHECK_ICON_SIZE,
-    padding: StyleGuide.spacing
-  }
+    padding: StyleGuide.spacing,
+  },
 });
 
 interface SelectionProps {

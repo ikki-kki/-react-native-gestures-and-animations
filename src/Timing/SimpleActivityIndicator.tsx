@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   container: {
     height: width,
@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#d3d3d3",
     borderTopLeftRadius: width / 2,
     borderTopRightRadius: width / 2,
-    borderBottomLeftRadius: width / 2
+    borderBottomLeftRadius: width / 2,
   },
   bubble: {
     width: size,
     height: size,
     borderRadius: size / 2,
-    backgroundColor: StyleGuide.palette.primary
-  }
+    backgroundColor: StyleGuide.palette.primary,
+  },
 });
 
 interface SimpleActivityIndicatorProps {
@@ -42,18 +42,18 @@ export default ({ progress }: SimpleActivityIndicatorProps) => {
   return (
     <View style={styles.root}>
       <View style={styles.container}>
-        {bubbles.map(i => {
+        {bubbles.map((i) => {
           const start = i * delta;
           const end = start + delta;
           const opacity = interpolate(progress, {
             inputRange: [start, end],
             outputRange: [0.5, 1],
-            extrapolate: Extrapolate.CLAMP
+            extrapolate: Extrapolate.CLAMP,
           });
           const scale = interpolate(progress, {
             inputRange: [start, end],
             outputRange: [1, 1.5],
-            extrapolate: Extrapolate.CLAMP
+            extrapolate: Extrapolate.CLAMP,
           });
           return (
             <Animated.View

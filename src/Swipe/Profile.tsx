@@ -15,46 +15,46 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     width: undefined,
     height: undefined,
-    borderRadius: 8
+    borderRadius: 8,
   },
   overlay: {
     flex: 1,
     justifyContent: "space-between",
-    padding: 16
+    padding: 16,
   },
   header: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   footer: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   name: {
     color: "white",
-    fontSize: 32
+    fontSize: 32,
   },
   like: {
     borderWidth: 4,
     borderRadius: 5,
     padding: 8,
-    borderColor: "#6ee3b4"
+    borderColor: "#6ee3b4",
   },
   likeLabel: {
     fontSize: 32,
     color: "#6ee3b4",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   nope: {
     borderWidth: 4,
     borderRadius: 5,
     padding: 8,
-    borderColor: "#ec5288"
+    borderColor: "#ec5288",
   },
   nopeLabel: {
     fontSize: 32,
     color: "#ec5288",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
 interface CardProps {
@@ -67,7 +67,7 @@ export default (props: CardProps) => {
   const { profile, likeOpacity, nopeOpacity } = {
     likeOpacity: 0,
     nopeOpacity: 0,
-    ...props
+    ...props,
   };
   return (
     <View style={StyleSheet.absoluteFill}>

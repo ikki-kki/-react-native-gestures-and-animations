@@ -14,8 +14,8 @@ const s3 = s2 - STROKE_WIDTH * 2;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000001"
-  }
+    backgroundColor: "#000001",
+  },
 });
 
 export default () => {
@@ -24,17 +24,17 @@ export default () => {
   const p1 = interpolate(progress, {
     inputRange: [0, 0.3],
     outputRange: [0, 0.3],
-    extrapolate: Extrapolate.CLAMP
+    extrapolate: Extrapolate.CLAMP,
   });
   const p2 = interpolate(progress, {
     inputRange: [0, 0.5],
     outputRange: [0, 0.5],
-    extrapolate: Extrapolate.CLAMP
+    extrapolate: Extrapolate.CLAMP,
   });
   const p3 = interpolate(progress, {
     inputRange: [0, 0.8],
     outputRange: [0, 0.8],
-    extrapolate: Extrapolate.CLAMP
+    extrapolate: Extrapolate.CLAMP,
   });
   return (
     <View style={styles.container}>

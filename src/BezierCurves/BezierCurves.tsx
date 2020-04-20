@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   content: {
     width: size + STROKE_WIDTH,
-    height: size + STROKE_WIDTH
-  }
+    height: size + STROKE_WIDTH,
+  },
 });
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const AnimatedLine = Animated.createAnimatedComponent(Line);
@@ -28,11 +28,11 @@ export default () => {
   const max = min + size;
   const start = {
     x: min,
-    y: max
+    y: max,
   };
   const end = {
     x: max,
-    y: min
+    y: min,
   };
   const c1x = new Value(0);
   const c1y = new Value(0);

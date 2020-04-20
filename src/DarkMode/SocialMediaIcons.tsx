@@ -7,7 +7,7 @@ const size = 64;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
   icon: {
     width: size,
@@ -15,13 +15,13 @@ const styles = StyleSheet.create({
     borderRadius: size / 2,
     backgroundColor: StyleGuide.palette.primary,
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 export default () => {
   return (
     <View style={styles.container}>
-      {["github", "twitter", "facebook"].map(name => (
+      {["github", "twitter", "facebook"].map((name) => (
         <View key={name} style={styles.icon}>
           <Icon name="github" color="white" size={32} {...{ name }} />
         </View>

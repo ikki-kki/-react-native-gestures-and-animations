@@ -12,15 +12,15 @@ interface FollowersProps {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
   text: {
-    textAlign: "center"
+    textAlign: "center",
   },
   separator: {
     width: 1,
-    height: "100%"
-  }
+    height: "100%",
+  },
 });
 
 export default ({ dark, followers, following }: FollowersProps) => {

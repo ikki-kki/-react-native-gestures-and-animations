@@ -19,8 +19,8 @@ const offsetY = new Value(snapY);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: StyleGuide.palette.background
-  }
+    backgroundColor: StyleGuide.palette.background,
+  },
 });
 const [card] = cards;
 
@@ -35,28 +35,28 @@ export default () => {
     translationX,
     translationY,
     velocityX,
-    velocityY
+    velocityY,
   });
   const translateX = withSpring({
     value: translationX,
     velocity: velocityX,
     state,
     offset: offsetX,
-    snapPoints: [snapX]
+    snapPoints: [snapX],
   });
   const translateY = withSpring({
     value: translationY,
     velocity: velocityY,
     state,
     offset: offsetY,
-    snapPoints: [snapY]
+    snapPoints: [snapY],
   });
   return (
     <View style={styles.container}>
       <PanGestureHandler {...gestureHandler}>
         <Animated.View
           style={{
-            transform: [{ translateX }, { translateY }]
+            transform: [{ translateX }, { translateY }],
           }}
         >
           <Card {...{ card }} />

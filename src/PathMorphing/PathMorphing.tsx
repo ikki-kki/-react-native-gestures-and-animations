@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { State } from "react-native-gesture-handler";
-import { interpolateColor } from "./AnimationHelpers";
 
+import { interpolateColor } from "react-native-redash";
 import Eye from "./Eye";
 import Mouth from "./Mouth";
 import Slider from "./Slider";
@@ -24,23 +24,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const bad = {
-  r: 0.9921568627 * 255,
-  g: 0.7450980392 * 255,
-  b: 0.9215686275 * 255,
-};
-
-const normal = {
-  r: 0.9921568627 * 255,
-  g: 0.9333333333 * 255,
-  b: 0.7450980392 * 255,
-};
-
-const good = {
-  r: 0.7450980392 * 255,
-  g: 0.9921568627 * 255,
-  b: 0.8980392157 * 255,
-};
+const bad = "#FDBEEB";
+const normal = "#FDEEBE";
+const good = "#BEFDE5";
 
 export default () => {
   const state = new Value(State.UNDETERMINED);

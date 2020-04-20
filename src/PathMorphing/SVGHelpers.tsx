@@ -9,27 +9,33 @@ enum SVGCommand {
   CLOSE,
 }
 
-interface SVGSegment {
-  type: SVGCommand;
-}
-
-interface Move extends SVGSegment {
+interface Move {
   type: SVGCommand.MOVE;
-  x: number;
-  y: number;
+  x: Animated.Adaptable<number>;
+  y: Animated.Adaptable<number>;
 }
 
 interface Point {
-  x: number;
-  y: number;
+  x: Animated.Adaptable<number>;
+  y: Animated.Adaptable<number>;
 }
 
-interface Curve extends SVGSegment {
+interface Curve {
   type: SVGCommand.CURVE;
   to: Point;
   c1: Point;
   c2: Point;
 }
+
+interface Close {
+  type: SVGCommand.CLOSE;
+}
+
+type SVGSegment = Close | Curve | Move;
+
+export const exhaustiveCheck = (command: never): never => {
+  throw new TypeError(`Unknown SVG Command: ${command}`);
+};
 
 const serializeMove = (c: Move) => string`M${c.x},${c.y} `;
 const serializeClose = () => string`Z`;
@@ -42,6 +48,9 @@ const isMove = (command: SVGSegment): command is Move =>
 const isCurve = (command: SVGSegment): command is Curve =>
   command.type === SVGCommand.CURVE;
 
+const isClose = (command: SVGSegment): command is Close =>
+  command.type === SVGCommand.CLOSE;
+
 export const serialize = (path: SVGSegment[]) => {
   return path
     .map((segment) => {
@@ -51,9 +60,29 @@ export const serialize = (path: SVGSegment[]) => {
       if (isCurve(segment)) {
         return serializeCurve(segment);
       }
-      return serializeClose();
+      if (isClose(segment)) {
+        return serializeClose();
+      }
+      return exhaustiveCheck(segment);
     })
     .reduce((acc, c) => concat(acc, c));
+};
+
+export const serializeString = (path: SVGSegment[]) => {
+  return path
+    .map((segment) => {
+      if (isMove(segment)) {
+        return `M${segment.x},${segment.y} `;
+      }
+      if (isCurve(segment)) {
+        return `C${segment.c1.x},${segment.c1.y} ${segment.c2.x},${segment.c2.y} ${segment.to.x},${segment.to.y} `;
+      }
+      if (isClose(segment)) {
+        return "Z";
+      }
+      return exhaustiveCheck(segment);
+    })
+    .reduce((acc, c) => `${acc}${c}`);
 };
 
 interface PathInterpolation<T extends readonly number[]> {
@@ -87,7 +116,7 @@ export const interpolatePath = <T extends readonly number[]>(
           inputRange,
           outputRange: points.map((p) => p.y),
         }),
-      };
+      } as Move;
     }
     if (isCurve(segment)) {
       const curves = outputRange.map((p) => {
@@ -133,7 +162,7 @@ export const interpolatePath = <T extends readonly number[]>(
             outputRange: curves.map((c) => c.c2.y),
           }),
         },
-      };
+      } as Curve;
     }
     return segment;
   });

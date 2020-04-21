@@ -49,17 +49,17 @@ export default () => {
   const focal = vec.createValue(0);
   const gestureScale = new Value(1);
   const numberOfPointers = new Value(0);
-  const state = new Value(State.UNDETERMINED);
+  const pinchState = new Value(State.END);
   const pinchGestureHandler = onGestureEvent({
     numberOfPointers,
     scale: gestureScale,
-    state,
+    state: pinchState,
     focalX: focal.x,
     focalY: focal.y,
   });
 
   const pan = vec.createValue(0);
-  const panState = new Value(State.UNDETERMINED);
+  const panState = new Value(State.END);
   const panGestureHandler = onGestureEvent({
     translationX: pan.x,
     translationY: pan.y,
@@ -77,15 +77,15 @@ export default () => {
     () =>
       block([
         cond(eq(panState, State.ACTIVE), vec.set(translation, pan)),
-        cond(pinchBegan(state), vec.set(origin, adjustedFocal)),
-        cond(pinchActive(state, numberOfPointers), [
+        cond(pinchBegan(pinchState), vec.set(origin, adjustedFocal)),
+        cond(pinchActive(pinchState, numberOfPointers), [
           vec.set(pinch, vec.sub(adjustedFocal, origin)),
           vec.set(
             translation,
             vec.add(pinch, origin, vec.multiply(-1, gestureScale, origin))
           ),
         ]),
-        cond(and(eq(state, State.END), eq(panState, State.END)), [
+        cond(and(eq(pinchState, State.END), eq(panState, State.END)), [
           vec.set(offset, vec.add(offset, translation)),
           set(scaleOffset, scale),
           set(gestureScale, 1),
@@ -127,9 +127,9 @@ export default () => {
       pan,
       panState,
       pinch,
+      pinchState,
       scale,
       scaleOffset,
-      state,
       translation,
     ]
   );

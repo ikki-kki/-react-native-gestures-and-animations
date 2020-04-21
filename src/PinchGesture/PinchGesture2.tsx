@@ -5,19 +5,15 @@ import Animated, {
   block,
   cond,
   eq,
-  max,
   multiply,
   set,
-  sub,
   useCode,
 } from "react-native-reanimated";
 import { PinchGestureHandler, State } from "react-native-gesture-handler";
 import {
-  clamp,
   onGestureEvent,
   pinchActive,
   pinchBegan,
-  timing,
   translate,
   vec,
 } from "react-native-redash";
@@ -55,8 +51,6 @@ export default () => {
 
   const scaleOffset = new Value(1);
   const scale = new Value(1);
-  const minVec = vec.min(vec.multiply(-0.5, CANVAS, sub(scale, 1)), 0);
-  const maxVec = vec.max(vec.invert(minVec), 0);
   const offset = vec.createValue(0);
   const translation = vec.createValue(0);
   const adjustedFocal = vec.sub(focal, vec.add(CENTER, offset));
@@ -78,24 +72,6 @@ export default () => {
           vec.set(translation, 0),
           vec.set(focal, 0),
           vec.set(pinch, 0),
-          set(
-            offset.x,
-            timing({
-              from: offset.x,
-              to: clamp(offset.x, minVec.x, maxVec.x),
-            })
-          ),
-          set(
-            offset.y,
-            timing({
-              from: offset.y,
-              to: clamp(offset.y, minVec.y, maxVec.y),
-            })
-          ),
-          set(
-            scaleOffset,
-            timing({ from: scaleOffset, to: max(scaleOffset, 1) })
-          ),
         ]),
         set(scale, multiply(gestureScale, scaleOffset)),
       ]),
@@ -103,10 +79,6 @@ export default () => {
       adjustedFocal,
       focal,
       gestureScale,
-      maxVec.x,
-      maxVec.y,
-      minVec.x,
-      minVec.y,
       numberOfPointers,
       offset,
       origin,

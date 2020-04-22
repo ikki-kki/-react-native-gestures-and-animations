@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
 
 export default () => {
   const origin = vec.createValue(0);
-  const pinch = vec.createValue(0);
   const focal = vec.createValue(0);
   const gestureScale = new Value(1);
   const numberOfPointers = new Value(0);
@@ -79,10 +78,13 @@ export default () => {
         cond(eq(panState, State.ACTIVE), vec.set(translation, pan)),
         cond(pinchBegan(pinchState), vec.set(origin, adjustedFocal)),
         cond(pinchActive(pinchState, numberOfPointers), [
-          vec.set(pinch, vec.sub(adjustedFocal, origin)),
           vec.set(
             translation,
-            vec.add(pinch, origin, vec.multiply(-1, gestureScale, origin))
+            vec.add(
+              vec.sub(adjustedFocal, origin),
+              origin,
+              vec.multiply(-1, gestureScale, origin)
+            )
           ),
         ]),
         cond(and(eq(pinchState, State.END), eq(panState, State.END)), [
@@ -91,7 +93,6 @@ export default () => {
           set(gestureScale, 1),
           vec.set(translation, 0),
           vec.set(focal, 0),
-          vec.set(pinch, 0),
           set(
             offset.x,
             timing({
@@ -126,7 +127,6 @@ export default () => {
       origin,
       pan,
       panState,
-      pinch,
       pinchState,
       scale,
       scaleOffset,

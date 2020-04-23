@@ -5549,10 +5549,10 @@ react-native-reanimated@~1.7.0:
   dependencies:
     fbjs "^1.0.0"
 
-react-native-redash@12.5.1:
-  version "12.5.1"
-  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-12.5.1.tgz#53e617e21cc77480931585f59dcb75c99f763b54"
-  integrity sha512-PEIoAfcX4wPOi4/a0tIXoAt5Q62I4F6Ae+imodJcm65ntXEbsqL703B7zCdzWven5EmjlbVSDquoReSZnRbtqg==
+react-native-redash@12.5.3:
+  version "12.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-12.5.3.tgz#682acf37e3c26032a9a28f91bf58facff0833119"
+  integrity sha512-KK5ZMdMWiIq+HP2PUp1l7fsjIgF2U6taD6pgnqdjT/RkbLvvgXQ7h5ssI9XvbudeXq4GDW8WVyF1VKtbbmGpTQ==
   dependencies:
     abs-svg-path "^0.1.1"
     normalize-svg-path "^1.0.1"
@@ -5568,6 +5568,13 @@ react-native-safe-area-view@^0.14.1:
 "react-native-screens@^1.0.0 || ^1.0.0-alpha":
   version "1.0.0-alpha.23"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.23.tgz#25d7ea4d11bda4fcde2d1da7ae50271c6aa636e0"
+  dependencies:
+    debounce "^1.2.0"
+
+react-native-screens@~2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.2.0.tgz#cc4cdf17426fdda97ad93a5e812a1899390f1978"
+  integrity sha512-a0VzxOWot7F9B/GQyDSssBRd3jUJazFnTQS61IiyReWB6aHlFhf3Xz10jBRoURXy1EMCDCHgenmTVTkKHpKyqQ==
   dependencies:
     debounce "^1.2.0"
 

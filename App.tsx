@@ -1,6 +1,7 @@
 import React from "react";
 import { StatusBar } from "react-native";
 import { createAppContainer, createStackNavigator } from "react-navigation";
+import { enableScreens } from "react-native-screens";
 
 import { LoadAssets, StyleGuide, cards } from "./src/components";
 import Examples, { examples } from "./src/Examples";
@@ -21,6 +22,8 @@ import CircularSlider from "./src/CircularSlider";
 import BezierCurves from "./src/BezierCurves";
 import PathMorphing from "./src/PathMorphing";
 import PinchGesture, { pictures } from "./src/PinchGesture";
+
+enableScreens();
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),

@@ -1,7 +1,11 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
+import { AsyncStorage } from "react-native";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
+import { InitialState, NavigationContainer } from "@react-navigation/native";
+
+const NAVIGATION_STATE_KEY = "NAVIGATION_STATE_KEY";
 
 export type FontSource = Parameters<typeof Font.loadAsync>[0];
 const usePromiseAll = (promises: Promise<void | void[]>[], cb: () => void) =>
@@ -28,9 +32,37 @@ interface LoadAssetsProps {
 }
 
 export default ({ assets, fonts, children }: LoadAssetsProps) => {
+  const [isNavigationReady, setIsNavigationReady] = useState(!__DEV__);
+  const [initialState, setInitialState] = useState<InitialState | undefined>();
   const ready = useLoadAssets(assets || [], fonts || {});
-  if (!ready) {
+  useEffect(() => {
+    const restoreState = async () => {
+      try {
+        const savedStateString = await AsyncStorage.getItem(
+          NAVIGATION_STATE_KEY
+        );
+        const state = JSON.parse(savedStateString ?? "{}");
+        setInitialState(state);
+      } finally {
+        setIsNavigationReady(true);
+      }
+    };
+
+    if (!isNavigationReady) {
+      restoreState();
+    }
+  }, [isNavigationReady]);
+  const onStateChange = useCallback(
+    (state) =>
+      AsyncStorage.setItem(NAVIGATION_STATE_KEY, JSON.stringify(state)),
+    []
+  );
+  if (!ready || !isNavigationReady) {
     return <AppLoading />;
   }
-  return <>{children}</>;
+  return (
+    <NavigationContainer {...{ onStateChange, initialState }}>
+      {children}
+    </NavigationContainer>
+  );
 };

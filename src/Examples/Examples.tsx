@@ -1,8 +1,10 @@
 import * as React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
-import { NavigationScreenConfigProps } from "react-navigation";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 import { StyleGuide, Thumbnail } from "../components";
+import { Lessons } from "../components/Routes";
 
 export const examples = [
   {
@@ -88,11 +90,11 @@ export const examples = [
     source: require("../../assets/examples/path-morphing.png"),
   },
   {
-    screen: "Pinch",
+    screen: "PinchGesture",
     title: "Pinch Gesture",
     source: require("../../assets/examples/pinch-gesture.png"),
   },
-];
+] as const;
 
 const styles = StyleSheet.create({
   container: {
@@ -103,13 +105,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ navigation }: NavigationScreenConfigProps) => {
+export default () => {
+  const { navigate } = useNavigation<
+    StackNavigationProp<Lessons, "Examples">
+  >();
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {examples.map((thumbnail) => (
         <Thumbnail
           key={thumbnail.screen}
-          onPress={() => navigation.navigate(thumbnail.screen)}
+          onPress={() => navigate(thumbnail.screen)}
           {...thumbnail}
         />
       ))}

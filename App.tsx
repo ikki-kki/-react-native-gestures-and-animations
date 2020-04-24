@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "react-native";
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createStackNavigator } from "@react-navigation/stack";
 import { enableScreens } from "react-native-screens";
 
 import { LoadAssets, StyleGuide, cards } from "./src/components";
@@ -22,6 +22,7 @@ import CircularSlider from "./src/CircularSlider";
 import BezierCurves from "./src/BezierCurves";
 import PathMorphing from "./src/PathMorphing";
 import PinchGesture, { pictures } from "./src/PinchGesture";
+import { Lessons } from "./src/components/Routes";
 
 enableScreens();
 
@@ -39,131 +40,146 @@ const assets = [
   ...pictures,
 ];
 
-const AppNavigator = createAppContainer(
-  createStackNavigator(
-    {
-      Examples: {
-        screen: Examples,
-        navigationOptions: {
-          title: "Gestures & Animations",
-          headerBackTitle: null,
-        },
-      },
-      ClockValuesAndIdentities: {
-        screen: ClockValuesAndIdentities,
-        navigationOptions: {
-          title: "Clock Values & Identities",
-        },
-      },
-      Transitions: {
-        screen: Transitions,
-        navigationOptions: {
-          title: "Transitions",
-        },
-      },
-      useTransition: {
-        screen: UseTransition,
-        navigationOptions: {
-          title: "useTransition()",
-        },
-      },
-      DarkMode: {
-        screen: DarkMode,
-        navigationOptions: {
-          title: "Dark Mode",
-        },
-      },
-      Timing: {
-        screen: Timing,
-        navigationOptions: {
-          title: "Timing",
-        },
-      },
-      PanGesture: {
-        screen: PanGesture,
-        navigationOptions: {
-          title: "Pan Gesture",
-        },
-      },
-      Spring: {
-        screen: Spring,
-        navigationOptions: {
-          title: "Spring",
-        },
-      },
-      Swipe: {
-        screen: Swipe,
-        navigationOptions: {
-          title: "Swipe",
-        },
-      },
-      DynamicSpring: {
-        screen: DynamicSpring,
-        navigationOptions: {
-          title: "Dynamic Spring",
-        },
-      },
-      DragToSort: {
-        screen: DragToSort,
-        navigationOptions: {
-          title: "Drag to Sort",
-        },
-      },
-      Svg: {
-        screen: Svg,
-        navigationOptions: {
-          title: "SVG",
-        },
-      },
-      Trigonometry: {
-        screen: Trigonometry,
-        navigationOptions: {
-          title: "Trigonometry",
-        },
-      },
-      Decay: {
-        screen: Decay,
-        navigationOptions: {
-          title: "Decay",
-        },
-      },
-      CircularSlider: {
-        screen: CircularSlider,
-        navigationOptions: {
-          title: "Circular Slider",
-        },
-      },
-      BezierCurves: {
-        screen: BezierCurves,
-        navigationOptions: {
-          title: "Bezier Curves",
-          gesturesEnabled: false,
-        },
-      },
-      PathMorphing: {
-        screen: PathMorphing,
-        navigationOptions: {
-          title: "Path Morphing",
-        },
-      },
-      Pinch: {
-        screen: PinchGesture,
-        navigationOptions: {
-          title: "PinchGesture",
-          header: null,
-        },
-      },
-    },
-    {
-      defaultNavigationOptions: {
+const Stack = createStackNavigator<Lessons>();
+const AppNavigator = () => (
+  <>
+    <Stack.Navigator
+      screenOptions={{
         headerStyle: {
           backgroundColor: StyleGuide.palette.primary,
           borderBottomWidth: 0,
         },
         headerTintColor: "white",
-      },
-    }
-  )
+      }}
+    >
+      <Stack.Screen
+        name="Examples"
+        component={Examples}
+        options={{
+          title: "Gestures & Animations",
+        }}
+      />
+      <Stack.Screen
+        name="ClockValuesAndIdentities"
+        component={ClockValuesAndIdentities}
+        options={{
+          title: "Clock Values & Identities",
+        }}
+      />
+      <Stack.Screen
+        name="Transitions"
+        component={Transitions}
+        options={{
+          title: "Transitions",
+        }}
+      />
+      <Stack.Screen
+        name="useTransition"
+        component={UseTransition}
+        options={{
+          title: "useTransition()",
+        }}
+      />
+      <Stack.Screen
+        name="DarkMode"
+        component={DarkMode}
+        options={{
+          title: "Dark Mode",
+        }}
+      />
+      <Stack.Screen
+        name="Timing"
+        component={Timing}
+        options={{
+          title: "Timing",
+        }}
+      />
+      <Stack.Screen
+        name="PanGesture"
+        component={PanGesture}
+        options={{
+          title: "Pan Gesture",
+        }}
+      />
+      <Stack.Screen
+        name="Spring"
+        component={Spring}
+        options={{
+          title: "Spring",
+        }}
+      />
+      <Stack.Screen
+        name="Swipe"
+        component={Swipe}
+        options={{
+          title: "Swipe",
+        }}
+      />
+      <Stack.Screen
+        name="DynamicSpring"
+        component={DynamicSpring}
+        options={{
+          title: "Dynamic Spring",
+        }}
+      />
+      <Stack.Screen
+        name="DragToSort"
+        component={DragToSort}
+        options={{
+          title: "Drag to Sort",
+        }}
+      />
+      <Stack.Screen
+        name="Svg"
+        component={Svg}
+        options={{
+          title: "SVG",
+        }}
+      />
+      <Stack.Screen
+        name="Trigonometry"
+        component={Trigonometry}
+        options={{
+          title: "Trigonometry",
+        }}
+      />
+      <Stack.Screen
+        name="Decay"
+        component={Decay}
+        options={{
+          title: "Decay",
+        }}
+      />
+      <Stack.Screen
+        name="CircularSlider"
+        component={CircularSlider}
+        options={{
+          title: "Circular Slider",
+        }}
+      />
+      <Stack.Screen
+        name="BezierCurves"
+        component={BezierCurves}
+        options={{
+          title: "Bèzier Curves",
+        }}
+      />
+      <Stack.Screen
+        name="PathMorphing"
+        component={PathMorphing}
+        options={{
+          title: "Path Morphing",
+        }}
+      />
+      <Stack.Screen
+        name="PinchGesture"
+        component={PinchGesture}
+        options={{
+          title: "Pinch Gesture",
+        }}
+      />
+    </Stack.Navigator>
+  </>
 );
 
 export default () => (

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ label, primary, onPress }: ButtonProps) => {
+const Button = ({ label, primary, onPress }: ButtonProps) => {
   const color = primary ? "white" : undefined;
   const backgroundColor = primary ? StyleGuide.palette.primary : undefined;
   return (
@@ -34,3 +34,5 @@ export default ({ label, primary, onPress }: ButtonProps) => {
     </RectButton>
   );
 };
+
+export default Button;

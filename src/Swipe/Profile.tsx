@@ -63,7 +63,7 @@ interface CardProps {
   nopeOpacity?: Animated.Node<number>;
 }
 
-export default (props: CardProps) => {
+const Profile = (props: CardProps) => {
   const { profile, likeOpacity, nopeOpacity } = {
     likeOpacity: 0,
     nopeOpacity: 0,
@@ -88,3 +88,5 @@ export default (props: CardProps) => {
     </View>
   );
 };
+
+export default Profile;

@@ -15,7 +15,13 @@ interface CircularProgressProps {
   strokeWidth: number;
 }
 
-export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
+const CircularProgressSVG = ({
+  theta,
+  r,
+  bg,
+  fg,
+  strokeWidth,
+}: CircularProgressProps) => {
   const radius = r - strokeWidth / 2;
   const strokeDashoffset = multiply(theta, radius);
   const circumference = radius * 2 * PI;
@@ -41,3 +47,5 @@ export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
     </Svg>
   );
 };
+
+export default CircularProgressSVG;

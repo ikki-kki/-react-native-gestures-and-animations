@@ -30,6 +30,8 @@ export const profiles: Profile[] = [
   },
 ];
 
-export default () => {
+const Swipe = () => {
   return <Profiles {...{ profiles }} />;
 };
+
+export default Swipe;

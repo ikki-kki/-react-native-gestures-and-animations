@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 });
 const [frontCard, middleCard, backCard] = cards;
 
-export default () => {
+const DynamicSpring = () => {
   const clock = new Clock();
   const state = new Value(State.UNDETERMINED);
   const translationX = new Value(0);
@@ -138,3 +138,5 @@ export default () => {
     </View>
   );
 };
+
+export default DynamicSpring;

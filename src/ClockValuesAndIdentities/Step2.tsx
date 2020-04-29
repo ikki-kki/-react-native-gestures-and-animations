@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const ClockValuesAndIdentity = () => {
   const clock = new Clock();
   const duration = 500;
   const startAnimation = new Value<0 | 1>(0);
@@ -66,3 +66,5 @@ export default () => {
     </View>
   );
 };
+
+export default ClockValuesAndIdentity;

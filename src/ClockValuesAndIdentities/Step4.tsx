@@ -48,7 +48,7 @@ const runAnimation = proc(
     ])
 );
 
-export default () => {
+const ClockValuesAndIdentity = () => {
   const [show, setShow] = useState(true);
   const clock = useClock();
   const [startTime, from, to, startAnimation] = useValues([0, 0, 0, 0]);
@@ -79,3 +79,5 @@ export default () => {
     </View>
   );
 };
+
+export default ClockValuesAndIdentity;

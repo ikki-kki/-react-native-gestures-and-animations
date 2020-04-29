@@ -7,7 +7,7 @@ interface HalfCircleProps {
   r: number;
 }
 
-export default ({ color, r }: HalfCircleProps) => {
+const HalfCircle = ({ color, r }: HalfCircleProps) => {
   return (
     <View
       style={{
@@ -27,3 +27,5 @@ export default ({ color, r }: HalfCircleProps) => {
     </View>
   );
 };
+
+export default HalfCircle;

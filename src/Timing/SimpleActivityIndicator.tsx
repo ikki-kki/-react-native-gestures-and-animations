@@ -36,7 +36,9 @@ interface SimpleActivityIndicatorProps {
   progress: Animated.Value<number>;
 }
 
-export default ({ progress }: SimpleActivityIndicatorProps) => {
+const SimpleActivityIndicator = ({
+  progress,
+}: SimpleActivityIndicatorProps) => {
   const bubbles = [0, 1, 2];
   const delta = 1 / bubbles.length;
   return (
@@ -66,3 +68,5 @@ export default ({ progress }: SimpleActivityIndicatorProps) => {
     </View>
   );
 };
+
+export default SimpleActivityIndicator;

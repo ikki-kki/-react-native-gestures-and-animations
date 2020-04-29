@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 });
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const AnimatedLine = Animated.createAnimatedComponent(Line);
-export default () => {
+const BezierCurves = () => {
   const min = STROKE_WIDTH / 2;
   const max = min + size;
   const start = {
@@ -92,3 +92,5 @@ export default () => {
     </View>
   );
 };
+
+export default BezierCurves;

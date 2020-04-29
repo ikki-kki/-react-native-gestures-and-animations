@@ -28,7 +28,7 @@ const bad = "#FDBEEB";
 const normal = "#FDEEBE";
 const good = "#BEFDE5";
 
-export default () => {
+const PathMorphing = () => {
   const state = new Value(State.UNDETERMINED);
   const progress = new Value(1);
   const backgroundColor = interpolateColor(progress, {
@@ -50,3 +50,5 @@ export default () => {
     </Animated.View>
   );
 };
+
+export default PathMorphing;

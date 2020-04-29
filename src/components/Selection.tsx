@@ -24,7 +24,7 @@ interface SelectionProps {
   isSelected: boolean;
 }
 
-export default ({ name, onPress, isSelected }: SelectionProps) => {
+const Selection = ({ name, onPress, isSelected }: SelectionProps) => {
   return (
     <SafeAreaView style={styles.buttonContainer}>
       <RectButton {...{ onPress }}>
@@ -36,3 +36,5 @@ export default ({ name, onPress, isSelected }: SelectionProps) => {
     </SafeAreaView>
   );
 };
+
+export default Selection;

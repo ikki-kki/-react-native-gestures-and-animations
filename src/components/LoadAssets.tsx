@@ -32,7 +32,7 @@ interface LoadAssetsProps {
   children: ReactElement | ReactElement[];
 }
 
-export default ({ assets, fonts, children }: LoadAssetsProps) => {
+const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
   const [isNavigationReady, setIsNavigationReady] = useState(!__DEV__);
   const [initialState, setInitialState] = useState<InitialState | undefined>();
   const ready = useLoadAssets(assets || [], fonts || {});
@@ -69,3 +69,5 @@ export default ({ assets, fonts, children }: LoadAssetsProps) => {
     </NavigationContainer>
   );
 };
+
+export default LoadAssets;

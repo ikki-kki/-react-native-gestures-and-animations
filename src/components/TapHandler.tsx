@@ -27,7 +27,7 @@ const { BEGAN, FAILED, CANCELLED, END, UNDETERMINED } = State;
 const easing = Easing.inOut(Easing.ease);
 const duration = 250;
 
-export default ({ onPress, children, value }: TapHandlerProps) => {
+const TapHandler = ({ onPress, children, value }: TapHandlerProps) => {
   const shouldSpring = new Value(0);
   const state = new Value(UNDETERMINED);
   const gestureHandler = onGestureEvent({ state });
@@ -71,3 +71,5 @@ export default ({ onPress, children, value }: TapHandlerProps) => {
     </TapGestureHandler>
   );
 };
+
+export default TapHandler;

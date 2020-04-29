@@ -108,7 +108,7 @@ curveTo(goodPath, {
 });
 close(goodPath);
 
-export default ({ progress, flip, state }: EyeProps) => {
+const Eye = ({ progress, flip, state }: EyeProps) => {
   const d = interpolatePath(progress, {
     inputRange: [0, 0.5, 1],
     outputRange: [angryPath, normalPath, goodPath],
@@ -143,3 +143,5 @@ export default ({ progress, flip, state }: EyeProps) => {
     </View>
   );
 };
+
+export default Eye;

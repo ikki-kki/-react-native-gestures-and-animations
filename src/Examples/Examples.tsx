@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const Examples = () => {
   const { navigate } = useNavigation<
     StackNavigationProp<Lessons, "Examples">
   >();
@@ -121,3 +121,5 @@ export default () => {
     </ScrollView>
   );
 };
+
+export default Examples;

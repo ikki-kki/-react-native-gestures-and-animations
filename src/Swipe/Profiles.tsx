@@ -69,7 +69,7 @@ interface ProfilesProps {
   profiles: Profile[];
 }
 
-export default ({ profiles }: ProfilesProps) => {
+const Profiles = ({ profiles }: ProfilesProps) => {
   const [index, setIndex] = useState(0);
   const { x, y, offsetX, like, dislike } = useMemoOne(
     () => ({
@@ -166,3 +166,5 @@ export default ({ profiles }: ProfilesProps) => {
     </SafeAreaView>
   );
 };
+
+export default Profiles;

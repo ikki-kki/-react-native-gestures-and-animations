@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const CircularSlider = () => {
   const start = new Value(0);
   const end = new Value(0);
   const theta = sub(
@@ -66,3 +66,5 @@ export default () => {
     </View>
   );
 };
+
+export default CircularSlider;

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 const [card] = cards;
 
-export default () => {
+const Spring = () => {
   const state = new Value(State.UNDETERMINED);
   const translationX = new Value(0);
   const translationY = new Value(0);
@@ -65,3 +65,5 @@ export default () => {
     </View>
   );
 };
+
+export default Spring;

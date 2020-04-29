@@ -58,7 +58,7 @@ const runTiming = (clock: Animated.Clock): Animated.Node<number> => {
   ]);
 };
 
-export default () => {
+const Timing = () => {
   const [play, setPlay] = useState(true);
   const { clock, isPlaying, progress } = useMemoOne(
     () => ({
@@ -89,3 +89,5 @@ export default () => {
     </View>
   );
 };
+
+export default Timing;

@@ -14,7 +14,7 @@ interface CursorProps {
   backgroundColor: Animated.Node<number>;
 }
 
-export default ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
+const Cursor = ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
   const center = { x: r, y: r };
   const translationX = new Value(0);
   const translationY = new Value(0);
@@ -60,3 +60,5 @@ export default ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
     </PanGestureHandler>
   );
 };
+
+export default Cursor;

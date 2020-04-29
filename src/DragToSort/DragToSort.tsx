@@ -5,7 +5,7 @@ import { cards } from "../components";
 import SortableCard, { CARD_HEIGHT } from "./SortableCard";
 
 const { Value } = Animated;
-export default () => {
+const DragToSort = () => {
   const offsets = cards.map((_, i) => new Value(i * CARD_HEIGHT));
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -15,3 +15,5 @@ export default () => {
     </View>
   );
 };
+
+export default DragToSort;

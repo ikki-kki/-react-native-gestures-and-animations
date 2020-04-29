@@ -64,7 +64,7 @@ const layouts: Layout[] = [
   },
 ];
 
-export default () => {
+const Transitions = () => {
   const ref = useRef<TransitioningView>(null);
   const [selectedLayout, setLayout] = useState(layouts[0].layout);
   return (
@@ -97,3 +97,5 @@ export default () => {
     </>
   );
 };
+
+export default Transitions;

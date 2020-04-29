@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-export default () => {
+
+const SocialMediaIcons = () => {
   return (
     <View style={styles.container}>
       {["github", "twitter", "facebook"].map((name) => (
@@ -29,3 +30,5 @@ export default () => {
     </View>
   );
 };
+
+export default SocialMediaIcons;

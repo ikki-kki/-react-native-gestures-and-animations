@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const ProfilePic = () => {
   return <Image style={styles.image} source={profilePic} />;
 };
+
+export default ProfilePic;

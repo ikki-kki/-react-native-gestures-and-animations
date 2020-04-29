@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ progress, state }: SliderProps) => {
+const Slider = ({ progress, state }: SliderProps) => {
   const translationX = new Value(0);
   const gestureHandler = onGestureEvent({ translationX, state });
   const translateX = diffClamp(
@@ -71,3 +71,5 @@ export default ({ progress, state }: SliderProps) => {
     </View>
   );
 };
+
+export default Slider;

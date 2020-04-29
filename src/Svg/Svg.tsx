@@ -34,7 +34,7 @@ const canvas2Euclidean = (
   };
 };
 
-export default () => {
+const SvgComp = () => {
   const x = new Value(0);
   const y = new Value(0);
   const velocityX = new Value(0);
@@ -71,3 +71,5 @@ export default () => {
     </View>
   );
 };
+
+export default SvgComp;

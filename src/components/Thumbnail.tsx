@@ -41,7 +41,7 @@ interface ThumbnailProps {
   dark?: boolean;
 }
 
-export default ({
+const Thumbnail = ({
   title,
   source,
   onPress,
@@ -79,3 +79,5 @@ export default ({
     </TapHandler>
   );
 };
+
+export default Thumbnail;

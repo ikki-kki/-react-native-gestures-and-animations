@@ -67,7 +67,7 @@ interface SortableCardProps extends CardProps {
   index: number;
 }
 
-export default ({ card, index, offsets }: SortableCardProps) => {
+const SortableCard = ({ card, index, offsets }: SortableCardProps) => {
   const { gestureHandler, translation, velocity, state } = panGestureHandler();
   const x = withOffset({
     offset: 0,
@@ -133,3 +133,5 @@ export default ({ card, index, offsets }: SortableCardProps) => {
     </PanGestureHandler>
   );
 };
+
+export default SortableCard;

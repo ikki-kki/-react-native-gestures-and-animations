@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ dark, followers, following }: FollowersProps) => {
+const Followers = ({ dark, followers, following }: FollowersProps) => {
   const backgroundColor = dark ? "white" : "black";
   return (
     <View style={styles.container}>
@@ -47,3 +47,5 @@ export default ({ dark, followers, following }: FollowersProps) => {
     </View>
   );
 };
+
+export default Followers;

@@ -16,7 +16,13 @@ interface CircularProgressProps {
   strokeWidth: number;
 }
 
-export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
+const CircularProgress = ({
+  theta,
+  r,
+  bg,
+  fg,
+  strokeWidth,
+}: CircularProgressProps) => {
   const opacity = lessThan(theta, PI);
   const rotate = interpolate(theta, {
     inputRange: [PI, 2 * PI],
@@ -68,3 +74,5 @@ export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
     </>
   );
 };
+
+export default CircularProgress;

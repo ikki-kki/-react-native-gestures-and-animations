@@ -182,9 +182,11 @@ const AppNavigator = () => (
   </>
 );
 
-export default () => (
+const App = () => (
   <LoadAssets {...{ fonts, assets }}>
     <StatusBar barStyle="light-content" />
     <AppNavigator />
   </LoadAssets>
 );
+
+export default App;

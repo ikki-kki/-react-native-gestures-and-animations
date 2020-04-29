@@ -48,7 +48,7 @@ curveTo(goodPath, {
   c2: { x: 97.4902012, y: 38.64845107 },
 });
 
-export default ({ progress }: MouthProps) => {
+const Mouth = ({ progress }: MouthProps) => {
   const d = interpolatePath(progress, {
     inputRange: [0, 0.5, 1],
     outputRange: [angryPath, normalPath, goodPath],
@@ -64,3 +64,5 @@ export default ({ progress }: MouthProps) => {
     </Svg>
   );
 };
+
+export default Mouth;

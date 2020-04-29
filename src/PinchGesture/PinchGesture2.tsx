@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const PinchGesture = () => {
   const origin = vec.createValue(0);
   const pinch = vec.createValue(0);
   const focal = vec.createValue(0);
@@ -110,3 +110,5 @@ export default () => {
     </View>
   );
 };
+
+export default PinchGesture;

@@ -60,6 +60,8 @@ export const FlexibleCard = ({ card, style }: FlexibleCardProps) => (
   />
 );
 
-export default ({ card }: CardProps) => {
+const Card = ({ card }: CardProps) => {
   return <Image style={styles.container} source={card.source} />;
 };
+
+export default Card;

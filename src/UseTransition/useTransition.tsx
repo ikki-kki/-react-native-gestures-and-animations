@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 const newOrigin = -(width / 2 - StyleGuide.spacing * 2);
 
-export default () => {
+const UseTransition = () => {
   const [toggled, setToggle] = useState(false);
   const transitionVal = useTimingTransition(toggled, {
     duration: 400,
@@ -58,3 +58,5 @@ export default () => {
     </View>
   );
 };
+
+export default UseTransition;

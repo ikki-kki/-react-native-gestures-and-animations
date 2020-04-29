@@ -23,7 +23,7 @@ interface SwipeableProps {
   onSnap: (value: readonly number[]) => void;
 }
 
-export default ({
+const Swipeable = ({
   x,
   y,
   offsetX,
@@ -71,3 +71,5 @@ export default ({
     </PanGestureHandler>
   );
 };
+
+export default Swipeable;

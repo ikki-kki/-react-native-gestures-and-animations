@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const DarkMode = () => {
   const [dark, setDark] = useState(false);
   const ref = useRef<TransitioningView>(null);
   return (
@@ -68,3 +68,5 @@ export default () => {
     </Transitioning.View>
   );
 };
+
+export default DarkMode;

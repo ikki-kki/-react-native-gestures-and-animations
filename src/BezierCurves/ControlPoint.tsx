@@ -30,7 +30,7 @@ interface ControlPointProps {
   max: number;
 }
 
-export default ({
+const ControlPoint = ({
   point: { x, y },
   defaultPoint,
   min,
@@ -74,3 +74,5 @@ export default ({
     </PanGestureHandler>
   );
 };
+
+export default ControlPoint;

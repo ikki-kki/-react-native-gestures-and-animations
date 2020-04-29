@@ -16,10 +16,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const CheckIcon = () => {
   return (
     <View style={styles.container}>
       <Icon name="check" color="white" size={24} />
     </View>
   );
 };
+
+export default CheckIcon;

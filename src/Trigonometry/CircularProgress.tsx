@@ -27,7 +27,12 @@ interface CircularProgressProps {
   progress: Animated.Node<number>;
 }
 
-export default ({ color, size, progress, icon }: CircularProgressProps) => {
+const CircularProgress = ({
+  color,
+  size,
+  progress,
+  icon,
+}: CircularProgressProps) => {
   const r = (size - STROKE_WIDTH) / 2;
   const circumference = r * 2 * PI;
   const α = multiply(sub(1, progress), PI * 2);
@@ -79,3 +84,5 @@ export default ({ color, size, progress, icon }: CircularProgressProps) => {
     </View>
   );
 };
+
+export default CircularProgress;

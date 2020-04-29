@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Platform, StyleSheet, Switch, View } from "react-native";
+import { Platform, Switch as RNSwitch, StyleSheet, View } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 import { StyleGuide } from "../components";
 
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ value, onValueChange }: SwitchProps) => {
+const Switch = ({ value, onValueChange }: SwitchProps) => {
   return (
     <View style={styles.container}>
-      <Switch
+      <RNSwitch
         style={styles.switch}
         thumbColor={Platform.OS === "android" ? "white" : undefined}
         trackColor={{
@@ -38,3 +38,5 @@ export default ({ value, onValueChange }: SwitchProps) => {
     </View>
   );
 };
+
+export default Switch;

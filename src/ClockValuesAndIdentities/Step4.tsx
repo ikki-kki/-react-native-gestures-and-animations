@@ -13,7 +13,7 @@ import Animated, {
   startClock,
   useCode,
 } from "react-native-reanimated";
-import { useClock, useValue, useValues } from "react-native-redash";
+import { useClock, useValues } from "react-native-redash";
 import { Button, Card, cards } from "../components";
 
 const styles = StyleSheet.create({
@@ -50,15 +50,16 @@ const runAnimation = proc(
 
 export default () => {
   const [show, setShow] = useState(true);
-  const clock = useClock([]);
-  const startAnimation = useValue(1, [show]);
-  const [startTime, from, to] = useValues([0, 0, 0], []);
+  const clock = useClock();
+  const [startTime, from, to, startAnimation] = useValues([0, 0, 0, 0]);
   const endTime = add(startTime, duration);
   const opacity = interpolate(clock, {
     inputRange: [startTime, endTime],
     outputRange: [from, to],
     extrapolate: Extrapolate.CLAMP,
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useCode(() => set(startAnimation, 1), [show]);
   useCode(
     () => runAnimation(clock, from, to, startTime, startAnimation, opacity),
     [clock, from, opacity, startAnimation, startTime, to]

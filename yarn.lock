@@ -5266,15 +5266,14 @@ react-native-reanimated@~1.7.0:
   dependencies:
     fbjs "^1.0.0"
 
-react-native-redash@12.5.3:
-  version "12.5.3"
-  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-12.5.3.tgz#682acf37e3c26032a9a28f91bf58facff0833119"
-  integrity sha512-KK5ZMdMWiIq+HP2PUp1l7fsjIgF2U6taD6pgnqdjT/RkbLvvgXQ7h5ssI9XvbudeXq4GDW8WVyF1VKtbbmGpTQ==
+react-native-redash@13.1.0:
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-13.1.0.tgz#fe43b01cd4569ef55376f051922bd63e204491bb"
+  integrity sha512-PezVhosig7ID2J/Qa0VmURuEld0+M5tZX1rkCXlAjTdgq/9r65ljC+ojCFg2djMK2MUbKVO1neIZ7MftD7COZQ==
   dependencies:
     abs-svg-path "^0.1.1"
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
-    use-memo-one "^1.1.1"
 
 react-native-safe-area-context@0.7.3:
   version "0.7.3"

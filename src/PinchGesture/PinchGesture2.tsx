@@ -75,19 +75,7 @@ const PinchGesture = () => {
         ]),
         set(scale, multiply(gestureScale, scaleOffset)),
       ]),
-    [
-      adjustedFocal,
-      focal,
-      gestureScale,
-      numberOfPointers,
-      offset,
-      origin,
-      pinch,
-      scale,
-      scaleOffset,
-      state,
-      translation,
-    ]
+    []
   );
   return (
     <View style={styles.container}>

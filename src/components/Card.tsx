@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Dimensions, Image, ImageStyle, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
+
 import StyleGuide from "./StyleGuide";
 
 type CardId = number;

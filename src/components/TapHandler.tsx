@@ -1,5 +1,17 @@
 import React, { ReactNode } from "react";
-import Animated, { Easing } from "react-native-reanimated";
+import Animated, {
+  Easing,
+  Value,
+  useCode,
+  block,
+  cond,
+  eq,
+  set,
+  call,
+  onChange,
+  and,
+  neq,
+} from "react-native-reanimated";
 import { State, TapGestureHandler } from "react-native-gesture-handler";
 import { contains, onGestureEvent } from "react-native-redash";
 
@@ -11,18 +23,6 @@ interface TapHandlerProps {
   children: ReactNode;
 }
 
-const {
-  Value,
-  useCode,
-  block,
-  cond,
-  eq,
-  set,
-  call,
-  onChange,
-  and,
-  neq,
-} = Animated;
 const { BEGAN, FAILED, CANCELLED, END, UNDETERMINED } = State;
 const easing = Easing.inOut(Easing.ease);
 const duration = 250;

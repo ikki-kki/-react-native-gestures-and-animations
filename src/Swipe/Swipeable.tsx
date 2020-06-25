@@ -1,11 +1,11 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { onGestureEvent } from "react-native-redash";
-import Animated from "react-native-reanimated";
+import Animated, { Value, useCode, block, set } from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
+
 import { withSpring } from "../components";
 
-const { Value, useCode, block, set } = Animated;
 const config = {
   damping: 40,
   mass: 1,

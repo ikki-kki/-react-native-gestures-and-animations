@@ -1,6 +1,7 @@
 import * as React from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
+
 import StyleGuide from "./StyleGuide";
 import CheckIcon, { CHECK_ICON_SIZE } from "./CheckIcon";
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { View } from "react-native";
+
 import { cards } from "../../components";
+
 import SortableCard from "./SortableCard";
 
 const DragToSort = () => {

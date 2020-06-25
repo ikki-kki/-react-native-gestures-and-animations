@@ -1,14 +1,21 @@
 import * as React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import Animated, {
+  Value,
+  Clock,
+  startClock,
+  useCode,
+  block,
+  spring,
+  set,
+} from "react-native-reanimated";
 import Constants from "expo-constants";
-
 import { onGestureEvent } from "react-native-redash";
+
 import { Card, StyleGuide, cards, withSpring } from "../components";
 import { CARD_HEIGHT, CARD_WIDTH } from "../components/Card";
 
-const { Value, Clock, startClock, useCode, block, spring, set } = Animated;
 const config = {
   damping: 15,
   mass: 1,

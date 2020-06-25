@@ -1,11 +1,17 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, {
+  Value,
+  block,
+  event,
+  set,
+  useCode,
+} from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import { canvas2Polar, polar2Canvas } from "./Coordinates";
+
 import { withOffset } from "../components";
 
-const { Value, block, event, set, useCode } = Animated;
+import { canvas2Polar, polar2Canvas } from "./Coordinates";
 
 interface CursorProps {
   r: number;

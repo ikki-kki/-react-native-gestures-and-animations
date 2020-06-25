@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, { Value, set, divide, useCode } from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import { diffClamp, onGestureEvent, withOffset } from "react-native-redash";
 
@@ -13,7 +13,6 @@ const { width } = Dimensions.get("window");
 const CURSOR_SIZE = 40;
 const CONTAINER_WIDTH = width - 64;
 const SLIDER_WIDTH = CONTAINER_WIDTH - CURSOR_SIZE;
-const { Value, set, divide, useCode } = Animated;
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",

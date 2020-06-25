@@ -9,7 +9,6 @@ import ClockValuesAndIdentities from "./src/ClockValuesAndIdentities";
 import Transitions from "./src/Transitions";
 import UseTransition from "./src/UseTransition";
 import Timing from "./src/Timing";
-import DarkMode, { profilePic } from "./src/DarkMode";
 import PanGesture from "./src/PanGesture";
 import Decay from "./src/Decay";
 import Spring from "./src/Spring";
@@ -36,7 +35,6 @@ const assets = [
   ...examples.map((example) => example.source),
   ...cards.map((card) => card.source),
   ...profiles.map((profile) => profile.profile),
-  profilePic,
   ...pictures,
 ];
 
@@ -78,13 +76,6 @@ const AppNavigator = () => (
         component={UseTransition}
         options={{
           title: "useTransition()",
-        }}
-      />
-      <Stack.Screen
-        name="DarkMode"
-        component={DarkMode}
-        options={{
-          title: "Dark Mode",
         }}
       />
       <Stack.Screen

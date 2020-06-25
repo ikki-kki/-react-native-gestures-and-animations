@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
-
 import { transformOrigin } from "react-native-redash";
+
 import HalfCircle from "./HalfCircle";
 
 const { PI } = Math;

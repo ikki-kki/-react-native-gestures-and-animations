@@ -1,11 +1,16 @@
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
+import {
+  Value,
+  useCode,
+  set,
+  interpolate,
+  Extrapolate,
+} from "react-native-reanimated";
 import { timing } from "react-native-redash";
 
 import CircularProgress, { STROKE_WIDTH } from "./CircularProgress";
 
-const { Value, useCode, set, interpolate, Extrapolate } = Animated;
 const { width } = Dimensions.get("window");
 const s1 = width - 64;
 const s2 = s1 - STROKE_WIDTH * 2;

@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import Svg, { Path } from "react-native-svg";
-
 import { State } from "react-native-gesture-handler";
 import { withTransition } from "react-native-redash";
+
 import {
   close,
   createSVGPath,

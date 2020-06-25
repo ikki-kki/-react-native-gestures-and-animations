@@ -1,10 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import Animated from "react-native-reanimated";
+import { Value } from "react-native-reanimated";
+
 import { cards } from "../components";
+
 import SortableCard, { CARD_HEIGHT } from "./SortableCard";
 
-const { Value } = Animated;
 const DragToSort = () => {
   const offsets = cards.map((_, i) => new Value(i * CARD_HEIGHT));
   return (

@@ -1,14 +1,13 @@
 import * as React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import Animated, { Value } from "react-native-reanimated";
 import Constants from "expo-constants";
-
 import { onGestureEvent } from "react-native-redash";
+
 import { Card, StyleGuide, cards, withSpring } from "../../components";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../components/Card";
 
-const { Value } = Animated;
 const { width, height } = Dimensions.get("window");
 const containerWidth = width;
 const containerHeight = height - Constants.statusBarHeight - 44;

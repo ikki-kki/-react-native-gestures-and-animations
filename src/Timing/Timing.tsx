@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Animated, { Easing } from "react-native-reanimated";
-import { useMemoOne } from "use-memo-one";
-
-import SimpleActivityIndicator from "./SimpleActivityIndicator";
-import { Button, StyleGuide } from "../components";
-
-const {
+import {
   Clock,
+  Easing,
   Value,
-  useCode,
-  set,
+  and,
   block,
+  clockRunning,
   cond,
+  eq,
+  not,
+  set,
   startClock,
   stopClock,
-  clockRunning,
-  and,
-  not,
-  eq,
   timing,
-} = Animated;
+  useCode,
+} from "react-native-reanimated";
+import { useClock, useValue } from "react-native-redash";
+
+import { Button, StyleGuide } from "../components";
+
+import ChatBubble from "./SimpleActivityIndicator";
 
 const styles = StyleSheet.create({
   container: {
@@ -30,17 +30,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const runTiming = (clock: Animated.Clock): Animated.Node<number> => {
-  const state: Animated.TimingState = {
+const runTiming = (clock: Clock) => {
+  const state = {
     finished: new Value(0),
     position: new Value(0),
-    time: new Value(0),
     frameTime: new Value(0),
+    time: new Value(0),
   };
   const config = {
     toValue: new Value(1),
-    duration: 1000,
-    easing: Easing.linear,
+    duration: 3000,
+    easing: Easing.inOut(Easing.ease),
   };
   return block([
     cond(
@@ -48,39 +48,34 @@ const runTiming = (clock: Animated.Clock): Animated.Node<number> => {
       set(state.time, 0),
       timing(clock, state, config)
     ),
+
     cond(eq(state.finished, 1), [
       set(state.finished, 0),
       set(state.frameTime, 0),
       set(state.time, 0),
-      set(config.toValue, cond(eq(state.position, 1), 0, 1)),
+      set(config.toValue, not(state.position)),
     ]),
     state.position,
   ]);
 };
 
 const Timing = () => {
-  const [play, setPlay] = useState(true);
-  const { clock, isPlaying, progress } = useMemoOne(
-    () => ({
-      clock: new Clock(),
-      isPlaying: new Value(0) as Animated.Value<0 | 1>,
-      progress: new Value(0),
-    }),
-    []
-  );
-  isPlaying.setValue(play ? 1 : 0);
+  const [play, setPlay] = useState(false);
+  const clock = useClock();
+  const progress = useValue(0);
+  const isPlaying = useValue(0);
+  useCode(() => set(isPlaying, play ? 1 : 0), [play]);
   useCode(
-    () =>
-      block([
-        cond(and(isPlaying, not(clockRunning(clock))), startClock(clock)),
-        cond(and(not(isPlaying), clockRunning(clock)), stopClock(clock)),
-        set(progress, runTiming(clock)),
-      ]),
-    [clock, isPlaying, progress]
+    () => [
+      cond(and(isPlaying, not(clockRunning(clock))), startClock(clock)),
+      cond(and(not(isPlaying), clockRunning(clock)), stopClock(clock)),
+      set(progress, runTiming(clock)),
+    ],
+    []
   );
   return (
     <View style={styles.container}>
-      <SimpleActivityIndicator {...{ progress }} />
+      <ChatBubble {...{ progress }} />
       <Button
         label={play ? "Pause" : "Play"}
         primary

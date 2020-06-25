@@ -14,6 +14,7 @@ import Animated, {
   useCode,
 } from "react-native-reanimated";
 import { useClock, useValues } from "react-native-redash";
+
 import { Button, Card, cards } from "../components";
 
 const styles = StyleSheet.create({
@@ -58,7 +59,6 @@ const ClockValuesAndIdentity = () => {
     outputRange: [from, to],
     extrapolate: Extrapolate.CLAMP,
   });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useCode(() => set(startAnimation, 1), [show]);
   useCode(
     () => runAnimation(clock, from, to, startTime, startAnimation, opacity),

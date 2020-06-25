@@ -1,8 +1,8 @@
 import * as React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+
 import { StyleGuide, Thumbnail } from "../components";
 import { Lessons } from "../components/Routes";
 
@@ -21,13 +21,6 @@ export const examples = [
     screen: "useTransition",
     title: "useTransition()",
     source: require("../../assets/examples/useTransition.png"),
-  },
-  {
-    screen: "DarkMode",
-    title: "Dark Mode",
-    source: require("../../assets/examples/dark-mode.png"),
-    resizeMode: "cover" as "cover",
-    dark: true,
   },
   {
     screen: "Timing",

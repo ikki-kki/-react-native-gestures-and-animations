@@ -1,8 +1,5 @@
-import Animated, { Easing } from "react-native-reanimated";
-import { State } from "react-native-gesture-handler";
-import { min } from "react-native-redash";
-
-const {
+import Animated, {
+  Easing,
   Clock,
   Value,
   block,
@@ -10,8 +7,8 @@ const {
   not,
   clockRunning,
   startClock,
-  timing: reTiming,
-  spring: reSpring,
+  timing as reTiming,
+  spring as reSpring,
   stopClock,
   add,
   multiply,
@@ -23,7 +20,9 @@ const {
   neq,
   set,
   defined,
-} = Animated;
+} from "react-native-reanimated";
+import { State } from "react-native-gesture-handler";
+import { min } from "react-native-redash";
 
 export interface TimingProps {
   clock?: Animated.Clock;

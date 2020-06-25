@@ -1,13 +1,19 @@
 import React from "react";
 import { Dimensions, PixelRatio, StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
-
+import Animated, {
+  Value,
+  sub,
+  add,
+  cond,
+  lessThan,
+} from "react-native-reanimated";
 import { interpolateColor } from "react-native-redash";
-import Cursor from "./Cursor";
+
 import { StyleGuide } from "../components";
+
+import Cursor from "./Cursor";
 import CircularProgress from "./CircularProgress";
 
-const { Value, sub, add, cond, lessThan } = Animated;
 const { PI } = Math;
 const { width } = Dimensions.get("window");
 const size = width - 32;

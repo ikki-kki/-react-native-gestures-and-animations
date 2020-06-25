@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+
 import Eye from "./Eye";
 import Mouth from "./Mouth";
 import Slider from "./Slider";

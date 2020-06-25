@@ -1,14 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, { Value } from "react-native-reanimated";
 import { State } from "react-native-gesture-handler";
-
 import { interpolateColor } from "react-native-redash";
+
 import Eye from "./Eye";
 import Mouth from "./Mouth";
 import Slider from "./Slider";
 
-const { Value } = Animated;
 const styles = StyleSheet.create({
   face: {
     width: 150,

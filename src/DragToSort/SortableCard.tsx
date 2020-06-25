@@ -1,18 +1,7 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
-import { panGestureHandler } from "react-native-redash";
-
-import Card, {
-  CardProps,
-  CARD_HEIGHT as INNER_CARD_HEIGHT,
-} from "../components/Card";
-import { withTransition } from "../components";
-
-export const CARD_HEIGHT = INNER_CARD_HEIGHT + 32;
-const { width } = Dimensions.get("window");
-const {
+import Animated, {
   Value,
   eq,
   cond,
@@ -30,7 +19,17 @@ const {
   not,
   and,
   neq,
-} = Animated;
+} from "react-native-reanimated";
+import { panGestureHandler } from "react-native-redash";
+
+import Card, {
+  CardProps,
+  CARD_HEIGHT as INNER_CARD_HEIGHT,
+} from "../components/Card";
+import { withTransition } from "../components";
+
+export const CARD_HEIGHT = INNER_CARD_HEIGHT + 32;
+const { width } = Dimensions.get("window");
 
 const isMoving = (position: Animated.Node<number>) => {
   const delta = diff(position);

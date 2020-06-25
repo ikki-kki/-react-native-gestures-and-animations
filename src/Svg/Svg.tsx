@@ -2,13 +2,20 @@ import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Svg, { Ellipse } from "react-native-svg";
 import Constants from "expo-constants";
-
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import Animated, {
+  Value,
+  sub,
+  multiply,
+  eq,
+  cond,
+  max,
+  abs,
+} from "react-native-reanimated";
 import { onGestureEvent } from "react-native-redash";
+
 import { StyleGuide, withTransition } from "../components";
 
-const { Value, sub, multiply, eq, cond, max, abs } = Animated;
 const { width, height } = Dimensions.get("window");
 const AnimatedEllipse = Animated.createAnimatedComponent(Ellipse);
 const containerWidth = width;

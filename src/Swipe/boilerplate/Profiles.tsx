@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
+// eslint-disable-next-line import/order
 import { Feather as Icon } from "@expo/vector-icons";
-
 // import { useMemoOne } from "use-memo-one";
+
 import { RectButton } from "react-native-gesture-handler";
+
+import { StyleGuide } from "../../components";
+
 import Card, { Profile } from "./Profile";
 // import Swipeable from "./Swipeable";
-import { StyleGuide } from "../../components";
 
 // const { width, height } = Dimensions.get("window");
 // const deltaX = width / 2;

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
-import SimpleActivityIndicator from "./SimpleActivityIndicator";
-import { StyleGuide } from "../../components";
+import { Button, StyleGuide } from "../../components";
+
+import ChatBubble from "./SimpleActivityIndicator";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,9 +14,16 @@ const styles = StyleSheet.create({
 });
 
 const Timing = () => {
+  const [play, setPlay] = useState(false);
+  const progress = 0;
   return (
     <View style={styles.container}>
-      <SimpleActivityIndicator />
+      <ChatBubble {...{ progress }} />
+      <Button
+        label={play ? "Pause" : "Play"}
+        primary
+        onPress={() => setPlay((prev) => !prev)}
+      />
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
+
 import { StyleGuide } from "../components";
 
 const { width: wWidth } = Dimensions.get("window");

@@ -1,14 +1,13 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, { Value } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
-
 import { mix } from "react-native-redash";
+
 import StyleGuide from "./StyleGuide";
 import Text from "./Text";
 import TapHandler from "./TapHandler";
 
-const { Value } = Animated;
 const styles = StyleSheet.create({
   container: {
     margin: StyleGuide.spacing * 2,
@@ -38,16 +37,9 @@ interface ThumbnailProps {
   source: number;
   onPress: () => void;
   resizeMode?: "cover" | "contain";
-  dark?: boolean;
 }
 
-const Thumbnail = ({
-  title,
-  source,
-  onPress,
-  dark,
-  resizeMode,
-}: ThumbnailProps) => {
+const Thumbnail = ({ title, source, onPress, resizeMode }: ThumbnailProps) => {
   const value = new Value(0);
   const scale = mix(value, 1, 1.5);
   return (
@@ -63,15 +55,13 @@ const Thumbnail = ({
           ]}
           {...{ source }}
         />
-        {!dark && (
-          <LinearGradient
-            style={StyleSheet.absoluteFill}
-            colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
-            locations={[0.61, 1]}
-          />
-        )}
+        <LinearGradient
+          style={StyleSheet.absoluteFill}
+          colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+          locations={[0.61, 1]}
+        />
         <View style={styles.content}>
-          <Text type="title2" style={{ color: dark ? "white" : "#2F2E41" }}>
+          <Text type="title2" style={{ color: "#2F2E41" }}>
             {title}
           </Text>
         </View>

@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import { Dimensions, SafeAreaView, StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
-import { Feather as Icon } from "@expo/vector-icons";
-
-import { useMemoOne } from "use-memo-one";
-import { RectButton } from "react-native-gesture-handler";
-import Card, { Profile } from "./Profile";
-import Swipeable from "./Swipeable";
-import { StyleGuide, timing } from "../components";
-
-const {
+import Animated, {
   Value,
   Clock,
   interpolate,
@@ -22,7 +13,16 @@ const {
   not,
   clockRunning,
   call,
-} = Animated;
+} from "react-native-reanimated";
+import { Feather as Icon } from "@expo/vector-icons";
+import { useMemoOne } from "use-memo-one";
+import { RectButton } from "react-native-gesture-handler";
+
+import { StyleGuide, timing } from "../components";
+
+import Card, { Profile } from "./Profile";
+import Swipeable from "./Swipeable";
+
 const { width, height } = Dimensions.get("window");
 const deltaX = width / 2;
 const α = Math.PI / 12;

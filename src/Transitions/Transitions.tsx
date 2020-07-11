@@ -18,7 +18,9 @@ interface Layout {
 }
 const { width } = Dimensions.get("window");
 const transition = (
-  <Transition.Change interpolation="easeInOut" durationMs={400} />
+  <Transition.Together>
+    <Transition.Change interpolation="easeInOut" durationMs={400} />
+  </Transition.Together>
 );
 const styles = StyleSheet.create({
   container: {

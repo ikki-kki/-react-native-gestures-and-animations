@@ -4,7 +4,6 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated, {
   Clock,
   Value,
-  diffClamp,
   cond,
   set,
   eq,
@@ -18,7 +17,7 @@ import Animated, {
   not,
 } from "react-native-reanimated";
 import Constants from "expo-constants";
-import { onGestureEvent } from "react-native-redash";
+import { diffClamp, onGestureEvent } from "react-native-redash";
 
 import { Card, StyleGuide, cards } from "../../components";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../components/Card";

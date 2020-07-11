@@ -52,7 +52,7 @@ const runAnimation = proc(
 const ClockValuesAndIdentity = () => {
   const [show, setShow] = useState(true);
   const clock = useClock();
-  const [startTime, from, to, startAnimation] = useValues([0, 0, 0, 0]);
+  const [startTime, from, to, startAnimation] = useValues(0, 0, 0, 0);
   const endTime = add(startTime, duration);
   const opacity = interpolate(clock, {
     inputRange: [startTime, endTime],

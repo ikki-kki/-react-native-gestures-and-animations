@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, {
   Value,
@@ -26,6 +26,7 @@ import {
   timing,
   translate,
   vec,
+  pinchEnd,
 } from "react-native-redash";
 
 const { width, height } = Dimensions.get("window");
@@ -45,6 +46,9 @@ const styles = StyleSheet.create({
 });
 
 const PinchGesture = () => {
+  const pinchRef = useRef<PinchGestureHandler>(null);
+  const panRef = useRef<PanGestureHandler>(null);
+
   const origin = vec.createValue(0);
   const focal = vec.createValue(0);
   const gestureScale = new Value(1);
@@ -73,12 +77,17 @@ const PinchGesture = () => {
   const offset = vec.createValue(0);
   const translation = vec.createValue(0);
   const adjustedFocal = vec.sub(focal, vec.add(CENTER, offset));
+
+  const isPinchBegan = pinchBegan(pinchState);
+  const isPinchActive = pinchActive(pinchState, numberOfPointers);
+  const isPinchEnd = pinchEnd(pinchState, numberOfPointers);
+
   useCode(
     () =>
       block([
         cond(eq(panState, State.ACTIVE), vec.set(translation, pan)),
-        cond(pinchBegan(pinchState), vec.set(origin, adjustedFocal)),
-        cond(pinchActive(pinchState, numberOfPointers), [
+        cond(isPinchBegan, vec.set(origin, adjustedFocal)),
+        cond(isPinchActive, [
           vec.set(
             translation,
             vec.add(
@@ -90,7 +99,7 @@ const PinchGesture = () => {
         ]),
         cond(
           and(
-            or(eq(pinchState, State.UNDETERMINED), eq(pinchState, State.END)),
+            or(eq(pinchState, State.UNDETERMINED), isPinchEnd),
             or(eq(panState, State.UNDETERMINED), eq(panState, State.END))
           ),
           [
@@ -125,9 +134,19 @@ const PinchGesture = () => {
   );
   return (
     <View style={styles.container}>
-      <PinchGestureHandler {...pinchGestureHandler}>
+      <PinchGestureHandler
+        ref={pinchRef}
+        simultaneousHandlers={panRef}
+        {...pinchGestureHandler}
+      >
         <Animated.View style={StyleSheet.absoluteFillObject}>
-          <PanGestureHandler {...panGestureHandler}>
+          <PanGestureHandler
+            ref={panRef}
+            minDist={10}
+            avgTouches
+            simultaneousHandlers={pinchRef}
+            {...panGestureHandler}
+          >
             <Animated.View style={StyleSheet.absoluteFill}>
               <Animated.Image
                 style={[

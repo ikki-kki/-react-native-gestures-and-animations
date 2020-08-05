@@ -49,7 +49,7 @@ const ClockValuesAndIdentity = () => {
         set(startAnimation, 0),
       ]),
     ],
-    [clock, from, opacity, startAnimation, startTime, to]
+    [clock, from, opacity, startAnimation, startTime, to],
   );
   return (
     <View style={styles.container}>

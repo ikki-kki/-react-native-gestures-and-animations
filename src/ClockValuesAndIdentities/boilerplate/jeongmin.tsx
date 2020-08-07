@@ -11,6 +11,7 @@ import Animated, {
   not,
   add,
   proc,
+  block,
 } from "react-native-reanimated";
 import { useClock, useValues } from "react-native-redash";
 
@@ -39,12 +40,14 @@ const runAnimation = proc(
     startAnimation: Animated.Value<number>,
     opacity: Animated.Node<number>,
   ) =>
-    cond(eq(startAnimation, 1), [
+    block([
       startClock(clock),
-      set(from, opacity),
-      set(to, not(to)),
-      set(startTime, clock),
-      set(startAnimation, 0),
+      cond(eq(startAnimation, 1), [
+        set(from, opacity),
+        set(to, not(to)),
+        set(startTime, clock),
+        set(startAnimation, 0),
+      ]),
     ]),
 );
 
@@ -66,6 +69,7 @@ const ClockValuesAndIdentity = () => {
     extrapolate: Extrapolate.CLAMP, //애니메이션이 누를때마다 미친듯이 반복되지 않게 설정
   });
 
+  useCode(() => set(startAnimation, 1), [show]);
   useCode(
     () => runAnimation(clock, from, to, startTime, startAnimation, opacity),
     [clock, from, opacity, startAnimation, startTime, to],
